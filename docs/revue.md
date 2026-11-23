@@ -1,5 +1,7 @@
 # État factuel du dossier local
 
+> **ARCHIVE V1 OBSOLÈTE.** Rapport de vérification historique, pas une revue ni une validation de la [décision V2](decision-v2.md). Les résultats et instructions ci-dessous concernent V1 ; aucun `VALIDATION_OK` V2 n'est revendiqué. V2 reste documentaire, sans push ni déploiement.
+
 [Accueil](../README.md) · [Essais](essais.md) · [Sources](sources.md) · [Vérificateur](../tools/verifier_dossier.py)
 
 ## Périmètre livré

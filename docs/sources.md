@@ -1,5 +1,7 @@
 # Sources et limites des références
 
+> **ARCHIVE V1 OBSOLÈTE.** Références et état de consultation historiques, sans revalidation des prix/stocks. Les sources primaires P110, TI et PVGIS utilisées pour V2 figurent dans la [décision V2](decision-v2.md). La mention d'absence de simulation locale ci-dessous est historique V1.
+
 [Accueil](../README.md) · [Capture](capture.md) · [Énergie](energie.md)
 
 Cette liste reprend les références du dossier. Pour cette correction, la notice V25 2025, les pages fabricant V25/P126, la fiche technique P126 et les README NestBox/BirdSensor_xiao ont été consultés en ligne. Cette lecture ciblée ne revalide ni les autres références, ni les stocks ou prix. « Source » ne signifie pas certification du montage. Les liens externes du vérificateur local sont contrôlés syntaxiquement, pas téléchargés.

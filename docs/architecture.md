@@ -1,5 +1,7 @@
 # Architecture V1
 
+> **ARCHIVE V1 OBSOLÈTE.** Remplacée par la [décision V2](decision-v2.md). Le choix sans radio ci-dessous n'est plus la décision actuelle ; les protections faune restent à respecter. Aucun firmware livré.
+
 [Accueil](../README.md) · [Sources](sources.md)
 
 ## Chaînes indépendantes

@@ -1,5 +1,11 @@
 # Nichoir vidéo solaire — conception V1
 
+> **Décision courante : [brainstorm / décision V2](docs/decision-v2.md).** Lire cette page en premier : clips PIR OV3660 AVI sur SD, Wi-Fi avec ACK durable, galerie MP4 sur Unraid sans import Frigate ; solaire et stockage conditionnés aux essais. Documentation seulement, aucun déploiement, aucun prix V2 établi.
+>
+> **ARCHIVE V1 OBSOLÈTE : le titre et tout le dossier ci-dessous sont conservés pour traçabilité et contrôles historiques.** La BOM, les prix, le toit, le budget sans Wi-Fi et le choix P126/V25 ne sont pas une nomenclature ou une prescription V2. Les huit pages anciennes portent une bannière V1. Les outils Python et tests sont inchangés et **V1 uniquement** ; ils ne valident pas le dimensionnement V2. Le [CSV PVGIS V2](docs/pvgis-le-havre.csv) et son protocole de calcul sont décrits dans la décision courante.
+
+## Archive de conception V1 — non applicable comme décision actuelle
+
 Dossier de conception du 23 novembre 2026. Pas un produit prêt à poser : **aucun firmware de capture n'est implémenté**, aucune vidéo réelle ni mesure électrique n'a été produite avec du matériel. Livrables exécutables : calculateur Python stdlib et tests. Les essais matériels restent des critères d'acceptation, pas des résultats.
 
 ## Décision
@@ -23,7 +29,9 @@ Dossier de conception du 23 novembre 2026. Pas un produit prêt à poser : **auc
 7. [Sources vérifiées et projets candidats](docs/sources.md)
 8. [Rapport local et demande de revue](docs/revue.md)
 
-## Achats — une unité par ligne sauf mention
+## Achats V1 uniquement — BOM obsolète, pas un devis V2
+
+> **BOM V1 archivée.** Références, prix, total et disponibilité ci-dessous sont historiques, non revalidés pour V2. Ne pas commander la V2 à partir de cette liste ; aucun prix V2 n'est inventé.
 
 Prix relevés ou provisions TTC France, hors port, outils et main-d'œuvre. Les stocks sont un instantané, pas une réservation. Kiwi affiche ici des prix **HT (« Ex. VAT »)** : conversion prévisionnelle avec TVA France 20 %, panier livraison France à confirmer. Aucun prix USD n'est présenté comme un prix TTC européen.
 

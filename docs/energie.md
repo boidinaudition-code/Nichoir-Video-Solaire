@@ -1,5 +1,7 @@
 # Énergie — modèle reproductible, pas une garantie météo
 
+> **ARCHIVE V1 OBSOLÈTE.** Modèle et tableaux sans upload, conservés pour les outils/tests **V1 uniquement**. Voir la [décision V2](decision-v2.md) et le [CSV PVGIS](pvgis-le-havre.csv) pour le besoin réseau, le panneau et le stockage V2. La mention historique d'absence d'étude PVGIS ne décrit pas l'état V2.
+
 [Accueil](../README.md) · [Calculateur](../tools/dimensionnement.py) · [Tests](../tests/test_dimensionnement.py)
 
 ## Référentiel d'énergie
