@@ -1,8 +1,8 @@
 # Câblage — vérifier le lot avant branchement
 
-> **ARCHIVE V1 OBSOLÈTE.** Voir la [décision V2](decision-v2.md) pour les options d'alimentation ; le couple P126/V25 ci-dessous n'est pas un câblage V2 validé. Conserver les précautions électriques et vérifier les révisions avant branchement.
+> **ARCHIVE V1 OBSOLÈTE.** Voir les [décisions V3](../../recherches-v3.md) et la [décision V2](../../decision-v2.md) pour l'alimentation ; le couple P126/V25 ci-dessous n'est pas un câblage courant validé. Conserver les précautions électriques et vérifier les révisions avant branchement.
 
-[Accueil](../README.md) · [Sources](sources.md) · [Essais](essais.md)
+[Accueil](../../../README.md) · [Sources](sources.md) · [Essais](essais.md)
 
 ## Alimentation retenue, génération V25 2025/actuelle
 

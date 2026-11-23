@@ -2,6 +2,8 @@
 
 [Accueil](../README.md) · [Décision V2](decision-v2.md)
 
+> **Décisions courantes : [recherches V3](recherches-v3.md).** Barrière IR, éclairage 940 nm, NoIR, clips 720p et photo 5 Mpx remplacent les choix et le protocole exploratoire V2 ci-dessous ; les fiches de projets restent documentaires.
+
 ## Périmètre et méthode
 
 Revue documentaire directe de **14 dépôts nommés**, plus un dépôt hors classement. Les README ont été téléchargés en parallèle depuis `raw.githubusercontent.com`, après résolution de `HEAD` par l'API GitHub ; chaque lien ci-dessous fige le commit effectivement consulté. Les arborescences GitHub et certains documents/fichiers complémentaires ont aussi été consultés. Ce classement est une priorité d'étude pour notre besoin, pas une mesure de qualité générale.
@@ -14,7 +16,7 @@ Vocabulaire : **photo** = JPEG isolé ou rafale ; **vidéo enregistrée** = séq
 
 La cible est désormais **XIAO ESP32S3 Sense + OV5640, à confirmer par PID à réception**, et non OV3660. [Seeed, source constructeur consultée](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/) annonce la transition, mais prévient que des lots OV3660 circulent encore. Pas de substitution silencieuse : obtenir le lot OV5640 et relever référence, PID, optique et révision.
 
-Le module OV5640 livré avec l'extension Sense est **à focale fixe** ; ne pas lui attribuer l'autofocus du module long séparé. La définition maximale annoncée est 2592 × 1944. Cela ne garantit ni vidéo 5 MP, ni cadence 1080p, ni supériorité en faible lumière. Le tableau constructeur laisse les consommations OV5640 à **TBD** : les anciennes valeurs OV3660, les microampères du SoC seul et les courants d'une autre carte ne dimensionnent pas le nichoir complet.
+Le module OV5640 Seeed standard possède **un autofocus et un filtre IR-cut** : [guide Seeed](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started), [fiche MJY5OAF-F3M-V1](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/new-res/OV5640_Camera_Module_Specification.pdf), broches 23 AF-GND / 24 AFVDD 2,8 V, objectif « 4P+IR », « IR Cut ». La V3 retient un NoIR grand angle DVP 24 broches pour le 940 nm, avec brochage à vérifier et mise au point manuelle à 10–15 cm si ce module n'a pas d'AF. La définition maximale annoncée est 2592 × 1944. Cela ne garantit ni vidéo 5 MP, ni cadence 1080p, ni supériorité en faible lumière. Le tableau constructeur laisse les consommations OV5640 à **TBD** : les anciennes valeurs OV3660, les microampères du SoC seul et les courants d'une autre carte ne dimensionnent pas le nichoir complet.
 
 ## Vue d'ensemble des 14 dépôts
 
@@ -50,7 +52,7 @@ Source : [README au commit 18f6e84](https://github.com/s60sc/ESP32-CAM_MJPEG2SD/
 Sources : [README au commit ca7bb61](https://github.com/Remeny-Farm/esp32-photostation/blob/ca7bb61b6cf3b93efdc18518aeb3be4328a16800/README.md), [architecture](https://github.com/Remeny-Farm/esp32-photostation/blob/ca7bb61b6cf3b93efdc18518aeb3be4328a16800/docs/architecture.md), [matériel](https://github.com/Remeny-Farm/esp32-photostation/blob/ca7bb61b6cf3b93efdc18518aeb3be4328a16800/docs/hardware.md), [contrat HTTPS](https://github.com/Remeny-Farm/esp32-photostation/blob/ca7bb61b6cf3b93efdc18518aeb3be4328a16800/docs/protocol.md).
 
 - **Force :** jusqu'à cinq photos par visite PIR, JPEG et JSON en file SD, reprise réseau avec backoff, serveur propre et logique testable sur hôte. Référence matérielle XIAO OV3660, une carte vérifiée selon l'auteur ; OV5640 est une variante supportée, pas un banc attesté.
-- **Faiblesse / énergie :** secteur USB en V1, **sans batterie, deep sleep ni solaire** ; scan BLE continu et heartbeats. « Wakes » dans le README n'est pas ici une preuve de réveil profond. L'identification par balise de poule ne convient pas à des oiseaux sauvages. La mention autofocus OV5640 dans sa documentation ne doit pas être étendue à la Sense fixe décrite par Seeed.
+- **Faiblesse / énergie :** secteur USB en V1, **sans batterie, deep sleep ni solaire** ; scan BLE continu et heartbeats. « Wakes » dans le README n'est pas ici une preuve de réveil profond. L'identification par balise de poule ne convient pas à des oiseaux sauvages. La mention autofocus OV5640 ne prouve pas l'optique d'un module NoIR générique ; le module Seeed standard a bien un autofocus.
 - **À transposer :** file persistante avec temporaires, identité de visite, photos avant manifeste et uploads hors capture ; adapter aux AVI clos. Ajouter explicitement empreinte, persistance serveur et ACK V2, réessais bornés et arrêt SD pleine. Ni équiper les oiseaux de BLE, ni importer éclairage constant et scan permanent.
 
 ### 3. happychriss/BirdSensor_xiao — priorité pour borner le cycle actif
@@ -83,7 +85,7 @@ Source : [README au commit f6216ed](https://github.com/TeTeHacko/chytra-budka/bl
 
 - **Force :** montage XIAO OV3660, photos PIR/VAD/MQTT, audio BirdNET, télémétrie et modes de puissance ; l'auteur distingue matériel déployé et travaux prévus.
 - **Faiblesse / énergie :** unités sur USB/powerbank ; essai intermédiaire panneau pliant rechargeant une powerbank, mais **aucun nœud solaire autonome déployé**, étage charge solaire/batterie non construit. ~1,1 W en modes toujours actifs et ~0,40 W en Safe light-sleep sont rapportés par l'auteur. Les modes automatiques ne passent pas réellement en sommeil profond ; hibernation sur commande distincte. Audio stream/vidéo à la demande ne prouvent pas AVI SD. SDIO annoncé dans son schéma ne valide pas le bus SPI réel de notre extension.
-- **À transposer :** consigner les mesures par état et distinguer conception, banc et terrain. Ne pas reprendre audio, IR 940 nm, indicateurs lumineux ni sa qualification « invisible aux oiseaux » : notre règle reste sans éclairage et sans intervention occupée.
+- **À transposer :** consigner les mesures par état et distinguer conception, banc et terrain. Ne pas reprendre audio, indicateurs lumineux ni sa qualification « invisible aux oiseaux ». La V3 retient son propre éclairage 940 nm à qualifier, sans intervention occupée.
 
 ### 7. Dyspersja/CameraTrap — référence photo SD simple
 
@@ -158,15 +160,16 @@ Sources : [README au commit 43725b5](https://github.com/Hansikajain05/Solar_ai_S
 
 La comparaison actuelle prime sur les formulations historiques V1 ; celles-ci restent archivées, pas réécrites comme si elles avaient visé l'OV5640.
 
-1. **OV3660 → OV5640** pour la consigne V2 seulement ; PID et lot à vérifier. Support d'un pilote ≠ montage testé. OV5640 Sense fixe ≠ autofocus systématique.
+1. **OV3660 → OV5640** pour la consigne V2 ; PID et lot à vérifier. Support d'un pilote ≠ montage testé ; autofocus et filtre dépendent du module acheté.
 2. **Photo / fichier / flux** : CameraTrap, BirdBox, BirdSensor_xiao, photostation, BirdWatch et les projets photo Telegram ne sont pas des preuves de notre enregistrement AVI. Le flux audio BirdNET n'est pas une vidéo nichoir enregistrée.
 3. **PIR optionnel** dans MJPEG2SD, BirdBox, les DVR et jameszah ; porte PIR désactivable dans Scarecrow. Un déclencheur lu sur une carte allumée ne prouve ni sommeil profond ni power-gating. Photostation n'est pas un prototype sur batterie.
 4. **jameszah** : « uniquement PSRAM et sans SD » ne décrit que l'ancien texte ; la v11 documente SD et accès local hors Internet. Ne pas fusionner les FPS/limites des versions.
 5. **Solaire** : chytra-budka distingue essais USB/powerbank et futur nœud autonome ; Scarecrow ne fournit pas une preuve d'autonomie par son nom. BirdWatch décrit du solaire, mais ses relevés INA219 à l'éveil n'intègrent pas toute la journée.
 6. **IA** : BirdBox utilise actuellement iNaturalist en ligne, non le modèle local abandonné ; XiaoBird reste non attribué. Aucun résultat IA, FPS ou durée de batterie tiers ne valide notre faible lumière.
 7. **Conservation et sécurité** : SD, FTP, MQTT, Telegram ou HTTP réussi ne prouvent pas ACK durable. Les exemples désactivant la validation TLS ne sont pas des recettes V2. La SD XIAO SPI ne se câble pas comme la MMC AI-Thinker.
+8. **Correction V3 autofocus** : « focale fixe / pas d'autofocus » était erroné pour le module Seeed OV5640 standard, qui possède AF + IR-cut. Un NoIR générique peut être sans AF ; comparer son brochage avant connexion et régler alors manuellement la netteté à 10–15 cm.
 
-## Briques retenues et exclusions
+## Briques retenues et exclusions — historique V2
 
 Ordre proposé pour un futur prototype, sans assembler aujourd'hui les firmwares :
 
@@ -175,13 +178,13 @@ Ordre proposé pour un futur prototype, sans assembler aujourd'hui les firmwares
 3. **Activité bornée** : BirdSensor_xiao pour deadline/réarmement ; BirdWatch pour mode dégradé et télémétrie, sans copier leur électronique. Réveil profond BS612 reste la solution initiale ; coupure TPS22918 seulement si besoin établi par mesures et circuit qualifié.
 4. **Galerie future sur serveur** : BirdBox pour visites, diagnostics et distinction en attente/échec, sans IA ou serveur vidéo permanent sur la carte. Le MP4 reste un dérivé de l'AVI conservé selon rétention explicite, pas un import Frigate.
 
-Exclus : éclairage/IR/flash, audio et servos, effarouchement, BLE sur oiseaux, exposition Internet directe, cloud obligatoire, rotation des clips non acquittés, et toute promesse de cadence ou d'autonomie. Cette revue n'est pas un audit exhaustif de sécurité/licences ; aucun code tiers repris.
+Exclusions V2 : éclairage/IR/flash, audio et servos, effarouchement, BLE sur oiseaux, exposition Internet directe, cloud obligatoire, rotation des clips non acquittés, et toute promesse de cadence ou d'autonomie. La V3 lève uniquement l'exclusion de l'éclairage IR et remplace le déclenchement PIR principal par la barrière IR. Cette revue n'est pas un audit exhaustif de sécurité/licences ; aucun code tiers repris.
 
-## Essai proposé : 5 MP contre 1080p en basse lumière, sans oiseaux
+## Essai exploratoire V2 archivé : 5 MP contre 1080p, sans oiseaux
 
 **Protocole non exécuté.** Nichoir vide ou boîte de banc aux mêmes géométrie, distance et matériaux, mire texturée et objet mobile inerte. Ni animal attiré/enfermé, ni intervention occupée, ni ajout d'éclairage au nichoir. Au banc seulement, faire varier une source externe reproductible et relever l'éclairement au plan de la mire ; inclure le noir pour constater la limite, sans promettre une image exploitable.
 
-- Identifier lot/PID OV5640, focale fixe, distance de netteté, carte/PSRAM, microSD, alimentation, firmware/commit, pilote, XCLK, qualité JPEG, gain/exposition et température. Même matériel et scène pour les deux modes ; consigner tout réglage différent. Vérifier LEDs caméra/SD et absence d'éclairage parasite avant pose.
+- Identifier lot/PID OV5640, autofocus ou réglage manuel selon module, distance de netteté, carte/PSRAM, microSD, alimentation, firmware/commit, pilote, XCLK, qualité JPEG, gain/exposition et température. Même matériel et scène pour les deux modes ; consigner tout réglage différent. Vérifier LEDs caméra/SD et absence d'éclairage parasite avant pose.
 - Comparer **photo 2592 × 1944 (5 MP)** et **photo 1920 × 1080**, à qualité JPEG fixée puis à taille de fichier comparable ; comparer détails utiles, bruit, couleur, zones saturées et flou sur objet mobile. Le cadrage 4:3 contre 16:9 change : comparer aussi la zone commune, pas seulement l'image affichée redimensionnée. Plus de pixels ne garantit pas plus de détails utilisables dans l'obscurité.
 - Tester ensuite des **clips AVI de 20 s en 1080p**, avec VGA comme témoin de repli. N'essayer une séquence 5 MP que si le pilote et le firmware la permettent sans dépassement mémoire ; sinon noter « non supporté/échec », pas inventer des FPS. Le conseil s60sc au-dessus de FHD vise les photos : le 5 MP photo n'est pas notre exigence vidéo. Les 10 images/s historiques sont une cible à vérifier, pas une cadence promise en 1080p.
 - Répéter au moins dix cycles par condition, après cold boot et après réveil PIR simulé au banc ; alterner l'ordre des modes. Mesurer temps PIR→première image **utilisable**, stabilisation d'exposition, capture, fermeture/sync SD, association Wi-Fi, upload et ACK. Rapporter dispersion et échecs, pas seulement meilleur résultat. Les fenêtres réseau restent bornées ; un dépassement est un échec de livraison à conserver en file, pas une permission radio illimitée.
@@ -194,6 +197,6 @@ Retenir le mode le moins coûteux qui donne des détails utiles et une vidéo d�
 
 ## Vérification documentaire reproductible
 
-Depuis la racine : `python -m unittest discover -s tests -v`, `python tools/verifier_dossier.py`, puis `git diff --check`. Les outils et tests V1 restent inchangés : ils vérifient leurs calculs historiques et la syntaxe des liens, pas le fonctionnement des dépôts externes ou de l'OV5640. Contrôler en plus les 14 fiches distinctes et leurs liens GitHub figés ; les deux exclusions ne comptent pas parmi les 14.
+Depuis la racine : `python -m unittest discover -s tests -v`, `python tools/verifier_dossier.py`, puis `git diff --check`. Les outils et tests restent V1, avec chemins d'archives adaptés dans le vérificateur : ils vérifient leurs calculs historiques et les liens, pas le fonctionnement des dépôts externes ou de l'OV5640. Contrôler en plus les 14 fiches distinctes et leurs liens GitHub figés ; les deux exclusions ne comptent pas parmi les 14.
 
 Résultats exécutés pour cette rédaction : **8 tests V1 réussis**, vérificateur de cohérence locale réussi, contrôle arithmétique V2 du CSV 12 mois/besoins/réserve réussi. Le contrôle documentaire a compté **14 fiches uniques**, chacune avec force/faiblesse/transposition, et vérifié **22 liens GitHub à SHA complet** contre les arborescences effectivement téléchargées ; 15 README récupérés au total, dont celui de trailcam hors classement. `git diff --check` sans erreur. Ces succès ne valident ni compilation tierce, ni matériel, ni performance ou autonomie. Commit local uniquement, pas de push ni de modification d'Unraid.

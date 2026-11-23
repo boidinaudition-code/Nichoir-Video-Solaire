@@ -1,8 +1,8 @@
 # Capture AVI — spécification à implémenter
 
-> **ARCHIVE V1 OBSOLÈTE.** La [décision V2](decision-v2.md) ajoute Wi-Fi, ACK durable, déduplication, réessais bornés et galerie MP4 Unraid. Les étapes SD ci-dessous ne constituent pas le protocole complet V2 ; aucun firmware livré.
+> **ARCHIVE V1 OBSOLÈTE.** La [décision V2](../../decision-v2.md) ajoute Wi-Fi, ACK durable, déduplication, réessais bornés et galerie MP4 Unraid ; voir aussi les [décisions V3](../../recherches-v3.md). Les étapes SD ci-dessous ne constituent pas le protocole complet courant ; aucun firmware livré.
 
-[Accueil](../README.md) · [Câblage](cablage.md) · [Essais](essais.md) · [Sources](sources.md)
+[Accueil](../../../README.md) · [Câblage](cablage.md) · [Essais](essais.md) · [Sources](sources.md)
 
 Aucun firmware n'est livré. Les étapes suivantes sont des exigences, pas des fonctions testées. Cible : XIAO ESP32S3 Sense avec OV3660 confirmé par PID, microSD FAT32, JPEG VGA 640 × 480, AVI MJPEG de 20 s, cible 10 images/s, sans audio ni éclairage.
 

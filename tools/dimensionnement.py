@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dimensionnement indicatif, pas un simulateur météo ni un firmware."""
+"""Dimensionnement indicatif V1 archivé, pas une validation V3 ni un firmware."""
 import argparse
 import json
 import math
