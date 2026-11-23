@@ -19,7 +19,7 @@ Seeed distingue deux modules : l'OV5640 **livré avec la carte Sense est à foca
 Sources primaires :
 
 - [Guide Seeed XIAO ESP32S3](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started) : « The OV5640 shipped with the Sense expansion board is a fixed-focus version; only the standalone long OV5640 module (sold separately, with heat sink) supports auto-focus (AF) » ; lots OV3660/OV5640 mixtes pendant la transition.
-- [Fiche du module Seeed OV5640](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/new-res/OV5640_Camera_Module_Specification.pdf) : module MJY5OAF-F3M-V1, broches 23 AF-GND et 24 AFVDD 2,8 V, objectif « 4P+IR », « IR Cut ». Les broches AF indiquent que cette fiche décrit le module autofocus ; la présence d'un filtre IR-cut sur le module fixe livré avec la Sense n'est pas documentée ici, mais reste probable pour un module grand public.
+- [Fiche du module Seeed OV5640](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/new-res/OV5640_Camera_Module_Specification.pdf) : module MJY5OAF-F3M-V1, broches 23 AF-GND et 24 AFVDD 2,8 V, objectif « 4P+IR », « IR Cut ». Les broches AF indiquent que cette fiche décrit le module autofocus ; la présence d'un filtre IR-cut sur le module fixe livré avec la Sense n'est pas documentée : à vérifier à réception.
 
 Un module à filtre IR-cut bloque largement le 940 nm. Choix V3 : OV5640 NoIR, sans filtre IR-cut, grand angle et connecteur DVP 24 broches. La compatibilité de brochage avec le connecteur Sense n'est pas vérifiée : comparer toute la table de broches du module acheté à la fiche Seeed avant branchement, pas seulement le nombre de broches.
 
