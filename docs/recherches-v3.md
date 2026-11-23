@@ -14,6 +14,8 @@ Frigate n'est pas retenu : pas de flux continu possible. La galerie MP4 future s
 
 ## 2. Caméra : focale fixe ou autofocus, choisir NoIR
 
+> **Mise à jour :** Romain retient finalement la carte Gotronic 39234 (XIAO ESP32-S3 Sense avec caméra OV3660), voir le [README](../README.md). L'analyse OV5640 ci-dessous reste utile si un module NoIR est nécessaire.
+
 Seeed distingue deux modules : l'OV5640 **livré avec la carte Sense est à focale fixe** ; seul le **module OV5640 long vendu séparément, avec dissipateur, a un autofocus**. La mention V2 « Sense à focale fixe » était donc juste ; une version intermédiaire de ce dossier l'avait corrigée à tort.
 
 Sources primaires :
@@ -43,7 +45,7 @@ La caméra NoIR verra l'IR de la barrière : placer celle-ci hors champ et véri
 
 [Voltaic P110](https://voltaicsystems.com/9-watt-panel/) : 9,54 W, 223 × 274 × 4 mm, Vmp 5,71 V, Voc 6,94 V. Le nom commercial « 10 W » ne remplace pas la valeur 9,54 W utilisée pour le calcul.
 
-Toit monopente à 45° orienté sud ; trou d'envol sur la face est. Le toit proposé de 250 × 300 mm sur rampant doit être revalidé à 45° : prise au vent, débord, fixation, sortie câble et ventilation. Aucun nouveau débit bois n'est établi.
+Toit monopente à 45° orienté sud ; trou d'envol sur la face est. Le toit proposé de 250 × 300 mm sur rampant doit être revalidé à 45° : prise au vent, débord, fixation, sortie câble et ventilation. Le débit et le montage sont désormais établis dans les [plans du nichoir](plans/README.md).
 
 ### Provenance et méthode
 
