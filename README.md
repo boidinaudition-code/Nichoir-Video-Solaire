@@ -2,6 +2,24 @@
 
 État : documentation de conception V3. Aucun firmware, aucun essai matériel et aucun déploiement.
 
+## Avancement du brainstorm
+
+| Étape | Ce qui a été décidé | Ce qui en reste |
+|---|---|---|
+| V1 — [archive](docs/archive/v1/README-v1.md) | Nichoir LPO (trou 28 ou 32 mm), XIAO Sense OV3660, PIR, clips AVI sur microSD, batterie V25 et panneau 2 W | Cotes du nichoir et règles faune. Panneau 2 W et récupération manuelle de la SD abandonnés |
+| V2 — [décision](docs/decision-v2.md) | Envoi Wi-Fi des clips vers une galerie sur Unraid, données solaires PVGIS du Havre, panneau P110 | **Livraison durable toujours valide** : le clip n'est effacé de la SD qu'après confirmation d'Unraid. Batterie et toit remplacés en V3 |
+| Comparatif — [14 projets GitHub](docs/comparatif-pir-ov5640.md) | Briques à étudier : `ESP32-CAM_MJPEG2SD` (clips AVI), `esp32-photostation` (file d'envoi hors ligne), `BirdSensor_xiao` et `BirdWatch` (cycle réveil → capture → veille), `BirdBox` (galerie) | Inspiration seulement : aucun code tiers intégré |
+| V3 — [recherches](docs/recherches-v3.md) | Choix de Romain : Wi-Fi OK, pas de câble, LED infrarouges. D'où caméra OV5640 NoIR, clips 720p, barrière IR au trou d'envol, toit 45° sud, batterie V75 | Décisions actuelles ci-dessous |
+
+Points encore ouverts :
+
+- brochage du module NoIR sur le connecteur de la Sense ;
+- références des LED IR et de la barrière, avec leur consommation ;
+- géométrie du toit à 45° (prise au vent, fixation) ;
+- consommation réelle par clip et en veille, à mesurer ;
+- firmware et galerie Unraid, à écrire ;
+- liste d'achats V3 chiffrée, à établir après les essais.
+
 ## Décisions actuelles
 
 - Caméra : XIAO ESP32-S3 Sense + OV5640 NoIR grand angle, DVP 24 broches. Comparer le brochage du module acheté à la fiche Seeed avant branchement ; la compatibilité n'est pas vérifiée. L'OV5640 livré avec la Sense est à focale fixe ; seul le module OV5640 long vendu séparément (avec dissipateur) a un autofocus. Sa fiche indique un filtre IR-cut. Le module livré sert de repli pour les essais de jour.
