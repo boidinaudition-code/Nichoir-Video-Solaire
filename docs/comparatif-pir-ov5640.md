@@ -45,7 +45,7 @@ Source : [README au commit 18f6e84](https://github.com/s60sc/ESP32-CAM_MJPEG2SD/
 
 - **Force :** enregistrement JPEG multiplexés dans de vrais AVI sur SD, relecture, transferts FTP/HTTPS/WebDAV et configurations S3/XIAO. PIR optionnel, détection image ou commande manuelle possibles. L'application ne se résume donc pas à du streaming.
 - **Faiblesse / énergie :** application riche, pression mémoire et nombreuses fonctions non nécessaires. Le README réserve les définitions au-dessus de FHD aux photos pour raisons mémoire, tout en publiant une table de cadences hautes définitions : cette tension documentaire interdit d'en déduire un mode 5 MP vidéo fiable. Détection image limitée au-delà de SXGA. Ses FPS OV2640/Freenove et sa table OV5640 ne sont pas une promesse XIAO en basse lumière ; son avertissement thermique concerne des montages caméra et alimentations à qualifier, pas toute Sense indistinctement. PIR ne prouve pas notre cycle profond/radio bornée.
-- **À transposer :** étudier tamponnement, écritures SD alignées, finalisation/index AVI et distinction enregistrement/relecture pour les clips de 20 s. Désactiver audio, lampes, direct permanent et rotation destructrice. Le transfert proposé ne remplace pas notre ACK durable avec empreinte et déduplication.
+- **À transposer :** étudier tamponnement, écritures SD alignées, finalisation/index AVI et distinction enregistrement/relecture pour les clips de 20 s, avec l'audio PDM dans l'AVI (décision V3, voir [inspirations et audio](inspirations-audio.md)). Désactiver lampes, direct permanent et rotation destructrice. Le transfert proposé ne remplace pas notre ACK durable avec empreinte et déduplication.
 
 ### 2. Remeny-Farm/esp32-photostation — priorité pour la file hors ligne
 
@@ -85,7 +85,7 @@ Source : [README au commit f6216ed](https://github.com/TeTeHacko/chytra-budka/bl
 
 - **Force :** montage XIAO OV3660, photos PIR/VAD/MQTT, audio BirdNET, télémétrie et modes de puissance ; l'auteur distingue matériel déployé et travaux prévus.
 - **Faiblesse / énergie :** unités sur USB/powerbank ; essai intermédiaire panneau pliant rechargeant une powerbank, mais **aucun nœud solaire autonome déployé**, étage charge solaire/batterie non construit. ~1,1 W en modes toujours actifs et ~0,40 W en Safe light-sleep sont rapportés par l'auteur. Les modes automatiques ne passent pas réellement en sommeil profond ; hibernation sur commande distincte. Audio stream/vidéo à la demande ne prouvent pas AVI SD. SDIO annoncé dans son schéma ne valide pas le bus SPI réel de notre extension.
-- **À transposer :** consigner les mesures par état et distinguer conception, banc et terrain. Ne pas reprendre audio, indicateurs lumineux ni sa qualification « invisible aux oiseaux ». La V3 retient son propre éclairage 940 nm à qualifier, sans intervention occupée.
+- **À transposer :** consigner les mesures par état et distinguer conception, banc et terrain. Ne pas reprendre son flux audio pour BirdNET (la V3 enregistre le son seulement avec les clips), ni ses indicateurs lumineux ni sa qualification « invisible aux oiseaux ». La V3 retient son propre éclairage 940 nm à qualifier, sans intervention occupée.
 
 ### 7. Dyspersja/CameraTrap — référence photo SD simple
 
@@ -178,7 +178,7 @@ Ordre proposé pour un futur prototype, sans assembler aujourd'hui les firmwares
 3. **Activité bornée** : BirdSensor_xiao pour deadline/réarmement ; BirdWatch pour mode dégradé et télémétrie, sans copier leur électronique. Réveil profond BS612 reste la solution initiale ; coupure TPS22918 seulement si besoin établi par mesures et circuit qualifié.
 4. **Galerie future sur serveur** : BirdBox pour visites, diagnostics et distinction en attente/échec, sans IA ou serveur vidéo permanent sur la carte. Le MP4 reste un dérivé de l'AVI conservé selon rétention explicite, pas un import Frigate.
 
-Exclusions V2 : éclairage/IR/flash, audio et servos, effarouchement, BLE sur oiseaux, exposition Internet directe, cloud obligatoire, rotation des clips non acquittés, et toute promesse de cadence ou d'autonomie. La V3 lève uniquement l'exclusion de l'éclairage IR et remplace le déclenchement PIR principal par la barrière IR. Cette revue n'est pas un audit exhaustif de sécurité/licences ; aucun code tiers repris.
+Exclusions V2 : éclairage/IR/flash, audio et servos, effarouchement, BLE sur oiseaux, exposition Internet directe, cloud obligatoire, rotation des clips non acquittés, et toute promesse de cadence ou d'autonomie. La V3 lève les exclusions de l'éclairage IR et de l'audio (son enregistré avec chaque clip) et remplace le déclenchement PIR principal par la barrière IR. Cette revue n'est pas un audit exhaustif de sécurité/licences ; aucun code tiers repris.
 
 ## Essai exploratoire V2 archivé : 5 MP contre 1080p, sans oiseaux
 

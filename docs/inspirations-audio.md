@@ -15,7 +15,7 @@ Idées retenues :
 | Idée | Ce que l'on en fait pour le nichoir |
 |---|---|
 | Mesure de la batterie (INA219 sur le chemin de la batterie) envoyée avec chaque observation | Envoyer la tension batterie, le RSSI Wi-Fi et la température de la carte avec chaque clip. L'auteur précise que ses Wh sont des **estimations** à partir de mesures prises pendant les réveils, pas un compteur continu. |
-| Mode survie quand la batterie est basse | Seuils à définir : moins de clips, plus d'envoi, puis photos seules. |
+| Mode survie quand la batterie est basse | Seuils à définir : moins de clips, envois regroupés et espacés, puis photos seules. |
 | Heures actives configurables | Plage horaire réglable. Dans un nichoir, la nuit compte (couvaison, dortoir) : ne pas la couper par défaut, la limiter si l'énergie manque. |
 | Portail Wi-Fi de configuration au premier démarrage, aucun réglage codé en dur | À reprendre : identifiants Wi-Fi et adresse du serveur hors du firmware et hors Git. |
 | Identifiant unique par appareil, serveur multi-appareils | Compatible avec l'identité persistante de la [livraison durable](decision-v2.md). |
@@ -32,17 +32,17 @@ Non retenu : l'électronique de charge et le pack 18650 (remplacés par la V75 c
 
 Sources : [Our Tech](https://naturebytes.org/our-tech/), [Conservation](https://naturebytes.org/conservation/).
 
-Ce que disent les pages : la NestBox reprend la technologie de leur Wildlife Cam Kit à Raspberry Pi pour diffuser en direct, filmer, photographier et suivre la nidification. Elle a été déployée avec le Muséum des sciences naturelles de Belgique dans le projet scolaire XperiBIRD.be, qui suit la nidification des mésanges. Les observations sont saisies sur un portail en ligne. Naturebytes déploie aussi des enregistreurs audio AudioMoth (full spectrum, jusqu'aux ultrasons) pour suivre les paysages sonores.
+Ce que disent les pages : la NestBox utilise une technologie similaire à leur Wildlife Cam Kit, lui-même alimenté par un Raspberry Pi, pour diffuser en direct, filmer, photographier et suivre la nidification. Elle a été déployée avec le Muséum des sciences naturelles de Belgique dans un projet éducatif national (« Xperibird ») ; les observations sont saisies sur un portail en ligne. Selon [l'étude d'impact de 2017](https://drive.google.com/file/d/13e6Tcm3k3meYt6jEoQe6_RHLcHpRFHc2/view) liée depuis la page, XperiBIRD.be suit la nidification des mésanges dans des écoles belges. Naturebytes déploie aussi des enregistreurs audio AudioMoth (full spectrum, jusqu'aux ultrasons) pour suivre les paysages sonores.
 
 Les pages publiques ne détaillent **ni le matériel exact, ni l'éclairage, ni l'alimentation** de la NestBox. Le document lié depuis « More information » est une étude d'impact éducatif de 2017 sans détails techniques.
 
 Idées retenues :
 
-- **Carnet de nidification** dans la galerie : date du premier œuf, nombre d'œufs, éclosion, envol. C'est ce que suivent les protocoles de science participative ; la vidéo sert à remplir ce carnet.
+- **Carnet de nidification** dans la galerie : construction du nid, ponte, éclosion, envol, plus le nombre d'œufs (ajout de notre part). La vidéo sert à remplir ce carnet.
 - Combiner images et **données de contexte**, comme le concept de station météo de Naturebytes : température dans la chambre et à l'extérieur.
 - L'audio a une vraie valeur de suivi (AudioMoth). Un enregistreur full spectrum dédié reste hors périmètre ; le micro de la Sense suffit pour une V1 audio (§4).
 
-Non retenu : la diffusion en direct (Raspberry Pi, incompatible avec le budget solaire et sans câble, voir le README).
+Non retenu : la diffusion en direct (technologie du Cam Kit à Raspberry Pi, incompatible avec le budget solaire et sans câble, voir le README).
 
 ## 3. Boîtier de piège photo ESP32-CAM sur Printables (Karl132)
 
@@ -72,7 +72,7 @@ Décision :
 - **Son enregistré avec chaque clip**, dans le même AVI, avec le micro de la Sense. Pas de micro supplémentaire en V1.
 - **Volume** : 16 000 échantillons × 2 octets × 20 s = **640 ko par clip**, peu par rapport à la vidéo. Consommation du micro à mesurer avec le reste.
 - **Limite** : à 16 kHz, le son est coupé au-dessus de 8 kHz. Les aigus des cris de passereaux peuvent donc être en partie perdus. À écouter lors des essais.
-- **Galerie** : le MP4 produit sur Unraid doit contenir la piste audio. Seeed signale que beaucoup de lecteurs lisent mal ses WAV ; la conversion sur Unraid règle ce point.
+- **Galerie** : le MP4 produit sur Unraid doit contenir la piste audio. Seeed signale que beaucoup de lecteurs vidéo lisent mal ses WAV. La conversion MP4 sur Unraid devrait régler ce point : à tester.
 - **Placement** : la Sense est dans le compartiment technique, au-dessus de la chambre. Prévoir un petit passage acoustique vers la chambre, protégé de l'eau et sans bord coupant. À tester.
 - **Vie privée** : le son n'est enregistré que pendant les clips déclenchés par une activité dans le nichoir, jamais en continu. Le micro peut capter des voix proches : éviter de placer le nichoir près d'une terrasse ou d'un passage.
 

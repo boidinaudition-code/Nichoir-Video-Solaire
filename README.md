@@ -7,7 +7,7 @@
 | Étape | Ce qui a été décidé | Ce qui en reste |
 |---|---|---|
 | V1 — [archive](docs/archive/v1/README-v1.md) | Nichoir LPO (trou 28 ou 32 mm), XIAO Sense OV3660, PIR, clips AVI sur microSD, batterie V25 et panneau 2 W | Cotes du nichoir et règles faune. Panneau 2 W et récupération manuelle de la SD abandonnés |
-| V2 — [décision](docs/decision-v2.md) | Envoi Wi-Fi des clips vers une galerie sur Unraid, données solaires PVGIS du Havre, panneau P110 | **Livraison durable toujours valide** : le clip n'est effacé de la SD qu'après confirmation d'Unraid. Caméra, éclairage, résolution, détection, panneau, toit et batterie remplacés en V3 |
+| V2 — [décision](docs/decision-v2.md) | Envoi Wi-Fi des clips vers une galerie sur Unraid, données solaires PVGIS du Havre, panneau P110 | **Livraison durable toujours valide** : le clip n'est effacé de la SD qu'après confirmation d'Unraid. Caméra, éclairage, résolution, audio, détection, panneau, toit et batterie remplacés en V3 |
 | Comparatif — [14 projets GitHub](docs/comparatif-pir-ov5640.md) | Briques à étudier : `ESP32-CAM_MJPEG2SD` (clips AVI), `esp32-photostation` (file d'envoi hors ligne), `BirdSensor_xiao` (durée d'activité bornée, réarmement), `BirdWatch` (mode dégradé, télémétrie), `BirdBox` (galerie) | Inspiration seulement : aucun code tiers intégré |
 | V3 — [recherches](docs/recherches-v3.md) | Wi-Fi OK, pas de câble, LED infrarouges (choix de Romain). Caméra OV5640 NoIR, clips 720p, barrière IR au trou d'envol ; toit 45° sud (gain solaire hivernal PVGIS) ; batterie V75 (certifiée, Always On) | Décisions actuelles ci-dessous |
 | Inspirations et audio — [BirdWatch, Naturebytes, boîtier Printables](docs/inspirations-audio.md) | Son enregistré avec chaque clip (micro de la Sense). Télémétrie, mode survie, portail de configuration, Home Assistant, carnet de nidification, coupure d'alimentation entre événements, règles d'étanchéité | Idées à intégrer au firmware et à la galerie |
@@ -46,7 +46,7 @@ Points encore ouverts :
 | 1080p ou vidéo 5 Mpx | 1080p : probablement plusieurs dizaines de Mo pour 20 s, ordre de grandeur non mesuré incompatible avec le budget Wi-Fi de 10–30 s/clip ; 5 Mpx réservé aux photos |
 | PIR seul | Oiseau qui couve peu mobile et détection peu fiable dans 14 cm |
 | Écoute audio continue | Coût énergétique d'un micro écouté en permanence ; le son est enregistré seulement avec les clips |
-| Diffusion en direct (type Naturebytes NestBox) | Raspberry Pi, incompatible avec le budget solaire sans câble |
+| Diffusion en direct (type Naturebytes NestBox) | Technologie du Wildlife Cam Kit, à Raspberry Pi : incompatible avec le budget solaire sans câble |
 
 ## Prochaines étapes
 

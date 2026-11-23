@@ -1,6 +1,6 @@
 # Décision V2 — brainstorm solaire, clips Wi-Fi et galerie Unraid
 
-> **Partiellement remplacée par V3 : caméra, éclairage, résolution, détection, panneau, toit et batterie → [README](../README.md) / [recherches V3](recherches-v3.md). §2 livraison durable reste valide.** Les autres choix et protocoles ci-dessous sont historiques V2, pas les prescriptions V3.
+> **Partiellement remplacée par V3 : caméra, éclairage, résolution, audio, détection, panneau, toit et batterie → [README](../README.md) / [recherches V3](recherches-v3.md). §2 livraison durable reste valide.** Les autres choix et protocoles ci-dessous sont historiques V2, pas les prescriptions V3.
 
 Statut : décision documentaire de conception, conditionnelle aux essais ci-dessous. Aucun firmware, service Unraid, transcodage ou déploiement n'est livré. Aucun essai matériel exécuté. Cette page remplace les choix V1 ; les huit pages anciennes restent des archives V1 signalées par bannière. Le comparatif PIR/OV5640 est un complément courant, pas une archive V1. Aucun prix ni total BOM V2 n'est établi.
 
