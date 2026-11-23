@@ -7,9 +7,10 @@
 | Étape | Ce qui a été décidé | Ce qui en reste |
 |---|---|---|
 | V1 — [archive](docs/archive/v1/README-v1.md) | Nichoir LPO (trou 28 ou 32 mm), XIAO Sense OV3660, PIR, clips AVI sur microSD, batterie V25 et panneau 2 W | Cotes du nichoir et règles faune. Panneau 2 W et récupération manuelle de la SD abandonnés |
-| V2 — [décision](docs/decision-v2.md) | Envoi Wi-Fi des clips vers une galerie sur Unraid, données solaires PVGIS du Havre, panneau P110 | **Livraison durable toujours valide** : le clip n'est effacé de la SD qu'après confirmation d'Unraid. Caméra, éclairage, résolution, détection, panneau, toit et batterie remplacés en V3 |
+| V2 — [décision](docs/decision-v2.md) | Envoi Wi-Fi des clips vers une galerie sur Unraid, données solaires PVGIS du Havre, panneau P110 | **Livraison durable toujours valide** : le clip n'est effacé de la SD qu'après confirmation d'Unraid. Caméra, éclairage, résolution, audio, détection, panneau, toit et batterie remplacés en V3 |
 | Comparatif — [14 projets GitHub](docs/comparatif-pir-ov5640.md) | Briques à étudier : `ESP32-CAM_MJPEG2SD` (clips AVI), `esp32-photostation` (file d'envoi hors ligne), `BirdSensor_xiao` (durée d'activité bornée, réarmement), `BirdWatch` (mode dégradé, télémétrie), `BirdBox` (galerie) | Inspiration seulement : aucun code tiers intégré |
 | V3 — [recherches](docs/recherches-v3.md) | Wi-Fi OK, pas de câble, LED infrarouges (choix de Romain). Caméra OV5640 NoIR, clips 720p, barrière IR au trou d'envol ; toit 45° sud (gain solaire hivernal PVGIS) ; batterie V75 (certifiée, Always On) | Décisions actuelles ci-dessous |
+| Inspirations et audio — [BirdWatch, Naturebytes, boîtier Printables](docs/inspirations-audio.md) | Son enregistré avec chaque clip (micro de la Sense). Télémétrie, mode survie, portail de configuration, Home Assistant, carnet de nidification, coupure d'alimentation entre événements, règles d'étanchéité | Idées à intégrer au firmware et à la galerie |
 
 Points encore ouverts :
 
@@ -18,6 +19,8 @@ Points encore ouverts :
 - géométrie du toit à 45° (prise au vent, fixation) ;
 - consommation réelle par clip et en veille, à mesurer ;
 - firmware et galerie Unraid, à écrire ;
+- qualité du son à travers la cloison et passage acoustique ;
+- seuils du mode survie ;
 - liste d'achats V3 chiffrée, à établir après les essais.
 
 ## Décisions actuelles
@@ -25,10 +28,12 @@ Points encore ouverts :
 - Caméra : XIAO ESP32-S3 Sense + OV5640 NoIR grand angle, DVP 24 broches. Comparer le brochage du module acheté à la fiche Seeed avant branchement ; la compatibilité n'est pas vérifiée. L'OV5640 livré avec la Sense est à focale fixe ; seul le module OV5640 long vendu séparément (avec dissipateur) a un autofocus. Sa fiche indique un filtre IR-cut. Le module livré sert de repli pour les essais de jour.
 - Éclairage : LED IR 940 nm diffusées, seulement pendant la capture, commandées depuis le 5 V par transistor/MOSFET, jamais directement par GPIO. Référence, nombre et courant restent à choisir et mesurer, sans échauffement de la chambre.
 - Capture : clips 720p MJPEG/AVI sur microSD, une photo 5 Mpx au début de chaque événement. Pas de vidéo 5 Mpx.
+- Audio : son enregistré pendant chaque clip par le micro PDM de la Sense, en mono 16 bits à 16 kHz, dans le même AVI (environ 640 ko par clip de 20 s). Aigus coupés au-dessus de 8 kHz. Jamais d'enregistrement continu.
+- Télémétrie : tension batterie, signal Wi-Fi et température envoyés avec chaque clip ; mode survie quand la batterie baisse (moins de clips, puis photos seules). Réglages Wi-Fi et serveur par portail de configuration, hors firmware et hors Git.
 - Détection : barrière IR au trou d'envol pour les entrées/sorties ; photo toutes les 10 min en journée pour le timelapse. PIR intérieur optionnel ; barrière hors champ, sans éclairer la chambre.
 - Solaire : Voltaic P110, 9,54 W ; toit monopente 45° orienté sud, trou d'envol sur la face est. Géométrie du toit à revalider.
 - Batterie : Voltaic V75, 72,36 Wh, sortie USB-A Always On 5 V. Prix fabricant : 89 USD, pas un prix France. Batterie dans un coffret séparé, ombragé et protégé de l'eau/condensation ; charge autorisée entre 0 et 45 °C.
-- Réseau : Wi-Fi déclaré OK par Romain, sans mesure RSSI documentée. Aucun câble possible : montage autonome solaire. Envois bornés vers une future galerie MP4 sur Unraid, avec ACK durable ; pas de flux continu ni de Frigate.
+- Réseau : Wi-Fi déclaré OK par Romain, sans mesure RSSI documentée. Aucun câble possible : montage autonome solaire. Envois bornés vers une future galerie MP4 avec son sur Unraid, avec ACK durable ; pas de flux continu ni de Frigate. La galerie pourra exposer des capteurs à Home Assistant (batterie, dernière visite, nombre de visites) et tenir un carnet de nidification (premier œuf, éclosion, envol).
 
 ## Options écartées et pourquoi
 
@@ -40,6 +45,8 @@ Points encore ouverts :
 | Power bank quelconque | La plupart s'éteignent à faible courant ; Always On nécessaire |
 | 1080p ou vidéo 5 Mpx | 1080p : probablement plusieurs dizaines de Mo pour 20 s, ordre de grandeur non mesuré incompatible avec le budget Wi-Fi de 10–30 s/clip ; 5 Mpx réservé aux photos |
 | PIR seul | Oiseau qui couve peu mobile et détection peu fiable dans 14 cm |
+| Écoute audio continue | Coût énergétique d'un micro écouté en permanence ; le son est enregistré seulement avec les clips |
+| Diffusion en direct (type Naturebytes NestBox) | Technologie du Wildlife Cam Kit, à Raspberry Pi : incompatible avec le budget solaire sans câble |
 
 ## Prochaines étapes
 
@@ -47,8 +54,11 @@ Points encore ouverts :
 2. Mesurer les Wh par clip et la veille au wattmètre USB, puis recalculer le budget complet.
 3. Vérifier le brochage du module NoIR ; c'est un préalable à son branchement pour l'essai 1.
 4. Réaliser le gabarit du toit 45° : prise au vent, débord et fixation.
+5. Au même essai que l'étape 1 : enregistrer le son et comparer veille seule et coupure d'alimentation entre événements (latence, Wh).
 
-Éléments à prévoir : XIAO Sense, module NoIR, microSD, LED IR et commande, barrière IR, P110, V75, câbles compatibles, bois, fixations et coffrets. Pas de BOM chiffrée V3 établie.
+Compartiment technique : imprimable en PETG ou ABS plutôt qu'en PLA, silicone autour des passages, vernis de protection sur les cartes, orifice bas laissé ouvert pour l'humidité.
+
+Éléments à prévoir : XIAO Sense (micro intégré), module NoIR, microSD, LED IR et commande, barrière IR, P110, V75, câbles compatibles, bois, fixations et coffrets. Pas de BOM chiffrée V3 établie.
 
 La faune reste prioritaire : chambre ombragée aux heures chaudes, aucun perchoir, câble libre ou pointe accessible. Aucune intervention sur nichoir occupé, même par trappe technique ; laisser la vidéo arrêtée en cas de panne.
 
@@ -58,6 +68,7 @@ La faune reste prioritaire : chambre ombragée aux heures chaudes, aucun perchoi
 - [CSV PVGIS des quatre inclinaisons](docs/pvgis-le-havre-inclinaisons.csv)
 - [Décision V2 partiellement remplacée ; §2 livraison durable toujours valide](docs/decision-v2.md)
 - [Comparatif de 14 projets PIR / OV5640](docs/comparatif-pir-ov5640.md)
+- [Inspirations BirdWatch, Naturebytes, Printables et décision audio](docs/inspirations-audio.md)
 - [Archive V1 : ancienne BOM, tableaux et huit pages](docs/archive/v1/README-v1.md)
 
 Depuis la racine : `python -m unittest discover -s tests -v`, `python tools/verifier_dossier.py`, puis `git diff --check`. Les outils et tests de calcul restent V1 : ils ne qualifient pas le matériel V3.
