@@ -31,8 +31,9 @@ JEU_LATERAL = 1           # jeu de la porte de chaque côté (bois qui gonfle)
 Z_PIVOT = 290             # axe des vis pivots de la porte, à E/2 du bord sud
 TRAPPE = (70, 150, 285, 345)  # trappe technique en FAÇADE : x de 70 à 150, z de 285 à 345
 MARGE_PLAQUE = 10            # la plaque de fermeture déborde de 10 tout autour
+AERATION_FACADE = (145, 400)  # trous Ø8 grillagés (x, z)
+AERATION_DOS = (60, 330)
 Z_BLOC_HAUT = 190 + 45        # haut du bloc d'entrée (90 × 90 centré sur le trou)
-X_PORTE_OUVERTE = 50          # le haut de la porte ouverte entre jusqu'à x ≈ 48
 MARGE_DEBIT = 40          # équerrage et reprises
 TOIT_L, TOIT_P = 300, 250  # toit : longueur dans la pente × largeur (est-ouest)
 DEBORD_SUD = 30           # débord du toit en bas de pente
@@ -73,17 +74,29 @@ def angle_ouverture_porte():
     return 90
 
 
+def x_max_porte_ouverte():
+    """Abscisse maximale atteinte par le haut de la porte pendant l'ouverture."""
+    xp, zp = E / 2, Z_PIVOT
+    coins = [(0, H_SUD - JEU_PORTE), (E, z_toit(E) - JEU_PORTE)]
+    xmax = 0
+    for deg10 in range(0, angle_ouverture_porte() * 10 + 1):
+        a = math.radians(deg10 / 10)
+        for x, z in coins:
+            xmax = max(xmax, xp + (x - xp) * math.cos(a) + (z - zp) * math.sin(a))
+    return xmax
+
+
 def pieces():
     """Liste des pièces finies. 'h_haute'/'h_basse' : biseau à 45° en tête."""
     return [
         dict(nom='Façade (est)', qte=1, l=EXT, h=H_NORD, ep=E,
-             note=f'trapèze : {H_SUD:g} côté sud, {H_NORD:g} côté nord ; trou Ø{TROU} axe à {Z_TROU} du bas'),
+             note=f'trapèze : {H_SUD:g} côté sud, {H_NORD:g} côté nord ; trou Ø{TROU} axe à {Z_TROU} du bas ; trappe technique et aération'),
         dict(nom='Dos (ouest)', qte=1, l=EXT, h=H_NORD, ep=E,
-             note='même trapèze que la façade ; trappe technique, passe-câble Ø10 et aération'),
+             note='même trapèze que la façade ; aération ; côté support, rien ne dépasse'),
         dict(nom='Côté sud (porte pivotante)', qte=1, l=INT - 2 * JEU_LATERAL, h=z_toit(E) - JEU_PORTE, ep=E,
              note=f'biseau 45° en tête : {z_toit(E) - JEU_PORTE:g} face intérieure, {H_SUD - JEU_PORTE:g} face extérieure'),
         dict(nom='Côté nord', qte=1, l=INT, h=H_NORD, ep=E,
-             note=f'biseau 45° en tête : {H_NORD:g} face extérieure, {z_toit(EXT - E):g} face intérieure'),
+             note=f'biseau 45° en tête : {H_NORD:g} face extérieure, {z_toit(EXT - E):g} face intérieure ; passe-câble vers la batterie'),
         dict(nom='Fond', qte=1, l=INT, h=INT, ep=E, note='4 trous Ø5 près des angles'),
         dict(nom='Cloison (plafond de la chambre)', qte=1, l=INT, h=INT, ep=E,
              note='passages caméra, LED IR et micro'),
@@ -91,7 +104,10 @@ def pieces():
              note='panneau 250 de large : planche large ou deux planches collées, couverture étanche'),
         dict(nom='Bloc d’entrée', qte=1, l=90, h=90, ep=E,
              note=f'trou Ø{TROU} aligné ; logement de la barrière IR'),
-        dict(nom='Barre de fixation', qte=1, l=40, h=600, ep=E, note='vissée sur le dos (LPO)'),
+        dict(nom='Plaque de trappe', qte=1, l=TRAPPE[1] - TRAPPE[0] + 2 * MARGE_PLAQUE,
+             h=TRAPPE[3] - TRAPPE[2] + 2 * MARGE_PLAQUE, ep=10,
+             note='contreplaqué marine ou planche de 10 ; encoche 6 × 6 en bas pour le câble de la barrière'),
+        dict(nom='Barre de fixation', qte=1, l=40, h=600, ep=E, note='vissée au milieu du dos (LPO)'),
     ]
 
 
@@ -105,8 +121,9 @@ def debit():
     autres = [p['Côté sud (porte pivotante)']['h'], p['Côté nord']['h'],
               p['Fond']['h'], p['Cloison (plafond de la chambre)']['h'], 90]
     longueur = flan + sum(autres) + TRAIT_SCIE * len(autres) + MARGE_DEBIT
+    plaque = p['Plaque de trappe']
     return dict(flan_facade_dos=math.ceil(flan), longueur_planche_180=math.ceil(longueur),
-                planche_toit=(TOIT_L, TOIT_P), barre=(40, 600))
+                planche_toit=(TOIT_L, TOIT_P), barre=(40, 600), plaque_10mm=(plaque['l'], plaque['h']))
 
 
 def verifications():
@@ -131,7 +148,14 @@ def verifications():
     res.append(('Plaque de trappe sous le débord du toit et au-dessus du bloc d’entrée',
                 z2 + m <= z_toit(x1 - m) - 10 and z1 - m > Z_BLOC_HAUT and x2 + m <= EXT,
                 f'plaque {x2 - x1 + 2 * m} × {z2 - z1 + 2 * m}, de x {x1 - m} à {x2 + m}, z {z1 - m} à {z2 + m}'))
-    res.append(('Trappe hors de la zone balayée par la porte', x1 > X_PORTE_OUVERTE, f'x {x1} > {X_PORTE_OUVERTE}'))
+    xm = x_max_porte_ouverte()
+    for nom, (xa, za) in {'façade': AERATION_FACADE, 'dos': AERATION_DOS}.items():
+        ok = E + 4 < xa < EXT - E - 4 and Z_CLOISON + 4 < za < z_toit(xa) - 15
+        if nom == 'façade':
+            ok = ok and not (x1 - m - 4 < xa < x2 + m + 4 and z1 - m - 4 < za < z2 + m + 4)
+        res.append((f'Aération Ø8 du {nom} dans le compartiment, sous le toit', ok, f'x {xa}, z {za}'))
+    res.append(('Trappe et plaque hors de la zone balayée par la porte', x1 - m > xm + 5,
+                f'porte jusqu’à x {xm:.1f}, plaque dès x {x1 - m}'))
     a = angle_ouverture_porte()
     res.append(('Porte ouvrable d’au moins 60°', a >= 60, f'butée sur le débord du toit vers {a}°'))
     pente_box = EXT / math.cos(math.radians(PENTE))
@@ -243,7 +267,7 @@ def vue_debit():
         c.append(f'<text x="{X(x) + 3}" y="{y1 + 26}">{p["l"]:g} × {p["h"]:g}</text>')
         x += p['h'] + TRAIT_SCIE
     d = debit()
-    c.append(f'<text x="20" y="{y1 + INT * s + 26}">Longueur totale de planche 180 : ≈ {d["longueur_planche_180"]} mm (bloc d’entrée compris), + toit {TOIT_L} × {TOIT_P} et barre 40 × 600.</text>')
+    c.append(f'<text x="20" y="{y1 + INT * s + 26}">Longueur totale de planche 180 : ≈ {d["longueur_planche_180"]} mm (bloc d’entrée compris), + toit {TOIT_L} × {TOIT_P} et barre 40 × 600 ; plaque de trappe {d["plaque_10mm"][0]} × {d["plaque_10mm"][1]} en 10 mm.</text>')
     return svg(740, int(y1 + INT * s + 50), ''.join(c), 'Débit des pièces — cotes en mm')
 
 
