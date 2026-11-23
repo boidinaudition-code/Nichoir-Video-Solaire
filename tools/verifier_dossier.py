@@ -143,7 +143,7 @@ def verifier(root=ROOT):
     ]
     for calcule, publie in geometrie:
         exiger(calcule == publie and publie in bois, f'Cote bois incohérente : {publie}')
-    rapports.append('Bois : hauteur utile, marges panneau, trou et pentes des deux variantes contrôlés')
+    rapports.append('Bois : huit valeurs numériques recalculées et présentes dans le texte ; libellés, plan et montage non validés')
     return erreurs, rapports
 
 

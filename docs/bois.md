@@ -32,7 +32,7 @@ Fond et cloison **130 × 130**, chambre **130 × 130 × 230** ; trou **Ø28**, m
 
 ## Toit et panneau intégralement dessus
 
-P126 : enveloppe plane **136 × 112** (épaisseur revendeur 2,7 ; prévoir 4 mm et tolérance du lot). Poser 136 transversalement au toit de 200, 112 dans le sens du rampant de 230. Centré : **32 de marge latérale et 59 dans le sens du rampant** de chaque côté. Même résultat sur la variante bleue puisque toit inchangé. Le câble sort au dos dans l'emprise du toit avec boucle vers coffret ; le panneau ne dépasse nulle part.
+P126 : enveloppe plane **136 × 112** (épaisseur revendeur et page commerciale 2,7, fiche technique constructeur du 31 août 2026 **3,1 ± 0,5** ; prévoir 4 mm et contrôler le lot, voir [câblage](cablage.md)). Poser 136 transversalement au toit de 200, 112 dans le sens du rampant de 230. Centré : **32 de marge latérale et 59 dans le sens du rampant** de chaque côté. Même résultat sur la variante bleue puisque toit inchangé. Le câble sort au dos dans l'emprise du toit avec boucle vers coffret ; le panneau ne dépasse nulle part.
 
 P105 fabricant actuel : **148 × 223 × 4**. Dans ce toit200 ×230, il resterait seulement 3,5 mm à chaque extrémité du rampant : aucune marge saine de montage/câble. Non retenu V1 ; agrandir le toit à **200 × 270 minimum** si étude énergétique ultérieure le justifie, puis revalider vent, ombre et disponibilité de la révision 6 V. Des anciennes fiches P105 parlent de 5 V : ne pas confondre.
 
