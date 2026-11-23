@@ -2,6 +2,8 @@
 
 [Accueil](../README.md) · [Décision V2](decision-v2.md) · [Comparatif des projets](comparatif-pir-ov5640.md) · [Archive V1](archive/v1/README-v1.md)
 
+> **Mise à jour du 24/11/2026 :** Romain abandonne l'éclairage et la barrière infrarouges, les sondes de température et la batterie V75 ; détection par capteur PIR, pack de 4 accus 18650 avec chargeur solaire. La [BOM](bom.md) fait foi ; les passages sur l'infrarouge, les sondes ou la V75 ci-dessous sont historiques.
+
 Décisions confirmées par Romain le 23/11/2026. Documentation uniquement : aucun firmware, essai matériel ou déploiement. Les sources ci-dessous étayent les choix, pas une qualification du montage.
 
 ## 1. Autonomie et réseau
@@ -30,6 +32,8 @@ Un module NoIR générique peut être sans autofocus ; prévoir alors un réglag
 L'autofocus (module long séparé uniquement) est utile à 10–15 cm. Le [forum Seeed sur l'AF OV5640](https://forum.seeedstudio.com/t/ov5640-camera-for-xiao-esp32s3-sense-how-to-use-autofocus/272485?page=2) évoque la possibilité de figer la focale par registre VCM, à valider sur le module et le pilote réels.
 
 ## 3. Éclairage et capture
+
+> **Mise à jour du 24/11/2026 :** Romain abandonne l'éclairage et la barrière infrarouges ; détection par capteur PIR. Voir la [BOM](bom.md).
 
 Version LED infrarouge validée. LED IR 940 nm diffusées, allumées seulement pendant la capture, alimentées depuis le 5 V et commandées par transistor/MOSFET, jamais directement par un GPIO. Référence, nombre et courant restent à choisir et mesurer ; aucun échauffement de la chambre n'est acceptable. Les caméras de nichoir du commerce éclairent en IR ; cela ne qualifie pas notre intensité ni notre montage.
 
@@ -76,6 +80,8 @@ Moyenne annuelle HSP annoncée dans le brief : 3,508 à 9° et 3,842 à 45°. La
 
 ## 6. Batterie : Voltaic V75
 
+> **Mise à jour du 24/11/2026 :** Romain remplace la V75 par 4 accus XTAR 18650 en parallèle, avec un chargeur solaire bq24074 à thermistance et un régulateur 5 V. Détails, sécurité et autonomie dans la [BOM](bom.md). Cette section reste comme historique.
+
 La V75 remplace le pack 1S5P maison et l'option « n'importe quelle power bank ». La plupart des power banks s'arrêtent à faible courant : [explication Always On Voltaic](https://voltaicsystems.com/always-on-batteries/).
 
 Sources : [fiche V75 fabricant](https://voltaicsystems.com/v75) et [notice V25/V50/V75 2025](https://voltaicsystems.com/content/batteries/V25_50_75_Instructions_2025.pdf).
@@ -92,10 +98,10 @@ Sources : [fiche V75 fabricant](https://voltaicsystems.com/v75) et [notice V25/V
 | Reprise | Automatique après décharge et défauts de température |
 | Conformité indiquée | IEC 62133, UN 38.3, CE |
 | Encombrement et masse | 15,5 × 8,2 × 2,4 cm ; 502 g |
-| Prix fabricant | 89 USD ; ni prix France ni total livré |
+| Prix | 89 USD chez le fabricant ; prix France relevé dans la [BOM](bom.md) |
 | Charge au panneau 10 W | 9 h selon la notice, pas un résultat local |
 
-Ne pas utiliser le port USB-C PD du dessus en mode Always On. La notice indique 3,5 × 1,5 mm dans la ligne de spécifications, contre 3,5 × 1,1 ailleurs : vérifier connecteur, polarité et notice du lot à réception. Faire confirmer la compatibilité du P110 avec l'entrée V75, notamment Voc à froid et tolérances, avant connexion ; jamais de panneau brut sur la XIAO.
+Ne pas utiliser le port USB-C PD du dessus en mode Always On. La notice indique 3,5 × 1,5 mm dans la ligne de spécifications, contre 3,5 × 1,1 ailleurs : vérifier connecteur, polarité et notice du lot à réception. La [fiche du P110](https://voltaicsystems.com/10-watt-panel-etfe) le déclare compatible avec la V75 ; vérifier tout de même le connecteur reçu avant connexion ; jamais de panneau brut sur la XIAO.
 
 Coffret séparé de la chambre, ombragé, protégé de l'eau et de la condensation, jamais sous le panneau chaud. Tester au banc USB stable à faible charge, charge/alimentation simultanées et reprise après interruptions selon un protocole fabricant sûr. Aucun raccordement aux pastilles BAT XIAO ni batterie supplémentaire en parallèle de l'USB.
 
