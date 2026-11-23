@@ -31,6 +31,8 @@ L'autofocus (module long séparé uniquement) est utile à 10–15 cm. Le [forum
 
 ## 3. Éclairage et capture
 
+> **Mise à jour du 24/11/2026 :** Romain abandonne l'éclairage et la barrière infrarouges ; détection par capteur PIR. Voir la [BOM](bom.md).
+
 Version LED infrarouge validée. LED IR 940 nm diffusées, allumées seulement pendant la capture, alimentées depuis le 5 V et commandées par transistor/MOSFET, jamais directement par un GPIO. Référence retenue dans la [BOM](bom.md) : 4 × TSAL6200 à environ 35 mA ; intensité à valider en essai ; aucun échauffement de la chambre n'est acceptable. Les caméras de nichoir du commerce éclairent en IR ; cela ne qualifie pas notre intensité ni notre montage.
 
 Clips 720p MJPEG dans un conteneur AVI sur microSD, avec une photo 5 Mpx au début de chaque événement. La durée de travail héritée est 20 s, avec cadence réelle à mesurer. Pas de vidéo 5 Mpx. Le 1080p est écarté : un clip de 20 s pèserait probablement plusieurs dizaines de Mo, ordre de grandeur non mesuré incompatible avec le budget V2 de 10–30 s de Wi-Fi total par clip.
@@ -75,6 +77,8 @@ Décembre : 9° → 4,88 Wh/j ; 45° → 8,12 Wh/j ; 60° → 8,76 Wh/j. Passer 
 Moyenne annuelle HSP annoncée dans le brief : 3,508 à 9° et 3,842 à 45°. La moyenne simple des 12 valeurs mensuelles arrondies du CSV donne 3,508 et 3,841 ; cet écart de dernière décimale est conservé explicitement, sans modifier les données. À 30°, cette même moyenne vaut 3,832 : 45° est le meilleur compromis hivernal, quasi identique à 30° en annuel. Ces moyennes supposent l'absence d'ombre locale ; elles ne garantissent ni une journée minimale ni l'autonomie hivernale.
 
 ## 6. Batterie : Voltaic V75
+
+> **Mise à jour du 24/11/2026 :** Romain remplace la V75 par 4 accus XTAR 18650 en parallèle, avec un chargeur solaire bq24074 à thermistance et un régulateur 5 V. Détails, sécurité et autonomie dans la [BOM](bom.md). Cette section reste comme historique.
 
 La V75 remplace le pack 1S5P maison et l'option « n'importe quelle power bank ». La plupart des power banks s'arrêtent à faible courant : [explication Always On Voltaic](https://voltaicsystems.com/always-on-batteries/).
 

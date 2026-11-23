@@ -17,12 +17,12 @@ class BomTests(unittest.TestCase):
         t = bom.totaux(self.lignes)
         self.assertEqual(sum(t.values()), sum(l['prix'] * l['qte'] for l in self.lignes))
         ferme = sum((v for (s, _), v in t.items() if s == 'ferme'), Decimal(0))
-        self.assertEqual(ferme, Decimal('301.06'))
+        self.assertEqual(ferme, Decimal('228.10'))
 
     def test_elements_du_readme_presents(self):
         ids = {l['id'] for l in self.lignes if l['statut'] == 'ferme'}
-        for requis in ('carte', 'sd', 'led', 'transistor', 'barriere', 'ds18b20',
-                       'v75', 'p110', 'rallonge', 'sbu', 'coffret', 'pg7', 'cable'):
+        for requis in ('carte', 'sd', 'pir', 'chargeur', 'regulateur', 'ctn', 'fusible',
+                       'accus', 'p110', 'rallonge', 'coffret', 'pg7', 'cable'):
             self.assertIn(requis, ids)
 
     def test_references_gotronic_numeriques(self):
@@ -32,9 +32,11 @@ class BomTests(unittest.TestCase):
                     self.assertTrue(l['reference'].isdigit())
                     self.assertTrue(l['url'].startswith('https://www.gotronic.fr/art-'))
 
-    def test_quatre_led_au_moins(self):
-        led = next(l for l in self.lignes if l['id'] == 'led')
-        self.assertGreaterEqual(led['qte'], 4)
+    def test_quatre_accus_et_plus_d_infrarouge(self):
+        accus = next(l for l in self.lignes if l['id'] == 'accus')
+        self.assertEqual(accus['qte'], 4)
+        ids = {l['id'] for l in self.lignes}
+        self.assertFalse(ids & {'led', 'barriere', 'ds18b20', 'v75', 'sbu', 'noir'})
 
 
 if __name__ == '__main__':

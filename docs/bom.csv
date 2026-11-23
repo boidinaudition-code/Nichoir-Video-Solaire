@@ -1,33 +1,30 @@
 id;statut;marchand;reference;designation;qte;prix_unitaire_ttc;url;stock_releve;role
 carte;ferme;Gotronic;39234;Carte XIAO ESP32-S3 Sense 102010635 (OV3660, micro, microSD), connecteurs soudés;1;17.90;https://www.gotronic.fr/art-carte-xiao-esp32s3-sen--soud--47620.htm;8;cerveau, caméra, micro
 sd;ferme;Gotronic;26870;Carte microSD SanDisk Ultra 32 Go (SDSQUNR-032G-GN3MN), -25 à 85 °C;1;18.50;https://www.gotronic.fr/art-carte-micro-sd-sandisk-32gb-49149.htm;153;"clips ; 32 Go maxi sur la XIAO"
-led;ferme;Gotronic;03458;LED IR TSAL6200 940 nm, ±17°;6;0.35;https://www.gotronic.fr/art-diode-emettrice-tsal6200-22603.htm;155;4 posées + 2 de rechange
-transistor;ferme;Gotronic;02157;Transistor NPN BC337-25 (0,8 A);2;0.15;https://www.gotronic.fr/art-transistor-bc337-25-1322.htm;240;commande des LED + 1 de rechange
-r100;ferme;Gotronic;04024;Lot de 10 résistances 1/4 W 100 Ω;1;0.20;https://www.gotronic.fr/art-10-resistances-1-4w-100-8486-2565.htm;1000+;une par LED (≈ 35 mA)
-r220;ferme;Gotronic;04028;Lot de 10 résistances 1/4 W 220 Ω;1;0.20;https://www.gotronic.fr/art-10-resistances-1-4w-220-8486-2568.htm;1000+;essai à intensité réduite (≈ 16 mA)
-r470;ferme;Gotronic;04032;Lot de 10 résistances 1/4 W 470 Ω;1;0.20;https://www.gotronic.fr/art-10-resistances-1-4w-470-8486-2571.htm;1000+;base du BC337
-r4k7;ferme;Gotronic;04044;Lot de 10 résistances 1/4 W 4,7 kΩ;1;0.20;https://www.gotronic.fr/art-10-resistances-1-4w-4-7k-8486-300.htm;1000+;tirage 1-Wire
-r10k;ferme;Gotronic;04048;Lot de 10 résistances 1/4 W 10 kΩ;1;0.20;https://www.gotronic.fr/art-10-resistances-1-4w-10k-8486-19.htm;1000+;rappel base, tirage barrière, série ADC
-barriere;ferme;Gotronic;39178;Barrière infrarouge Adafruit 2167 (3 mm, 25 cm);1;4.90;https://www.gotronic.fr/art-barriere-infrarouge-3mm-47820.htm;200;détection au trou d'envol
-ds18b20;ferme;Gotronic;31695;Sonde étanche DS18B20 DFRobot DFR0198 (cordon 90 cm);2;7.95;https://www.gotronic.fr/art-sonde-etanche-ds18b20-19339.htm;250+;chambre + coffret batterie
-plaque;ferme;Gotronic;12630;Carte d'essais EE3070 30 × 70 mm;2;0.95;https://www.gotronic.fr/art-carte-d-essai-ee3070-21091.htm;57;nichoir + coffret
-bornier;ferme;Gotronic;49114;Bornier à vis SC03/5.08 (3 contacts);8;0.45;https://www.gotronic.fr/art-bornier-sc03-5-08-26024.htm;1000+;câble, barrière, sondes
-c470;ferme;Gotronic;04947;Condensateur radial 470 µF / 16 V;1;0.20;https://www.gotronic.fr/art-condensateur-radial-470uf-16v-3386.htm;500+;réserve sur le 5 V au nichoir
+pir;ferme;Gotronic;38058;Capteur PIR BS612 (Adafruit 5578), ≤ 11 µA;1;2.70;https://www.gotronic.fr/art-capteur-pir-bs612-36148.htm;21;détection des entrées et sorties (seule détection)
+chargeur;ferme;Gotronic;37263;Chargeur solaire Li-ion Adafruit 4755 (bq24074), entrée 5–10 V, charge 1 A, sortie ≤ 4,4 V;1;17.90;https://www.gotronic.fr/art-chargeur-d-accu-lipo-3-7-vcc-ada4755-33478.htm;28;charge des accus par le panneau
+regulateur;ferme;Gotronic;32784;Régulateur 5 V Pololu S7V8F5 (2123), entrée 2,7–11,8 V, 500 mA à 1 A;1;9.60;https://www.gotronic.fr/art-regulateur-5-v-s7v8f5-21748.htm;67;sortie 5 V pour la carte
+ctn;ferme;Gotronic;05339;Thermistance CTN 10 kΩ (B = 4300, ±10 %);1;0.80;https://www.gotronic.fr/art-thermistance-ctn-10k-8486-3739.htm;182;coupe la charge par froid ou chaleur (entrée THERM du chargeur)
+fusible;ferme;Gotronic;09341;Fusible temporisé 2 A 5 × 20 mm;2;0.25;https://www.gotronic.fr/art-fusible-temporise-2-a-5484.htm;250+;sortie du pack (+ 1 de rechange)
+porte_fusible;ferme;Gotronic;09402;Porte-fusible PF3 pour circuit imprimé, 5 × 20 mm, 10 A;1;0.30;https://www.gotronic.fr/art-porte-fusible-pf3-5544.htm;250+;fusible du pack
+r100k;ferme;Gotronic;04060;Lot de 10 résistances 1/4 W 100 kΩ;1;0.20;https://www.gotronic.fr/art-10-resistances-1-4w-100k-8486-20.htm;500+;pont diviseur de la mesure batterie
 c100n;ferme;Gotronic;15852;Condensateur céramique 100 nF;2;0.10;https://www.gotronic.fr/art-condensateur-ceramique-100-nf-40054.htm;1000+;filtre de la mesure batterie
-cordon;ferme;Gotronic;49204;Cordon USB-A / USB-C 1 m, 3 A;1;4.30;https://www.gotronic.fr/art-cordon-1-m-usbc-1m-33654.htm;250+;coupé en deux : fiche USB-A côté batterie, fiche USB-C côté carte
-cable;ferme;Gotronic;48415;Câble blindé CB4CR 4 × 0,28 mm², Ø 4,2 mm (prix au mètre);2;0.50;https://www.gotronic.fr/art-cable-blinde-cb4cr-15162.htm;250+;liaison coffret → nichoir
-pg7;ferme;Gotronic;11345;Presse-étoupe PG7 (câble 3,5–7 mm, perçage 12,5 mm);3;1.05;https://www.gotronic.fr/art-presse-etoupe-pg7b-6376.htm;160;nichoir + 2 au coffret
-coffret;ferme;Gotronic;11871;Boîtier étanche ABS IP65, int. 193 × 114 × 51 mm;1;10.90;https://www.gotronic.fr/art-boitier-etanche-abs-ip207337-6695.htm;36;coffret de la V75
+c470;ferme;Gotronic;04947;Condensateur radial 470 µF / 16 V;1;0.20;https://www.gotronic.fr/art-condensateur-radial-470uf-16v-3386.htm;500+;réserve sur le 5 V au nichoir
+plaque;ferme;Gotronic;12630;Carte d'essais EE3070 30 × 70 mm;2;0.95;https://www.gotronic.fr/art-carte-d-essai-ee3070-21091.htm;57;nichoir + coffret
+bornier;ferme;Gotronic;49114;Bornier à vis SC03/5.08 (3 contacts);6;0.45;https://www.gotronic.fr/art-bornier-sc03-5-08-26024.htm;1000+;câble, PIR, pack et panneau
+cordon;ferme;Gotronic;49204;Cordon USB-A / USB-C 1 m, 3 A;1;4.30;https://www.gotronic.fr/art-cordon-1-m-usbc-1m-33654.htm;250+;moitié USB-C seulement : alimentation de la carte
+cable;ferme;Gotronic;48415;Câble blindé CB4CR 4 × 0,28 mm², Ø 4,2 mm (prix au mètre);2;0.50;https://www.gotronic.fr/art-cable-blinde-cb4cr-15162.htm;250+;liaison coffret → nichoir (5 V, masse, batterie / 2, réserve)
+pg7;ferme;Gotronic;11345;Presse-étoupe PG7 (câble 3,5–7 mm, perçage 12,5 mm);3;1.05;https://www.gotronic.fr/art-presse-etoupe-pg7b-6376.htm;160;nichoir + coffret (câble et panneau)
+coffret;ferme;Gotronic;11871;Boîtier étanche ABS IP65, int. 193 × 114 × 51 mm;1;10.90;https://www.gotronic.fr/art-boitier-etanche-abs-ip207337-6695.htm;36;coffret des accus et du chargeur
 gaine;ferme;Gotronic;08913;Pochette de 100 gaines thermorétractables GT100M;1;4.90;https://www.gotronic.fr/art-pochette-de-gaine-thermo-rouge-gt40r-5176.htm;116;épissures
 fil_n;ferme;Gotronic;08770;Fil souple 0,20 mm² noir (prix au mètre);2;0.30;https://www.gotronic.fr/art-fil-de-cablage-fc25n-5076.htm;1000+;câblage interne
 fil_r;ferme;Gotronic;08776;Fil souple 0,20 mm² rouge (prix au mètre);2;0.30;https://www.gotronic.fr/art-fil-de-cablage-fc25r-5082.htm;1000+;câblage interne
-v75;ferme;Kiwi Electronics;KW-2936;Voltaic V75 USB Battery Pack 20 100 mAh / 72 Wh;1;105.59;https://www.kiwi-electronics.com/en/v75-usb-battery-pack-10102;119;batterie Always On
+fil50_n;ferme;Gotronic;08940;Fil souple 0,50 mm² noir (prix au mètre);1;0.40;https://www.gotronic.fr/art-fil-de-cablage-fc50n-5199.htm;1000+;câblage du pack
+fil50_r;ferme;Gotronic;08946;Fil souple 0,50 mm² rouge (prix au mètre);1;0.40;https://www.gotronic.fr/art-fil-de-cablage-fc50r-5203.htm;1000+;câblage du pack
+accus;ferme;Bestpiles;6952918302384;Accu 18650 XTAR 4000 mAh protégé, + en relief (3 800 mAh mini, 69,2 mm);4;8.03;https://bestpiles.fr/piles-rechargeables-18650/1663-pile-rechargeable-18650-xtar-lithium-37v-4000mah-10a-6952918302384.html;disponible;pack 1S4P
+chargeur_accus;ferme;Bestpiles;6952918340744;Chargeur XTAR MC2 Plus, 2 baies, coupure 4,20 V ± 0,05 V;1;6.95;https://bestpiles.fr/chargeur-de-piles-et-batteries/1084-chargeur-de-piles-xtar-mc2-plus-6952918340744.html;disponible;charger chaque accu avant la mise en parallèle
 p110;ferme;Kiwi Electronics;KW-3003;Voltaic P110 panneau 10 W 6 V ETFE, 223 × 274 mm, câble 30 cm;1;76.79;https://www.kiwi-electronics.com/en/10-watt-6-volt-solar-panel-etfe-10924;28;panneau du toit
-rallonge;ferme;Kiwi Electronics;KW-2069;Rallonge Voltaic W031 3 m, 3,5 × 1,1 mm étanche;1;12.59;https://www.kiwi-electronics.com/en/extension-cable-for-voltaic-solar-panel-300cm-3-5x1-1mm-plug-3367;20;toit → coffret
-a123;ferme;Kiwi Electronics;KW-3009;Adaptateur Voltaic A123 3,5 × 1,1 mm femelle → USB-C;1;3.95;https://www.kiwi-electronics.com/en/female-3-5x1-1mm-usb-c-10930;1;entrée solaire USB-C de la V75 (inutile si la V75 reçue a une entrée 3,5 × 1,1)
-sbu;ferme;Amazon.fr;B0H8RP4QQ1;Carte de test USB-C 3.1 mâle 24 broches QIANRENON (SBU sorties);1;10.19;https://www.amazon.fr/dp/B0H8RP4QQ1;en stock;lecture de la tension batterie
-pir;option;Gotronic;38058;Capteur PIR BS612 (Adafruit 5578), ≤ 11 µA;1;2.70;https://www.gotronic.fr/art-capteur-pir-bs612-36148.htm;21;détection secondaire
+rallonge;ferme;Kiwi Electronics;KW-2069;Rallonge Voltaic W031 3 m, 3,5 × 1,1 mm étanche;1;12.59;https://www.kiwi-electronics.com/en/extension-cable-for-voltaic-solar-panel-300cm-3-5x1-1mm-plug-3367;20;toit → coffret, coupée et soudée sur le chargeur
 vernis;option;Amazon.fr;B08KJPDPH9;WEICON Insulation Spray 400 ml (vernis acrylique);1;20.99;https://www.amazon.fr/dp/B08KJPDPH9;en stock;protection des cartes
 toile;option;Amazon.fr;B0DMLQ1FB2;Toile inox 304 maille 1 mm, 30 × 250 cm;1;10.55;https://www.amazon.fr/dp/B0DMLQ1FB2;en stock;grilles des deux aérations Ø8
 testeur;outil;Amazon.fr;B0FB43CZ9L;Testeur USB FNIRSI FNB58 (résolution 0,00001 A annoncée);1;53.99;https://www.amazon.fr/dp/B0FB43CZ9L;12;mesures de consommation
-noir;conditionnel;AliExpress;1005003040149873;Module caméra OV2640 DVP 24 broches, variante « 21MM-66-without IR »;1;16.99;https://fr.aliexpress.com/item/1005003040149873.html;—;seulement si l'OV3660 ne voit pas les LED 940 nm

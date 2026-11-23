@@ -33,8 +33,8 @@ Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seuleme
 ### Énergie et nuit
 
 - **Nuit détectée par l'image, pas par l'heure** (BirdBox) : le contraste de l'image s'effondre dans le noir, alors que la luminosité moyenne reste trompeuse. Réveil par une courte mesure toutes les 10 minutes. Garde-fou : réveil forcé après 14 h de sommeil, au cas où un oiseau ou une feuille masquerait l'objectif. Pour nous, avec les LED IR, la nuit ne coupe pas la vidéo : elle sert à **passer en mode IR**.
-- **Tension batterie calibrée en deux points** (BirdNest). Notre carte est alimentée en 5 V régulé par la V75 : elle ne voit pas la tension de la batterie. Voltaic indique que la tension des cellules de la V75 est disponible sur les broches SBU de son port USB-C, divisée par deux (1,6 à 2,1 V). Retenu dans la [BOM](bom.md) avec une carte de test USB-C ; à vérifier au multimètre à réception.
-- **Température** par sonde DS18B20 (BirdNest) : une sonde dans la chambre et une dans le coffret de batterie, pour le carnet et pour la sécurité de charge.
+- **Tension batterie calibrée en deux points** (BirdNest). Notre carte est alimentée en 5 V régulé par la V75 : elle ne voit pas la tension de la batterie. Depuis le 24/11/2026, la V75 est remplacée par un pack de 4 accus 18650 dont la carte lit directement la tension, via un pont diviseur ([BOM](bom.md)) : l'étalonnage en deux points reste utile.
+- **Température** par sonde DS18B20 (BirdNest) : non retenu le 24/11/2026. La sécurité de charge repose sur la thermistance du chargeur ([BOM](bom.md)).
 
 ### Galerie, Home Assistant et suivi de la nichée
 

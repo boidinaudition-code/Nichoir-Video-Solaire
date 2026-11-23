@@ -99,14 +99,14 @@ def pieces():
              note=f'biseau 45° en tête : {H_NORD:g} face extérieure, {z_toit(EXT - E):g} face intérieure ; passe-câble vers la batterie'),
         dict(nom='Fond', qte=1, l=INT, h=INT, ep=E, note='4 trous Ø5 près des angles'),
         dict(nom='Cloison (plafond de la chambre)', qte=1, l=INT, h=INT, ep=E,
-             note='passages caméra, LED IR et micro'),
+             note='passages caméra, micro et capteur PIR'),
         dict(nom='Toit', qte=1, l=TOIT_L, h=TOIT_P, ep=E,
              note='panneau 250 de large : planche large ou deux planches collées, couverture étanche'),
         dict(nom='Bloc d’entrée', qte=1, l=90, h=90, ep=E,
-             note=f'trou Ø{TROU} aligné ; logement de la barrière IR'),
+             note=f'trou Ø{TROU} aligné (tunnel d’entrée)'),
         dict(nom='Plaque de trappe', qte=1, l=TRAPPE[1] - TRAPPE[0] + 2 * MARGE_PLAQUE,
              h=TRAPPE[3] - TRAPPE[2] + 2 * MARGE_PLAQUE, ep=10,
-             note='contreplaqué marine ou planche de 10 ; encoche 6 × 6 en bas pour le câble de la barrière'),
+             note='contreplaqué marine ou planche de 10 ; joint mousse'),
         dict(nom='Barre de fixation', qte=1, l=40, h=600, ep=E, note='vissée au milieu du dos (LPO)'),
     ]
 
@@ -272,15 +272,13 @@ def vue_debit():
 
 
 def vue_cloison():
-    """Cloison vue de dessus : caméra, LED IR, micro."""
+    """Cloison vue de dessus : caméra, micro, capteur PIR."""
     o, c = 40, []
     c.append(f'<rect class="bois" x="{o}" y="{o}" width="{INT}" height="{INT}"/>')
     m = o + INT / 2
     c.append(f'<circle class="trou" cx="{m}" cy="{m}" r="7"/><text x="{m + 10}" y="{m + 3}">objectif Ø14 (à ajuster)</text>')
-    for dx, dy in [(-30, -30), (30, -30), (-30, 30), (30, 30)]:
-        c.append(f'<circle class="trou" cx="{m + dx}" cy="{m + dy}" r="2.75"/>')
+    c.append(f'<circle class="trou" cx="{m - 40}" cy="{m + 40}" r="6"/><text x="{m - 30}" y="{m + 44}">fenêtre du PIR (Ø selon la lentille)</text>')
     c.append(f'<circle class="trou" cx="{m + 45}" cy="{m - 55}" r="2"/><text x="{m + 20}" y="{o - 6}">micro Ø4, position selon la carte</text>')
-    c.append(f'<text x="{o}" y="{o + INT + 16}">4 LED IR Ø5,5 sur un carré de 60</text>')
     c.append(cote(o, o + INT + 30, o + INT, o + INT + 30, f'{INT}'))
     return svg(260, 250, ''.join(c), 'Cloison vue de dessus')
 
