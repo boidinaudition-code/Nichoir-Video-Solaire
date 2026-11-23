@@ -2,7 +2,7 @@
 
 [Accueil](../README.md) · [Décision V2](decision-v2.md)
 
-> **Décisions courantes : [recherches V3](recherches-v3.md).** Barrière IR, éclairage 940 nm, NoIR, clips 720p et photo 5 Mpx remplacent les choix et le protocole exploratoire V2 ci-dessous ; les fiches de projets restent documentaires.
+> **Décisions courantes : [README](../README.md).** La carte retenue est la XIAO ESP32-S3 Sense avec caméra **OV3660** (Gotronic 39234), et non plus l'OV5640 : clips 720p et photo 3 Mpx. Les fiches de projets ci-dessous restent valables comme inspiration ; les consignes OV5640 et le protocole 5 Mpx sont historiques.
 
 ## Périmètre et méthode
 

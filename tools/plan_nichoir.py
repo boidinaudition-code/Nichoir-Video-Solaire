@@ -27,6 +27,10 @@ TROU_AXE = 170            # axe du trou au-dessus du dessus du fond (LPO : 17 cm
 PENTE = 45                # degrés
 H_SUD = 310               # hauteur extérieure de la façade côté sud (bas du toit)
 JEU_PORTE = 3             # côté sud raccourci pour pivoter sous le toit
+JEU_LATERAL = 1           # jeu de la porte de chaque côté (bois qui gonfle)
+Z_PIVOT = 290             # axe des vis pivots de la porte, à E/2 du bord sud
+TRAPPE = (40, 140, 280, 340)  # trappe technique au dos : x de 40 à 140, z de 280 à 340
+MARGE_DEBIT = 40          # équerrage et reprises
 TOIT_L, TOIT_P = 300, 250  # toit : longueur dans la pente × largeur (est-ouest)
 DEBORD_SUD = 30           # débord du toit en bas de pente
 PANNEAU = (274, 223, 4)   # Voltaic P110 : long, large, épaisseur
@@ -55,8 +59,8 @@ def pieces():
         dict(nom='Façade (est)', qte=1, l=EXT, h=H_NORD, ep=E,
              note=f'trapèze : {H_SUD:g} côté sud, {H_NORD:g} côté nord ; trou Ø{TROU} axe à {Z_TROU} du bas'),
         dict(nom='Dos (ouest)', qte=1, l=EXT, h=H_NORD, ep=E,
-             note=f'même trapèze que la façade ; passe-câble Ø10 et aération'),
-        dict(nom='Côté sud (porte pivotante)', qte=1, l=INT, h=z_toit(E) - JEU_PORTE, ep=E,
+             note='même trapèze que la façade ; trappe technique, passe-câble Ø10 et aération'),
+        dict(nom='Côté sud (porte pivotante)', qte=1, l=INT - 2 * JEU_LATERAL, h=z_toit(E) - JEU_PORTE, ep=E,
              note=f'biseau 45° en tête : {z_toit(E) - JEU_PORTE:g} face intérieure, {H_SUD - JEU_PORTE:g} face extérieure'),
         dict(nom='Côté nord', qte=1, l=INT, h=H_NORD, ep=E,
              note=f'biseau 45° en tête : {H_NORD:g} face extérieure, {z_toit(EXT - E):g} face intérieure'),
@@ -76,12 +80,12 @@ def debit():
 
     Façade et dos : un seul flan 180 × (H_SUD + H_NORD), coupé en diagonale à 45°.
     """
-    flan = H_SUD + H_NORD + TRAIT_SCIE
+    flan = H_SUD + H_NORD + TRAIT_SCIE * math.sqrt(2)  # trait de scie d'une coupe à 45°
     p = {x['nom']: x for x in pieces()}
     autres = [p['Côté sud (porte pivotante)']['h'], p['Côté nord']['h'],
               p['Fond']['h'], p['Cloison (plafond de la chambre)']['h'], 90]
-    longueur = flan + sum(autres) + TRAIT_SCIE * len(autres)
-    return dict(flan_facade_dos=flan, longueur_planche_180=math.ceil(longueur),
+    longueur = flan + sum(autres) + TRAIT_SCIE * len(autres) + MARGE_DEBIT
+    return dict(flan_facade_dos=math.ceil(flan), longueur_planche_180=math.ceil(longueur),
                 planche_toit=(TOIT_L, TOIT_P), barre=(40, 600))
 
 
@@ -97,6 +101,12 @@ def verifications():
     res.append(('Trou dans la façade côté sud (hauteur mini)', Z_TROU + TROU / 2 < H_SUD, ''))
     tech_sud = z_toit(E) - Z_CLOISON
     res.append(('Compartiment technique ≥ 40 mm au point bas', tech_sud >= 40, f'{tech_sud:g}'))
+    res.append(('Pivot de la porte entre cloison et toit', Z_CLOISON < Z_PIVOT < H_SUD - JEU_PORTE - 10,
+                f'pivot {Z_PIVOT}, cloison {Z_CLOISON}, haut de porte {H_SUD - JEU_PORTE}'))
+    x1, x2, z1, z2 = TRAPPE
+    res.append(('Trappe technique au dos, au-dessus de la cloison et sous le toit',
+                E < x1 < x2 < EXT - E and z1 > Z_CLOISON + 5 and z2 < z_toit(x1) - 5,
+                f'{x2 - x1} × {z2 - z1}, haut {z2} sous un toit à {z_toit(x1):g}'))
     pente_box = EXT / math.cos(math.radians(PENTE))
     debord_nord = TOIT_L - DEBORD_SUD - pente_box
     res.append(('Toit couvre la boîte dans la pente', debord_nord >= 10,
@@ -147,7 +157,7 @@ def vue_facade():
     c.append(f'<line class="cache" x1="{P(EXT-E,0)[0]}" y1="{P(EXT-E,0)[1]}" x2="{P(EXT-E,z_toit(EXT-E))[0]}" y2="{P(EXT-E,z_toit(EXT-E))[1]:.1f}"/>')
     tx, tz = P(EXT / 2, Z_TROU)
     c.append(f'<circle class="trou" cx="{tx}" cy="{tz}" r="{TROU / 2}"/>')
-    c.append(f'<rect class="cache" x="{tx - 45}" y="{tz - 45}" width="90" height="90"/>')
+    c.append(f'<rect fill="none" stroke="#5a3d1a" x="{tx - 45}" y="{tz - 45}" width="90" height="90"/>')
     # toit (dessous sur le plan z = H_SUD + x), épaisseur E vers le haut
     u = (math.cos(math.radians(PENTE)), math.sin(math.radians(PENTE)))
     n = (-u[1], u[0])
@@ -165,9 +175,10 @@ def vue_facade():
     c.append(cote(*P(0, -25), *P(EXT, -25), f'{EXT}'))
     c.append(cote(*P(-30, 0), *P(-30, H_SUD), f'{H_SUD}', -14))
     c.append(cote(*P(EXT + 30, 0), *P(EXT + 30, H_NORD), f'{H_NORD:g}', 16))
-    c.append(cote(*P(EXT / 2 + 30, Z_FOND), *P(EXT / 2 + 30, Z_PLAFOND), f'{H_CHAMBRE}', 14))
-    c.append(cote(*P(EXT / 2 - 40, Z_FOND), *P(EXT / 2 - 40, Z_TROU), f'axe {TROU_AXE}', -18))
-    t = [f'Trou Ø{TROU} (28 pour la mésange bleue)', 'Bloc d’entrée 90 × 90 (pointillés)',
+    c.append(cote(*P(EXT - E - 8, Z_FOND), *P(EXT - E - 8, Z_PLAFOND), f'{H_CHAMBRE}', -14))
+    c.append(cote(*P(E + 8, Z_FOND), *P(E + 8, Z_TROU), f'axe {TROU_AXE}', 20))
+    c.append(f'<line class="cote" x1="{P(E + 8, Z_TROU)[0]}" y1="{P(0, Z_TROU)[1]}" x2="{tx}" y2="{tz}"/>')
+    t = [f'Trou Ø{TROU} (28 pour la mésange bleue)', 'Bloc d’entrée 90 × 90 devant le trou',
          f'Chambre {INT} × {INT} × {H_CHAMBRE}', f'Cloison {Z_PLAFOND}–{Z_CLOISON}, compartiment technique au-dessus',
          f'Toit {TOIT_L} × {TOIT_P}, pente {PENTE}°, panneau P110 sur cales {CALE_PANNEAU}',
          'Sud à gauche (bas du toit), nord à droite']

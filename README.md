@@ -21,8 +21,9 @@ Nichoir en bois pour mésanges, autonome au solaire : détection des entrées et
 - **Capture :** clip 720p de 20 s sur microSD (AVI), plus une photo pleine définition (3 Mpx) au début de chaque événement.
 - **Son :** enregistré pendant chaque clip par le micro de la carte, dans le même fichier (mono, 16 kHz, environ 640 ko par clip). Aigus coupés au-dessus de 8 kHz. Jamais d'enregistrement continu.
 - **Envoi :** en Wi-Fi vers Unraid après chaque clip. Le clip reste sur la SD tant qu'Unraid n'a pas confirmé l'avoir enregistré ([règles de livraison](docs/decision-v2.md)).
-- **Galerie sur Unraid :** clips convertis en MP4 avec son, carnet de nidification (construction du nid, ponte, éclosion, envol), capteurs Home Assistant (batterie, dernière visite, nombre de visites). Pas de flux en direct ni de Frigate.
-- **Télémétrie :** tension batterie, signal Wi-Fi et température envoyés avec chaque clip ; mode survie quand la batterie baisse (moins de clips, puis photos seules). Réglages Wi-Fi et serveur par un portail de configuration, hors firmware et hors Git.
+- **Galerie sur Unraid :** clips convertis en MP4 avec son, regroupés par visite. Réception et analyse séparées : une panne de l'analyse ne perd aucun clip. Calendrier de la nichée (construction, ponte, couvaison, nourrissage, envol) avec compteur de jours ; une étape n'est validée qu'après deux observations ; une image IR douteuse donne « incertain », jamais « nid vide ». Capteurs Home Assistant par MQTT (batterie, dernière visite, nombre de visites, file d'envoi). Bouton « pause » avant de s'approcher. Pas de flux en direct ni de Frigate.
+- **Télémétrie :** tension batterie, signal Wi-Fi et température (chambre et coffret de batterie) envoyés avec chaque clip ; mode survie quand la batterie baisse (moins de clips, puis photos seules). Réglages Wi-Fi et serveur par un portail de configuration, hors firmware et hors Git.
+- **Fiabilité :** mises à jour à distance avec retour automatique à l'ancienne version, jamais batterie basse ; carte et caméra redémarrées par coupure d'alimentation si la caméra se bloque ; chaque échec enregistre sa raison.
 - **Énergie :** au Havre en décembre, le P110 incliné à 45° produit environ 8 Wh/j en moyenne ([données PVGIS](docs/pvgis-le-havre-inclinaisons.csv)). Consommation réelle à mesurer.
 
 ## Le nichoir en bois
@@ -30,9 +31,9 @@ Nichoir en bois pour mésanges, autonome au solaire : détection des entrées et
 Plans, débit et montage : **[docs/plans](docs/plans/README.md)**.
 
 - Chambre 140 × 140 × 230 mm, trou Ø32 (28 pour réserver aux mésanges bleues), selon le tableau LPO.
-- Planche de 20 mm, environ 2 m de long pour la caisse, plus le toit de 300 × 250.
+- Planche de 20 mm, environ 2,05 m de long pour la caisse, plus le toit de 300 × 250.
 - Compartiment technique au-dessus de la chambre, sous le toit à 45° qui porte le panneau.
-- Côté sud pivotant pour le nettoyage d'automne.
+- Côté sud pivotant pour le nettoyage d'automne ; trappe au dos pour l'électronique et la carte SD.
 
 ![Vue de face](docs/plans/vue-facade.svg)
 
@@ -64,6 +65,7 @@ La faune passe avant les images : chambre ombragée aux heures chaudes, aucun pe
 - [Plans du nichoir](docs/plans/README.md)
 - [Recherches V3 : éclairage, toit, batterie, PVGIS](docs/recherches-v3.md)
 - [Inspirations BirdWatch, Naturebytes, Printables et audio](docs/inspirations-audio.md)
+- [Inspirations NestNinja, BirdNest, birdnest-ai, BirdBox, birdcam : firmware, galerie, suivi de la nichée](docs/inspirations-firmware-galerie.md)
 - [Comparatif de 14 projets ESP32 + caméra + PIR](docs/comparatif-pir-ov5640.md)
 - [Décision V2 : règles de livraison des clips](docs/decision-v2.md)
 - [Archive V1](docs/archive/v1/README-v1.md)
