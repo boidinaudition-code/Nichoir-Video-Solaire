@@ -1,8 +1,8 @@
 # Sources et limites des références
 
-> **ARCHIVE V1 OBSOLÈTE.** Références et état de consultation historiques, sans revalidation des prix/stocks. Les sources primaires P110, TI et PVGIS utilisées pour V2 figurent dans la [décision V2](decision-v2.md). La mention d'absence de simulation locale ci-dessous est historique V1.
+> **ARCHIVE V1 OBSOLÈTE.** Références et état de consultation historiques, sans revalidation des prix/stocks. Voir les [décisions V3](../../recherches-v3.md) et les sources P110, TI et PVGIS de la [décision V2](../../decision-v2.md). La mention d'absence de simulation locale ci-dessous est historique V1.
 
-[Accueil](../README.md) · [Capture](capture.md) · [Énergie](energie.md)
+[Accueil](../../../README.md) · [Capture](capture.md) · [Énergie](energie.md)
 
 Cette liste reprend les références du dossier. Pour cette correction, la notice V25 2025, les pages fabricant V25/P126, la fiche technique P126 et les README NestBox/BirdSensor_xiao ont été consultés en ligne. Cette lecture ciblée ne revalide ni les autres références, ni les stocks ou prix. « Source » ne signifie pas certification du montage. Les liens externes du vérificateur local sont contrôlés syntaxiquement, pas téléchargés.
 
@@ -13,7 +13,7 @@ Cette liste reprend les références du dossier. Pour cette correction, la notic
 - [Gotronic — Sense](https://www.gotronic.fr/art-carte-xiao-esp32s3-sense-37063.htm) et [BS612](https://www.gotronic.fr/art-capteur-pir-bs612-36148.htm) : références commerciales déjà retenues ; dessin de brochage à contrôler avant soudure.
 - [Voltaic — V25](https://voltaicsystems.com/v25/) et [P126](https://voltaicsystems.com/P126/) : références fabricant à confronter au lot. La [fiche technique P126 datée du 31 août 2026](https://voltaicsystems.com/content/P126_ds.pdf) présente R3C en tête de son historique ; les chiffres revendeur 7,28/8,51 V correspondent aux anciennes R1D/R1E, pas aux valeurs actuelles. Voir les distinctions et précautions dans le [câblage](cablage.md).
 - [Notice constructeur V25/V50/V75 2025 (PDF)](https://voltaicsystems.com/content/batteries/V25_50_75_Instructions_2025.pdf) : document dont le titre interne porte 2025-06-02 ; génération V25 6700 mAh / 24,12 Wh, USB-A Always On et entrées DC/USB-C. Ce document n'identifie pas à lui seul la révision de la batterie reçue.
-- [Kiwi — V25](https://www.kiwi-electronics.com/en/v25-usb-battery-pack-10076) et [P126](https://www.kiwi-electronics.com/en/solar-panel-6v-2w-etfe-coating-10922) : références du panier prévisionnel, non nouvelle vérification de stock/TVA. Tous les achats et alternatives sont liés dans le README.
+- [Kiwi — V25](https://www.kiwi-electronics.com/en/v25-usb-battery-pack-10076) et [P126](https://www.kiwi-electronics.com/en/solar-panel-6v-2w-etfe-coating-10922) : références du panier prévisionnel, non nouvelle vérification de stock/TVA. Tous les achats et alternatives sont liés dans le [README V1](README-v1.md).
 - [PVGIS, Commission européenne](https://re.jrc.ec.europa.eu/pvg_tools/en/) : outil proposé pour une étude future ; aucune simulation locale n'a été effectuée.
 
 La notice V25 2025 consultée contient bien l'incohérence 3,5 × 1,1 (repérage des ports) / 3,5 × 1,5 (spécifications). Obtenir la notice du lot et faire lever cette ambiguïté avant achat/branchement. Prix, dimensions et révisions restent à confirmer à réception.

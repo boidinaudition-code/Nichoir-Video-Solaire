@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Vérification locale du dossier, sans requête réseau ni validation matérielle."""
+"""Vérification des calculs V1 archivés et des liens, sans validation matérielle."""
 import re
 from decimal import Decimal
 from pathlib import Path
@@ -34,7 +34,8 @@ def verifier(root=ROOT):
 
     requis = ['README.md', '.gitignore', 'tools/dimensionnement.py',
               'tools/verifier_dossier.py', 'tests/test_dimensionnement.py']
-    requis += [f'docs/{nom}.md' for nom in
+    requis += ['docs/archive/v1/README-v1.md']
+    requis += [f'docs/archive/v1/{nom}.md' for nom in
                ('architecture', 'cablage', 'bois', 'energie', 'capture', 'essais',
                 'sources', 'revue')]
     for nom in requis:
@@ -42,13 +43,16 @@ def verifier(root=ROOT):
     if erreurs:
         return erreurs, rapports
 
-    readme = (root / 'README.md').read_text(encoding='utf-8')
-    energie = (root / 'docs/energie.md').read_text(encoding='utf-8')
+    archive = root / 'docs/archive/v1'
+    readme = (archive / 'README-v1.md').read_text(encoding='utf-8')
+    energie = (archive / 'energie.md').read_text(encoding='utf-8')
     exiger(readme.splitlines()[0] == '# Nichoir vidéo solaire — conception V1',
-           'Titre public inattendu (sans identité/localisation personnelle attendu)')
+           'Titre de l’archive V1 inattendu')
+    exiger((root / 'README.md').read_text(encoding='utf-8').splitlines()[0]
+           == '# Nichoir vidéo solaire', 'Titre public inattendu')
 
     locaux = externes = 0
-    for fichier in [root / 'README.md', *sorted((root / 'docs').glob('*.md'))]:
+    for fichier in [root / 'README.md', *sorted((root / 'docs').rglob('*.md'))]:
         texte = fichier.read_text(encoding='utf-8')
         # Liens inline du dossier ; les URL nues ne sont pas téléchargées non plus.
         liens = re.findall(r'\[[^\]]*\]\(([^\s)]+)\)', texte)
@@ -130,7 +134,7 @@ def verifier(root=ROOT):
            'Ombre 50 % : seuil doublé attendu')
     rapports.append('Calculs : quatre scénarios README/énergie, TVA, réserve et ombre contrôlés')
 
-    bois = (root / 'docs/bois.md').read_text(encoding='utf-8')
+    bois = (archive / 'bois.md').read_text(encoding='utf-8')
     geometrie = [
         (f'{250 - 20}', '230'),
         (f'{(200 - 136) / 2:g}', '32'),

@@ -1,8 +1,8 @@
 # Bois et implantation mécanique — toutes les cotes en mm
 
-> **ARCHIVE V1 OBSOLÈTE.** Voir la [décision V2](decision-v2.md) : toit proposé 250 × 300 mm pour P110, à qualifier. Le toit et le débit V1 ci-dessous ne conviennent pas tels quels ; les exigences de chambre utile et de protection faune restent à respecter.
+> **ARCHIVE V1 OBSOLÈTE.** Voir les [décisions V3](../../recherches-v3.md) et la [décision V2](../../decision-v2.md) : toit proposé 250 × 300 mm pour P110, à revalider à 45°. Le toit et le débit V1 ci-dessous ne conviennent pas tels quels ; les exigences de chambre utile et de protection faune restent à respecter.
 
-[Accueil](../README.md) · [Câblage](cablage.md) · [Essais](essais.md)
+[Accueil](../../../README.md) · [Câblage](cablage.md) · [Essais](essais.md)
 
 ## Géométrie utile et repère
 

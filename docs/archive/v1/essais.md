@@ -1,8 +1,8 @@
 # Essais et décision de pose
 
-> **ARCHIVE V1 OBSOLÈTE.** Compléter ces critères par les portes de la [décision V2](decision-v2.md), notamment ACK durable, reprise réseau, galerie, alimentation et température. Aucun essai matériel V1 ou V2 n'est revendiqué.
+> **ARCHIVE V1 OBSOLÈTE.** Compléter ces critères par les [décisions V3](../../recherches-v3.md) et les portes de la [décision V2](../../decision-v2.md), notamment ACK durable, reprise réseau, galerie, alimentation et température. Aucun essai matériel n'est revendiqué.
 
-[Accueil](../README.md) · [Capture](capture.md) · [Énergie](energie.md) · [Bois](bois.md)
+[Accueil](../../../README.md) · [Capture](capture.md) · [Énergie](energie.md) · [Bois](bois.md)
 
 Statut de tous les essais matériels ci-dessous : **non exécuté**. Aucun firmware, montage, clip réel, relevé Wh ou température n'est disponible ici. Les tests Python ne valident que le modèle et la cohérence documentaire.
 

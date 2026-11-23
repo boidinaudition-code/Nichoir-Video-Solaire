@@ -1,87 +1,63 @@
-# Nichoir vidéo solaire — conception V1
+# Nichoir vidéo solaire
 
-> **Décision courante : [brainstorm / décision V2](docs/decision-v2.md).** Lire cette page en premier : cible XIAO ESP32S3 Sense **OV5640 à confirmer par PID**, clips PIR AVI sur SD, Wi-Fi avec ACK durable, galerie MP4 sur Unraid sans import Frigate. **Énergie à remesurer avec l'OV5640**, solaire et stockage conditionnés aux essais. Documentation seulement, aucun déploiement, aucun prix V2 établi.
->
-> **ARCHIVE V1 OBSOLÈTE : le titre et tout le dossier ci-dessous sont conservés pour traçabilité et contrôles historiques.** La BOM, les prix, le toit, le budget sans Wi-Fi et le choix P126/V25 ne sont pas une nomenclature ou une prescription V2. Les huit pages anciennes portent une bannière V1. Les outils Python et tests sont inchangés et **V1 uniquement** ; ils ne valident pas le dimensionnement V2. Le [CSV PVGIS V2](docs/pvgis-le-havre.csv) et son protocole de calcul sont décrits dans la décision courante.
+État : documentation de conception V3. Aucun firmware, aucun essai matériel et aucun déploiement.
 
-Documentation courante complémentaire : [comparatif PIR / OV5640 des 14 dépôts GitHub](docs/comparatif-pir-ov5640.md), sources figées par commit, distinctions photo/vidéo/stream et protocole d'essai 5 MP contre 1080p en basse lumière, **sans oiseaux**. Aucun résultat FPS, temps ou Wh matériel revendiqué ; l'OV3660 ci-dessous appartient uniquement à l'archive V1.
+## Avancement du brainstorm
 
-## Archive de conception V1 — non applicable comme décision actuelle
+| Étape | Ce qui a été décidé | Ce qui en reste |
+|---|---|---|
+| V1 — [archive](docs/archive/v1/README-v1.md) | Nichoir LPO (trou 28 ou 32 mm), XIAO Sense OV3660, PIR, clips AVI sur microSD, batterie V25 et panneau 2 W | Cotes du nichoir et règles faune. Panneau 2 W et récupération manuelle de la SD abandonnés |
+| V2 — [décision](docs/decision-v2.md) | Envoi Wi-Fi des clips vers une galerie sur Unraid, données solaires PVGIS du Havre, panneau P110 | **Livraison durable toujours valide** : le clip n'est effacé de la SD qu'après confirmation d'Unraid. Caméra, éclairage, résolution, détection, panneau, toit et batterie remplacés en V3 |
+| Comparatif — [14 projets GitHub](docs/comparatif-pir-ov5640.md) | Briques à étudier : `ESP32-CAM_MJPEG2SD` (clips AVI), `esp32-photostation` (file d'envoi hors ligne), `BirdSensor_xiao` (durée d'activité bornée, réarmement), `BirdWatch` (mode dégradé, télémétrie), `BirdBox` (galerie) | Inspiration seulement : aucun code tiers intégré |
+| V3 — [recherches](docs/recherches-v3.md) | Wi-Fi OK, pas de câble, LED infrarouges (choix de Romain). Caméra OV5640 NoIR, clips 720p, barrière IR au trou d'envol ; toit 45° sud (gain solaire hivernal PVGIS) ; batterie V75 (certifiée, Always On) | Décisions actuelles ci-dessous |
 
-Dossier de conception du 23 novembre 2026. Pas un produit prêt à poser : **aucun firmware de capture n'est implémenté**, aucune vidéo réelle ni mesure électrique n'a été produite avec du matériel. Livrables exécutables : calculateur Python stdlib et tests. Les essais matériels restent des critères d'acceptation, pas des résultats.
+Points encore ouverts :
 
-## Décision
+- brochage du module NoIR sur le connecteur de la Sense ;
+- références des LED IR et de la barrière, avec leur consommation ;
+- géométrie du toit à 45° (prise au vent, fixation) ;
+- consommation réelle par clip et en veille, à mesurer ;
+- firmware et galerie Unraid, à écrire ;
+- liste d'achats V3 chiffrée, à établir après les essais.
 
-- Nichoir bois massif brut 20 mm, chambre charbonnière **140 × 140 × 230 mm utiles**, trou **32 mm** ; variante bleue **130 × 130 × 230 mm**, trou **28 mm**. Cotes fondées sur le [tableau LPO](https://www.lpo.fr/la-lpo-en-actions/mobilisation-citoyenne/refuges-lpo/tutoriels/nichoirs-pour-passereaux), pas un nichoir commercial à ces dimensions extérieures.
-- XIAO ESP32S3 **Sense 113991115 avec OV3660** et lecteur microSD intégré ; contrôler le lot avant achat et le PID à réception. Le fabricant annonce une transition OV5640 : pas de substitution silencieuse.
-- BS612 PIR maintenu sous 3,3 V ; réveil RTC sur GPIO1/D0 ; objectif : **vraies vidéos MJPEG dans un conteneur AVI sur SD**, 20 s, VGA 640 × 480, cible 10 images/s, sans audio ni Wi-Fi permanent. Le mode profond impose une latence et peut manquer l'entrée rapide d'un oiseau.
-- Power bank **Voltaic V25 nouvelle génération 6700 mAh / 24,12 Wh**, sortie USB-A Always On ; panneau fabricant **P126 6 V / 2 W**, entièrement sur le toit, entrée solaire DC directe. Pas de panneau déporté ni de cellule LiPo ajoutée à la XIAO.
-- **Faune avant image et rendement** : implantation protégée des pluies/vents, ombre aux heures chaudes, entrée est/sud-est, pas de perchoir. Si le toit reste trop ombragé, accepter l'arrêt de la vidéo plutôt que déplacer la nichée au soleil.
-- V1 sans IR ni LED d'éclairage : intérieur parfois très sombre, nuit noire inexploitable acceptée. Pas d'agrandissement du trou ni de fenêtre lumineuse pour la caméra.
-- Batterie dans un coffret extérieur séparé de la chambre, à l'ombre, protégé de l'eau et de la condensation ; jamais sous le panneau chaud. Charge autorisée **0–45 °C uniquement** ; pas de charge gel. Aucun entretien, retrait SD ou dépannage sur nid occupé, même par trappe externe.
+## Décisions actuelles
 
-## Lecture du dossier
+- Caméra : XIAO ESP32-S3 Sense + OV5640 NoIR grand angle, DVP 24 broches. Comparer le brochage du module acheté à la fiche Seeed avant branchement ; la compatibilité n'est pas vérifiée. L'OV5640 livré avec la Sense est à focale fixe ; seul le module OV5640 long vendu séparément (avec dissipateur) a un autofocus. Sa fiche indique un filtre IR-cut. Le module livré sert de repli pour les essais de jour.
+- Éclairage : LED IR 940 nm diffusées, seulement pendant la capture, commandées depuis le 5 V par transistor/MOSFET, jamais directement par GPIO. Référence, nombre et courant restent à choisir et mesurer, sans échauffement de la chambre.
+- Capture : clips 720p MJPEG/AVI sur microSD, une photo 5 Mpx au début de chaque événement. Pas de vidéo 5 Mpx.
+- Détection : barrière IR au trou d'envol pour les entrées/sorties ; photo toutes les 10 min en journée pour le timelapse. PIR intérieur optionnel ; barrière hors champ, sans éclairer la chambre.
+- Solaire : Voltaic P110, 9,54 W ; toit monopente 45° orienté sud, trou d'envol sur la face est. Géométrie du toit à revalider.
+- Batterie : Voltaic V75, 72,36 Wh, sortie USB-A Always On 5 V. Prix fabricant : 89 USD, pas un prix France. Batterie dans un coffret séparé, ombragé et protégé de l'eau/condensation ; charge autorisée entre 0 et 45 °C.
+- Réseau : Wi-Fi déclaré OK par Romain, sans mesure RSSI documentée. Aucun câble possible : montage autonome solaire. Envois bornés vers une future galerie MP4 sur Unraid, avec ACK durable ; pas de flux continu ni de Frigate.
 
-1. [Architecture et limites](docs/architecture.md)
-2. [Câblage et versions d'alimentation](docs/cablage.md)
-3. [Débit bois et montage](docs/bois.md)
-4. [Énergie et scénarios chiffrés](docs/energie.md)
-5. [Capture AVI, réveil et réarmement](docs/capture.md)
-6. [Essais et décision de pose](docs/essais.md)
-7. [Sources vérifiées et projets candidats](docs/sources.md)
-8. [Rapport local et demande de revue](docs/revue.md)
+## Options écartées et pourquoi
 
-## Achats V1 uniquement — BOM obsolète, pas un devis V2
+| Option | Motif |
+|---|---|
+| Pi Zero 2 W + Camera Module 3 NoIR Wide + Frigate | Environ 1 W continu, soit 24 Wh/j estimés non mesurés, contre au plus 8,8 Wh/j solaires moyens en décembre à 60° ; Frigate suppose un flux continu |
+| Panneau 2 W | Budget hivernal insuffisant avec les envois Wi-Fi |
+| Pack maison 5×18650 XTAR et chargeur BQ25185 | Sécurité et complexité ; la V75 certifiée couvre le besoin documentaire |
+| Power bank quelconque | La plupart s'éteignent à faible courant ; Always On nécessaire |
+| 1080p ou vidéo 5 Mpx | 1080p : probablement plusieurs dizaines de Mo pour 20 s, ordre de grandeur non mesuré incompatible avec le budget Wi-Fi de 10–30 s/clip ; 5 Mpx réservé aux photos |
+| PIR seul | Oiseau qui couve peu mobile et détection peu fiable dans 14 cm |
 
-> **BOM V1 archivée.** Références, prix, total et disponibilité ci-dessous sont historiques, non revalidés pour V2. Ne pas commander la V2 à partir de cette liste ; aucun prix V2 n'est inventé.
+## Prochaines étapes
 
-Prix relevés ou provisions TTC France, hors port, outils et main-d'œuvre. Les stocks sont un instantané, pas une réservation. Kiwi affiche ici des prix **HT (« Ex. VAT »)** : conversion prévisionnelle avec TVA France 20 %, panier livraison France à confirmer. Aucun prix USD n'est présenté comme un prix TTC européen.
+1. Essai en carton fermé, trou de 32 mm, avec NoIR + LED IR, sans oiseaux.
+2. Mesurer les Wh par clip et la veille au wattmètre USB, puis recalculer le budget complet.
+3. Vérifier le brochage du module NoIR ; c'est un préalable à son branchement pour l'essai 1.
+4. Réaliser le gabarit du toit 45° : prise au vent, débord et fixation.
 
-| Élément / référence et lien direct | TTC € | Statut / contenu |
-|---|---:|---|
-| [XIAO Sense 113991115, Gotronic 38234](https://www.gotronic.fr/art-carte-xiao-esp32s3-sense-37063.htm) | 16,90 | Page OV3660, antenne/radiateurs/carte Sense inclus ; SD et câble USB non inclus ; stock affiché lors consultation |
-| [PIR BS612, Gotronic 38058 / Adafruit 5578](https://www.gotronic.fr/art-capteur-pir-bs612-36148.htm) | 2,70 | En stock ; composant à câbler, pas module Grove |
-| [SanDisk Ultra microSDHC UHS-I 32 Go, Gotronic 26870](https://www.gotronic.fr/art-carte-micro-sd-sandisk-32gb-49149.htm) | 18,50 | En stock au catalogue ; FAT32, pas de lecteur SD supplémentaire pour XIAO |
-| [V25 KW-2655, Kiwi, génération USB-C/DC](https://www.kiwi-electronics.com/en/v25-usb-battery-pack-10076) | 52,79 | 43,99 HT ; fiche 6700 mAh, deux USB-A et entrée solaire 3,5 × 1,1 ; stock UE affiché |
-| [P126 KW-3001, Kiwi](https://www.kiwi-electronics.com/en/solar-panel-6v-2w-etfe-coating-10922) | 24,59 | 20,49 HT ; stock UE affiché ; 136 × 112 mm ; fiche revendeur épaisseur 2,7 mm |
-| [Joint de fixation P126 G110, Kiwi](https://www.kiwi-electronics.com/en/high-bonding-gasket-for-p126-10933) | 3,95 | 3,29 HT ; coller sur platine lisse, pas directement sur bois brut ; retenue mécanique ajoutée |
-| [Lecteur PC microSD WT12370, Gotronic 32961](https://www.gotronic.fr/art-lecteur-de-carte-microsd-wt12370-27794.htm) | 3,90 | Facultatif si déjà équipé ; inclus dans total pour récupération externe |
-| Câble USB-A vers USB-C court de qualité | 4–8 | Provision non cotée, modèle à choisir ; nécessaire en sortie V25 même si câble de recharge fourni |
-| Fils, connecteurs, résistance de tirage et bouton service | 3–8 | Provision ; [barrette MH100](https://www.gotronic.fr/art-connecteur-he14-mh100-4457.htm) candidate, pas prix ferme du lot |
-| Bois Douglas/mélèze non traité 20 mm, tasseaux, cloison | 20–35 | Provision scierie locale ; débit détaillé dans bois, chute/trait de scie inclus à prévoir |
-| Visserie inox, charnières/loquet de nettoyage | 8–15 | Provision locale ; pas de pointe dépassant dans chambre |
-| Platine panneau, entretoises, couverture toit et retenues | 8–18 | Provision ; pas de perçage arbitraire des cellules |
-| Coffret batterie utile ≥ 120 × 120 × 60 mm, coffret technique/trappe et joints | 15–30 | Provision non cotée ; étanchéité finale à tester, batterie non étanche |
-| Presse-étoupes, membrane anti-condensation, gaine et attache-câbles | 5–12 | Provision ; boucle goutte d'eau, pas de câble exposé aux becs |
-| Fixation support, cales de protection arbre, renfort trou | 6–15 | Provision ; adapter au support, pas de perchoir |
-| **Total complet prévisionnel** | **192,33–264,33** | **TTC hors port**, lecteur PC inclus, aucun outil de mesure inclus |
+Éléments à prévoir : XIAO Sense, module NoIR, microSD, LED IR et commande, barrière IR, P110, V75, câbles compatibles, bois, fixations et coffrets. Pas de BOM chiffrée V3 établie.
 
-Provisions explicitement non vérifiées en panier : ce n'est pas une nomenclature industrielle entièrement qualifiée. Prévoir en prêt un multimètre, mesureur USB intégrateur Wh (qui peut lui-même consommer et fausser la veille), alimentation de labo et outillage bois/soudure ; leur achat n'est pas dans ce total. Adaptateur solaire **non requis pour la V25 actuelle** : fiche P126 3,5 × 1,1 mâle vers entrée V25 de même format. Ne pas acheter un adaptateur micro-USB d'ancienne génération par défaut. Rallonge solaire non incluse : implanter coffret sous débord arrière dans la portée du câble réel, sinon chiffrer une rallonge Voltaic compatible avant commande.
+La faune reste prioritaire : chambre ombragée aux heures chaudes, aucun perchoir, câble libre ou pointe accessible. Aucune intervention sur nichoir occupé, même par trappe technique ; laisser la vidéo arrêtée en cas de panne.
 
-Alternative UE V25 : [SeeSense](https://seesense.eu/products/power/batteries/battery-voltaic-v25-23wh-lithium-with-always-on-capability/) décrit la nouvelle version, mais disponibilité annoncée en réapprovisionnement ; TVA affichée non française. Alternative panneau : [Robot Italy P126](https://robot-italy.com/products/5366-6v-2w-solar-panel-etfe), 30,67 € TVA italienne incluse affichée, stock ambigu dans extraction, à confirmer. Kiwi est retenu pour la disponibilité explicite des deux éléments. Aucun ASIN Amazon inventé : les références directes Gotronic suffisent pour caméra/PIR/SD.
+## Documentation et contrôles
 
-## Énergie : décision d'usage
+- [Recherches V3, sources, PVGIS et calculs](docs/recherches-v3.md)
+- [CSV PVGIS des quatre inclinaisons](docs/pvgis-le-havre-inclinaisons.csv)
+- [Décision V2 partiellement remplacée ; §2 livraison durable toujours valide](docs/decision-v2.md)
+- [Comparatif de 14 projets PIR / OV5640](docs/comparatif-pir-ov5640.md)
+- [Archive V1 : ancienne BOM, tableaux et huit pages](docs/archive/v1/README-v1.md)
 
-Modèle de travail conservateur : 5 mA en veille système sous USB 5 V, 350 mA pendant capture/démarrage, 20 + 3 s par événement, pertes USB 15 %, consommation propre V25 26 mW, solaire 2 W avec rendement global 50 %. Ces hypothèses doivent être remplacées par les mesures du montage complet.
-
-| Usage | Besoin cellule Wh/j | HSP minimales sans ombre | Jours sans soleil depuis réserve pleine* |
-|---|---:|---:|---:|
-| 10 clips/j | 1,460 | 1,460 | 13,22 |
-| 100 clips/j | 2,626 | 2,626 | 7,35 |
-| 500 clips/j | 7,813 | 7,813 | 2,47 |
-| Continu 140 mA, comparaison | 20,389 | 20,389 | 0,95 |
-
-*Réserve de calcul 80 % de 24,12 Wh, pas capacité mesurée ni promesse. Les HSP sont des heures équivalentes à 1000 W/m² sur le plan du panneau, pas des heures de jour. Au Havre, hiver, ombre, pluie et gel rendent l'autonomie non garantie ; pas de météo fictive ni de moyenne locale utilisée comme preuve. Voir [énergie](docs/energie.md) pour sensibilités, pertes et arrêt.
-
-## Reproduire la vérification logicielle
-
-Depuis la racine, Python ≥ 3.10, aucune installation de package :
-
-```sh
-python -m unittest discover -s tests -v
-python tools/dimensionnement.py --clips 100 --hsp 1
-python tools/dimensionnement.py --clips 100 --hsp 1 --ombre 0.5
-python tools/verifier_dossier.py
-```
-
-Le dossier reste au statut **prototype à valider avant occupation** : PID, vraie vidéo AVI, latence, comportement PIR, maintien Always On, froid/chaleur, SD et étanchéité sont des portes de validation obligatoires. La récupération SD se fait depuis le compartiment technique extérieur, après arrêt propre, uniquement quand le nichoir est confirmé inoccupé.
+Depuis la racine : `python -m unittest discover -s tests -v`, `python tools/verifier_dossier.py`, puis `git diff --check`. Les outils et tests de calcul restent V1 : ils ne qualifient pas le matériel V3.

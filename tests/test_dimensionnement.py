@@ -1,3 +1,4 @@
+"""Tests du modèle historique V1, sans qualification du dimensionnement V3."""
 import math
 import unittest
 from tools.dimensionnement import calcul

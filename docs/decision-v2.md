@@ -1,5 +1,7 @@
 # Décision V2 — brainstorm solaire, clips Wi-Fi et galerie Unraid
 
+> **Partiellement remplacée par V3 : caméra, éclairage, résolution, détection, panneau, toit et batterie → [README](../README.md) / [recherches V3](recherches-v3.md). §2 livraison durable reste valide.** Les autres choix et protocoles ci-dessous sont historiques V2, pas les prescriptions V3.
+
 Statut : décision documentaire de conception, conditionnelle aux essais ci-dessous. Aucun firmware, service Unraid, transcodage ou déploiement n'est livré. Aucun essai matériel exécuté. Cette page remplace les choix V1 ; les huit pages anciennes restent des archives V1 signalées par bannière. Le comparatif PIR/OV5640 est un complément courant, pas une archive V1. Aucun prix ni total BOM V2 n'est établi.
 
 [Accueil et archives V1](../README.md) · [CSV PVGIS fourni](pvgis-le-havre.csv) · [Comparatif des 14 dépôts PIR/OV5640](comparatif-pir-ov5640.md)
@@ -8,7 +10,7 @@ Statut : décision documentaire de conception, conditionnelle aux essais ci-dess
 
 PIR BS612 → réveil XIAO ESP32S3 Sense, cible capteur **OV5640 à confirmer par PID à réception** → clip MJPEG dans un vrai **AVI sur microSD FAT32** → fermeture/synchronisation → envoi Wi-Fi différé → réception durable sur Unraid → conversion MP4 pour une galerie dédiée.
 
-- La consigne OV5640 remplace l'OV3660 V2 antérieur ; l'OV3660 reste historique V1. Seeed annonce encore des lots mixtes : confirmer le lot, le PID, l'optique et la révision, sans substitution silencieuse. Le module Sense standard est à focale fixe, pas l'autofocus du module long séparé.
+- La consigne OV5640 remplace l'OV3660 V2 antérieur ; l'OV3660 reste historique V1. Seeed annonce encore des lots mixtes : confirmer le lot, le PID, l'optique et la révision, sans substitution silencieuse. Précision V3 : selon le [guide Seeed](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started), l'OV5640 livré avec la Sense est à focale fixe ; seul le module long vendu séparément a un autofocus, et sa [fiche](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/new-res/OV5640_Camera_Module_Specification.pdf) indique un filtre IR-cut. La V3 choisit un NoIR dont le brochage reste à vérifier.
 - Cible de travail : 100 clips/jour de 20 s, VGA 640 × 480 comme témoin de repli, 10 images/s à vérifier, sans audio, IR, éclairage ou flux permanent. Comparer photo 5 MP et 1080p, puis vidéo 1080p selon le [protocole sans oiseaux](comparatif-pir-ov5640.md) ; ni vidéo 5 MP, ni 10 images/s en 1080p ne sont promis. Résolution finale conditionnée à la qualité utile, aux FPS acquis, aux temps actifs, aux Wh et à la température mesurés. Les 3 s hors clip sont une hypothèse pour démarrage, exposition, fermeture et réarmement, pas une mesure ; toute dérive impose un nouveau budget.
 - Pas d'import Frigate : Frigate n'est ni la galerie, ni le destinataire des clips, ni une dépendance. Le MP4 est un dérivé pour lecture web, pas le format d'enregistrement ESP32. Transcodage asynchrone sur Unraid, codec/navigateur à qualifier ; conserver l'AVI original selon rétention explicite.
 - Le Wi-Fi est activé seulement pour des fenêtres bornées. Une panne réseau ne doit pas empêcher la capture tant que l'espace SD et la réserve le permettent. Pas de serveur vidéo permanent sur la carte.
@@ -98,7 +100,7 @@ Tous les essais suivants restent **non exécutés** :
 
 | Porte | Traces et critères à recueillir avant toute pose active |
 |---|---|
-| Réception | PID OV5640, lot/optique fixe et révision Sense, références/révisions panneau/pack/chargeur, dimensions, gabarit toit ; aucune substitution implicite |
+| Réception | PID OV5640, lot/optique et révision Sense, références/révisions panneau/pack/chargeur, dimensions, gabarit toit ; aucune substitution implicite |
 | Capture | Sur nichoir vide : photos 5 MP contre 1080p en basse lumière, clips AVI 20 s 1080p et témoin VGA décodés indépendamment ; FPS acquis distincts de la lecture, latence/exposition et température, SD absente/pleine, coupure en écriture, PIR haut et faux positifs ; pas de perte de clips clos, aucune cadence promise |
 | Réseau et durabilité | Serveur indisponible, timeout, ACK perdu/faux, doublon, conflit d'identité, crash avant/après sync/renommage/index/ACK, reset ESP ; un seul original durable, aucun effacement prématuré, bornes persistantes respectées |
 | Galerie | AVI→MP4 sur Unraid après réception, durée et décodage contrôlés, transcodage raté relançable, rétention/quotas/sauvegarde et absence d'import Frigate ; aucune publication de fichier partiel |
@@ -110,7 +112,7 @@ Consigner date, opérateur, lots, version/commit firmware futur, instruments, co
 
 ## 8. Contrôles locaux et périmètre des outils V1
 
-`tools/dimensionnement.py`, `tools/verifier_dossier.py` et `tests/test_dimensionnement.py` sont conservés **inchangés, V1 uniquement**. Ils ne modélisent pas automatiquement le réseau V2, le pack 72 Wh ou le nouveau toit. Le vérificateur V1 reste utile aux tableaux historiques et aux liens, pas comme validation de cette décision.
+`tools/dimensionnement.py`, `tools/verifier_dossier.py` et `tests/test_dimensionnement.py` restent **V1 uniquement** ; seuls les chemins du vérificateur sont adaptés aux [archives V1](archive/v1/README-v1.md), avec contrôle récursif des liens. La logique de calcul ne change pas. Ils ne modélisent pas automatiquement le réseau V2, le pack 72 Wh ou le nouveau toit et ne valident pas la V3.
 
 Rejouer les tests V1 et le contrôle de format depuis la racine :
 
