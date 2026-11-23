@@ -1,14 +1,15 @@
 # Décision V2 — brainstorm solaire, clips Wi-Fi et galerie Unraid
 
-Statut : décision documentaire de conception, conditionnelle aux essais ci-dessous. Aucun firmware, service Unraid, transcodage ou déploiement n'est livré. Aucun essai matériel exécuté. Cette page remplace les choix V1 ; les autres pages restent des archives V1 signalées par bannière. Aucun prix ni total BOM V2 n'est établi.
+Statut : décision documentaire de conception, conditionnelle aux essais ci-dessous. Aucun firmware, service Unraid, transcodage ou déploiement n'est livré. Aucun essai matériel exécuté. Cette page remplace les choix V1 ; les huit pages anciennes restent des archives V1 signalées par bannière. Le comparatif PIR/OV5640 est un complément courant, pas une archive V1. Aucun prix ni total BOM V2 n'est établi.
 
-[Accueil et archives V1](../README.md) · [CSV PVGIS fourni](pvgis-le-havre.csv)
+[Accueil et archives V1](../README.md) · [CSV PVGIS fourni](pvgis-le-havre.csv) · [Comparatif des 14 dépôts PIR/OV5640](comparatif-pir-ov5640.md)
 
 ## 1. Chaîne retenue et limites
 
-PIR BS612 → réveil XIAO ESP32S3 Sense, capteur **OV3660 confirmé par PID** → clip MJPEG dans un vrai **AVI sur microSD FAT32** → fermeture/synchronisation → envoi Wi-Fi différé → réception durable sur Unraid → conversion MP4 pour une galerie dédiée.
+PIR BS612 → réveil XIAO ESP32S3 Sense, cible capteur **OV5640 à confirmer par PID à réception** → clip MJPEG dans un vrai **AVI sur microSD FAT32** → fermeture/synchronisation → envoi Wi-Fi différé → réception durable sur Unraid → conversion MP4 pour une galerie dédiée.
 
-- Cible : 100 clips/jour de 20 s, VGA 640 × 480, 10 images/s à vérifier, sans audio, IR, éclairage ou flux permanent. Les 3 s hors clip couvrent démarrage, exposition, fermeture et réarmement ; toute dérive impose un nouveau budget.
+- La consigne OV5640 remplace l'OV3660 V2 antérieur ; l'OV3660 reste historique V1. Seeed annonce encore des lots mixtes : confirmer le lot, le PID, l'optique et la révision, sans substitution silencieuse. Le module Sense standard est à focale fixe, pas l'autofocus du module long séparé.
+- Cible de travail : 100 clips/jour de 20 s, VGA 640 × 480 comme témoin de repli, 10 images/s à vérifier, sans audio, IR, éclairage ou flux permanent. Comparer photo 5 MP et 1080p, puis vidéo 1080p selon le [protocole sans oiseaux](comparatif-pir-ov5640.md) ; ni vidéo 5 MP, ni 10 images/s en 1080p ne sont promis. Résolution finale conditionnée à la qualité utile, aux FPS acquis, aux temps actifs, aux Wh et à la température mesurés. Les 3 s hors clip sont une hypothèse pour démarrage, exposition, fermeture et réarmement, pas une mesure ; toute dérive impose un nouveau budget.
 - Pas d'import Frigate : Frigate n'est ni la galerie, ni le destinataire des clips, ni une dépendance. Le MP4 est un dérivé pour lecture web, pas le format d'enregistrement ESP32. Transcodage asynchrone sur Unraid, codec/navigateur à qualifier ; conserver l'AVI original selon rétention explicite.
 - Le Wi-Fi est activé seulement pour des fenêtres bornées. Une panne réseau ne doit pas empêcher la capture tant que l'espace SD et la réserve le permettent. Pas de serveur vidéo permanent sur la carte.
 - Préserver la chambre utile V1, trou LPO, ombre aux heures chaudes, absence de perchoir et séparation de la batterie. Le toit V1 et son débit ne valent plus pour le grand panneau. Aucune intervention sur nichoir occupé : panne laissée à l'arrêt ; essais sur nichoir vide uniquement.
@@ -44,7 +45,7 @@ Le CSV provient de `/opt/data/cache/scratch/nichoir-pvgis-le-havre.csv` : donné
 
 ## 4. Besoin énergétique V2 reproductible
 
-Hypothèses V25 héritées, **à remesurer** : USB régulé 5 V ; veille système complète 5 mA (PIR/caméra/SD compris), actif capture et réseau 350 mA ; conversion batterie→USB 85 % ; consommation propre 26 mW = 0,624 Wh/j. Le courant Wi-Fi réel n'est pas établi. Les phases actives remplacent la veille, elles ne s'y ajoutent pas.
+Hypothèses V25 héritées, **à remesurer intégralement avec l'OV5640** : USB régulé 5 V ; veille système complète 5 mA (PIR/caméra/SD compris), actif capture et réseau 350 mA ; conversion batterie→USB 85 % ; consommation propre 26 mW = 0,624 Wh/j. Seeed laisse la consommation OV5640 à « TBD » : aucune ancienne valeur OV3660 ne qualifie ce montage. Courants, stabilisation d'exposition, FPS réels, taille AVI, débit SD, radio et réessais restent inconnus. Les phases actives remplacent la veille, elles ne s'y ajoutent pas. Les tableaux et autonomies ci-dessous restent des **sensibilités historiques de calcul**, pas un dimensionnement OV5640 validé ; recalculer panneau, réserve et marges après intégration des Wh mesurés par phase.
 
 ```text
 N = 100 clips/j ; T = N × (20 + 3 + upload_s)
@@ -97,11 +98,11 @@ Tous les essais suivants restent **non exécutés** :
 
 | Porte | Traces et critères à recueillir avant toute pose active |
 |---|---|
-| Réception | PID OV3660, références/révisions panneau/pack/chargeur, dimensions, gabarit toit ; aucune substitution implicite |
-| Capture | Vrais AVI 20 s décodés indépendamment, cadence/latence, SD absente/pleine, coupure en écriture, PIR haut et faux positifs ; pas de perte de clips clos |
+| Réception | PID OV5640, lot/optique fixe et révision Sense, références/révisions panneau/pack/chargeur, dimensions, gabarit toit ; aucune substitution implicite |
+| Capture | Sur nichoir vide : photos 5 MP contre 1080p en basse lumière, clips AVI 20 s 1080p et témoin VGA décodés indépendamment ; FPS acquis distincts de la lecture, latence/exposition et température, SD absente/pleine, coupure en écriture, PIR haut et faux positifs ; pas de perte de clips clos, aucune cadence promise |
 | Réseau et durabilité | Serveur indisponible, timeout, ACK perdu/faux, doublon, conflit d'identité, crash avant/après sync/renommage/index/ACK, reset ESP ; un seul original durable, aucun effacement prématuré, bornes persistantes respectées |
 | Galerie | AVI→MP4 sur Unraid après réception, durée et décodage contrôlés, transcodage raté relançable, rétention/quotas/sauvegarde et absence d'import Frigate ; aucune publication de fichier partiel |
-| Énergie | Wh et courants réels capture/veille/radio, poids AVI et débit, budgets 10/30 s avec réessais, réserve utile ; 72 h sans solaire et au moins une semaine au site vide, comparaison CSV sans confondre météo et climat |
+| Énergie | Avec OV5640 : Wh et courants du système complet, veille/démarrage/exposition/capture/fermeture/radio/réessais, temps par phase, poids AVI et débit ; revoir budgets 10/30 s et réserve utile ; 72 h sans solaire et au moins une semaine au site vide, comparaison CSV sans confondre météo et climat |
 | Sécurité électrique | USB stable, faible charge, simultanéité et reprise après coupure/vide, compatibilité Voc à froid/entrée, protection pack, charge 4,20 V et blocage NTC/gel par protocole fabricant sûr, rendement et dissipation à 1 A |
 | Mécanique/faune | Pluie/condensation, ventilation, tenue vent, températures chambre et pack, marges panneau/câbles, ombre et chambre utile ; pas d'intervention occupée |
 
@@ -128,6 +129,8 @@ python -c 'import csv; from pathlib import Path; r=list(csv.DictReader(Path("doc
 Les contrôles arithmétiques ne sont pas des essais de batterie, de vidéo, de livraison durable ou d'autonomie. Aucun push ni déploiement demandé ; le commit reste local. Toute publication ultérieure demeure soumise à la validation applicable de Jean Vérif.
 
 ### Résultats locaux de cette mise à jour
+
+Les résultats PVGIS et calculs ci-dessous proviennent de la mise à jour V2 antérieure ; ils ne constituent pas des mesures OV5640. La nouvelle revue des 14 dépôts, les corrections des résumés et le protocole matériel non exécuté figurent dans le [comparatif](comparatif-pir-ov5640.md). Aucun changement sur Unraid.
 
 - 8 tests unitaires V1 : réussis ; vérificateur V1 : cohérence locale réussie (BOM historique, énergie V1, valeurs bois et liens, sans qualification matérielle).
 - CSV : données identiques au fichier fourni après normalisation des fins de ligne CRLF→LF ; 12 mois uniques et ordonnés ; colonnes de production cohérentes avec rendement 50 %.
