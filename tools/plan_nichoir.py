@@ -149,11 +149,11 @@ def verifications():
                 z2 + m <= z_toit(x1 - m) - 10 and z1 - m > Z_BLOC_HAUT and x2 + m <= EXT,
                 f'plaque {x2 - x1 + 2 * m} × {z2 - z1 + 2 * m}, de x {x1 - m} à {x2 + m}, z {z1 - m} à {z2 + m}'))
     xm = x_max_porte_ouverte()
-    for nom, (xa, za) in {'façade': AERATION_FACADE, 'dos': AERATION_DOS}.items():
+    for nom, (xa, za) in {'de la façade': AERATION_FACADE, 'du dos': AERATION_DOS}.items():
         ok = E + 4 < xa < EXT - E - 4 and Z_CLOISON + 4 < za < z_toit(xa) - 15
-        if nom == 'façade':
+        if nom == 'de la façade':
             ok = ok and not (x1 - m - 4 < xa < x2 + m + 4 and z1 - m - 4 < za < z2 + m + 4)
-        res.append((f'Aération Ø8 du {nom} dans le compartiment, sous le toit', ok, f'x {xa}, z {za}'))
+        res.append((f'Aération Ø8 {nom} dans le compartiment, sous le toit', ok, f'x {xa}, z {za}'))
     res.append(('Trappe et plaque hors de la zone balayée par la porte', x1 - m > xm + 5,
                 f'porte jusqu’à x {xm:.1f}, plaque dès x {x1 - m}'))
     a = angle_ouverture_porte()
