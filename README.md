@@ -1,8 +1,10 @@
 # Nichoir vidéo solaire — conception V1
 
-> **Décision courante : [brainstorm / décision V2](docs/decision-v2.md).** Lire cette page en premier : clips PIR OV3660 AVI sur SD, Wi-Fi avec ACK durable, galerie MP4 sur Unraid sans import Frigate ; solaire et stockage conditionnés aux essais. Documentation seulement, aucun déploiement, aucun prix V2 établi.
+> **Décision courante : [brainstorm / décision V2](docs/decision-v2.md).** Lire cette page en premier : cible XIAO ESP32S3 Sense **OV5640 à confirmer par PID**, clips PIR AVI sur SD, Wi-Fi avec ACK durable, galerie MP4 sur Unraid sans import Frigate. **Énergie à remesurer avec l'OV5640**, solaire et stockage conditionnés aux essais. Documentation seulement, aucun déploiement, aucun prix V2 établi.
 >
 > **ARCHIVE V1 OBSOLÈTE : le titre et tout le dossier ci-dessous sont conservés pour traçabilité et contrôles historiques.** La BOM, les prix, le toit, le budget sans Wi-Fi et le choix P126/V25 ne sont pas une nomenclature ou une prescription V2. Les huit pages anciennes portent une bannière V1. Les outils Python et tests sont inchangés et **V1 uniquement** ; ils ne valident pas le dimensionnement V2. Le [CSV PVGIS V2](docs/pvgis-le-havre.csv) et son protocole de calcul sont décrits dans la décision courante.
+
+Documentation courante complémentaire : [comparatif PIR / OV5640 des 14 dépôts GitHub](docs/comparatif-pir-ov5640.md), sources figées par commit, distinctions photo/vidéo/stream et protocole d'essai 5 MP contre 1080p en basse lumière, **sans oiseaux**. Aucun résultat FPS, temps ou Wh matériel revendiqué ; l'OV3660 ci-dessous appartient uniquement à l'archive V1.
 
 ## Archive de conception V1 — non applicable comme décision actuelle
 
