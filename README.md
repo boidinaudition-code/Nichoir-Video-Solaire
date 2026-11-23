@@ -4,7 +4,7 @@
 
 ## Décisions actuelles
 
-- Caméra : XIAO ESP32-S3 Sense + OV5640 NoIR grand angle, DVP 24 broches. Comparer le brochage du module acheté à la fiche Seeed avant branchement ; la compatibilité n'est pas vérifiée. Le module Seeed standard a un autofocus et un filtre IR-cut : repli pour les essais de jour.
+- Caméra : XIAO ESP32-S3 Sense + OV5640 NoIR grand angle, DVP 24 broches. Comparer le brochage du module acheté à la fiche Seeed avant branchement ; la compatibilité n'est pas vérifiée. L'OV5640 livré avec la Sense est à focale fixe ; seul le module OV5640 long vendu séparément (avec dissipateur) a un autofocus. Sa fiche indique un filtre IR-cut. Le module livré sert de repli pour les essais de jour.
 - Éclairage : LED IR 940 nm diffusées, seulement pendant la capture, commandées depuis le 5 V par transistor/MOSFET, jamais directement par GPIO. Référence, nombre et courant restent à choisir et mesurer, sans échauffement de la chambre.
 - Capture : clips 720p MJPEG/AVI sur microSD, une photo 5 Mpx au début de chaque événement. Pas de vidéo 5 Mpx.
 - Détection : barrière IR au trou d'envol pour les entrées/sorties ; photo toutes les 10 min en journée pour le timelapse. PIR intérieur optionnel ; barrière hors champ, sans éclairer la chambre.

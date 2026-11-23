@@ -12,20 +12,20 @@ L'option Raspberry Pi Zero 2 W + Camera Module 3 NoIR Wide + Frigate est écart�
 
 Frigate n'est pas retenu : pas de flux continu possible. La galerie MP4 future sur Unraid et la spécification d'ACK durable de la décision V2 §2 restent valides. Conserver AVI original, identité persistante, SHA-256, réception authentifiée TLS, persistance avant ACK, déduplication, réessais bornés et aucune suppression SD avant ACK persistant. La photo d'événement et les photos timelapse devront aussi recevoir une politique de livraison durable explicite ; aucun service Unraid n'est livré ici.
 
-## 2. Caméra : corriger l'autofocus, choisir NoIR
+## 2. Caméra : focale fixe ou autofocus, choisir NoIR
 
-Le module OV5640 du commerce Seeed pour XIAO possède un autofocus et un filtre IR-cut. Les anciennes mentions « focale fixe / pas d'autofocus » dans la V2 et le comparatif étaient erronées.
+Seeed distingue deux modules : l'OV5640 **livré avec la carte Sense est à focale fixe** ; seul le **module OV5640 long vendu séparément, avec dissipateur, a un autofocus**. La mention V2 « Sense à focale fixe » était donc juste ; une version intermédiaire de ce dossier l'avait corrigée à tort.
 
 Sources primaires :
 
-- [Guide Seeed XIAO ESP32S3](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started) : « OV5640 camera with auto-focus (AF) » ; lots OV3660/OV5640 mixtes pendant la transition.
-- [Fiche du module Seeed OV5640](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/new-res/OV5640_Camera_Module_Specification.pdf) : module MJY5OAF-F3M-V1, broches 23 AF-GND et 24 AFVDD 2,8 V, objectif « 4P+IR », « IR Cut ».
+- [Guide Seeed XIAO ESP32S3](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started) : « The OV5640 shipped with the Sense expansion board is a fixed-focus version; only the standalone long OV5640 module (sold separately, with heat sink) supports auto-focus (AF) » ; lots OV3660/OV5640 mixtes pendant la transition.
+- [Fiche du module Seeed OV5640](https://files.seeedstudio.com/wiki/SeeedStudio-XIAO-ESP32S3/new-res/OV5640_Camera_Module_Specification.pdf) : module MJY5OAF-F3M-V1, broches 23 AF-GND et 24 AFVDD 2,8 V, objectif « 4P+IR », « IR Cut ». Les broches AF indiquent que cette fiche décrit le module autofocus ; la présence d'un filtre IR-cut sur le module fixe livré avec la Sense n'est pas documentée ici, mais reste probable pour un module grand public.
 
-Ce module standard bloque largement le 940 nm. Choix V3 : OV5640 NoIR, sans filtre IR-cut, grand angle et connecteur DVP 24 broches. La compatibilité de brochage avec le connecteur Sense n'est pas vérifiée : comparer toute la table de broches du module acheté à la fiche Seeed avant branchement, pas seulement le nombre de broches.
+Un module à filtre IR-cut bloque largement le 940 nm. Choix V3 : OV5640 NoIR, sans filtre IR-cut, grand angle et connecteur DVP 24 broches. La compatibilité de brochage avec le connecteur Sense n'est pas vérifiée : comparer toute la table de broches du module acheté à la fiche Seeed avant branchement, pas seulement le nombre de broches.
 
-Un module NoIR générique peut être sans autofocus ; prévoir alors un réglage manuel de mise au point à environ 10–15 cm. Le module Seeed standard reste le repli pour mise au point et essais de jour. Contrôler référence, lot, PID, optique, révision et champ réel à réception.
+Un module NoIR générique peut être sans autofocus ; prévoir alors un réglage manuel de mise au point à environ 10–15 cm. Le module fixe livré avec la Sense reste le repli pour les essais de jour ; le module AF séparé est une alternative pour la netteté, mais avec filtre IR-cut. Contrôler référence, lot, PID, optique, révision et champ réel à réception.
 
-L'autofocus est utile à 10–15 cm. Le [forum Seeed sur l'AF OV5640](https://forum.seeedstudio.com/t/ov5640-camera-for-xiao-esp32s3-sense-how-to-use-autofocus/272485?page=2) évoque la possibilité de figer la focale par registre VCM, à valider sur le module et le pilote réels.
+L'autofocus (module long séparé uniquement) est utile à 10–15 cm. Le [forum Seeed sur l'AF OV5640](https://forum.seeedstudio.com/t/ov5640-camera-for-xiao-esp32s3-sense-how-to-use-autofocus/272485?page=2) évoque la possibilité de figer la focale par registre VCM, à valider sur le module et le pilote réels.
 
 ## 3. Éclairage et capture
 
