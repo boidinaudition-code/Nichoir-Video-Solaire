@@ -29,7 +29,10 @@ H_SUD = 310               # hauteur extérieure de la façade côté sud (bas du
 JEU_PORTE = 3             # côté sud raccourci pour pivoter sous le toit
 JEU_LATERAL = 1           # jeu de la porte de chaque côté (bois qui gonfle)
 Z_PIVOT = 290             # axe des vis pivots de la porte, à E/2 du bord sud
-TRAPPE = (40, 140, 280, 340)  # trappe technique au dos : x de 40 à 140, z de 280 à 340
+TRAPPE = (70, 150, 285, 345)  # trappe technique en FAÇADE : x de 70 à 150, z de 285 à 345
+MARGE_PLAQUE = 10            # la plaque de fermeture déborde de 10 tout autour
+Z_BLOC_HAUT = 190 + 45        # haut du bloc d'entrée (90 × 90 centré sur le trou)
+X_PORTE_OUVERTE = 50          # le haut de la porte ouverte entre jusqu'à x ≈ 48
 MARGE_DEBIT = 40          # équerrage et reprises
 TOIT_L, TOIT_P = 300, 250  # toit : longueur dans la pente × largeur (est-ouest)
 DEBORD_SUD = 30           # débord du toit en bas de pente
@@ -51,6 +54,23 @@ def z_toit(x):
 
 
 H_NORD = z_toit(EXT)                      # 490
+
+
+def angle_ouverture_porte():
+    """Angle (degrés) auquel la porte sud touche l'arête du débord sud du toit."""
+    u = math.radians(PENTE)
+    ex, ez = -DEBORD_SUD * math.cos(u), H_SUD - DEBORD_SUD * math.sin(u)   # arête basse du toit
+    xp, zp = E / 2, Z_PIVOT
+    h = z_toit(E) - JEU_PORTE
+    for deg in range(0, 91):
+        a = math.radians(deg)
+        # point de l'arête ramené dans le repère de la porte (rotation inverse)
+        dx, dz = ex - xp, ez - zp
+        x = xp + dx * math.cos(a) - dz * math.sin(a)
+        z = zp + dx * math.sin(a) + dz * math.cos(a)
+        if 0 <= x <= E and 0 <= z <= h:
+            return deg
+    return 90
 
 
 def pieces():
@@ -104,9 +124,16 @@ def verifications():
     res.append(('Pivot de la porte entre cloison et toit', Z_CLOISON < Z_PIVOT < H_SUD - JEU_PORTE - 10,
                 f'pivot {Z_PIVOT}, cloison {Z_CLOISON}, haut de porte {H_SUD - JEU_PORTE}'))
     x1, x2, z1, z2 = TRAPPE
-    res.append(('Trappe technique au dos, au-dessus de la cloison et sous le toit',
-                E < x1 < x2 < EXT - E and z1 > Z_CLOISON + 5 and z2 < z_toit(x1) - 5,
-                f'{x2 - x1} × {z2 - z1}, haut {z2} sous un toit à {z_toit(x1):g}'))
+    res.append(('Trappe technique en façade, au-dessus de la cloison, ≥ 25 de bois sous le toit',
+                E < x1 < x2 < EXT - E and z1 > Z_CLOISON + 5 and z2 <= z_toit(x1) - 25,
+                f'{x2 - x1} × {z2 - z1}, haut {z2}, toit à {z_toit(x1):g} au-dessus'))
+    m = MARGE_PLAQUE
+    res.append(('Plaque de trappe sous le débord du toit et au-dessus du bloc d’entrée',
+                z2 + m <= z_toit(x1 - m) - 10 and z1 - m > Z_BLOC_HAUT and x2 + m <= EXT,
+                f'plaque {x2 - x1 + 2 * m} × {z2 - z1 + 2 * m}, de x {x1 - m} à {x2 + m}, z {z1 - m} à {z2 + m}'))
+    res.append(('Trappe hors de la zone balayée par la porte', x1 > X_PORTE_OUVERTE, f'x {x1} > {X_PORTE_OUVERTE}'))
+    a = angle_ouverture_porte()
+    res.append(('Porte ouvrable d’au moins 60°', a >= 60, f'butée sur le débord du toit vers {a}°'))
     pente_box = EXT / math.cos(math.radians(PENTE))
     debord_nord = TOIT_L - DEBORD_SUD - pente_box
     res.append(('Toit couvre la boîte dans la pente', debord_nord >= 10,
@@ -158,6 +185,13 @@ def vue_facade():
     tx, tz = P(EXT / 2, Z_TROU)
     c.append(f'<circle class="trou" cx="{tx}" cy="{tz}" r="{TROU / 2}"/>')
     c.append(f'<rect fill="none" stroke="#5a3d1a" x="{tx - 45}" y="{tz - 45}" width="90" height="90"/>')
+    x1, x2, z1, z2 = TRAPPE
+    m = MARGE_PLAQUE
+    (a1, b1), (a2, b2) = P(x1 - m, z2 + m), P(x2 + m, z1 - m)
+    c.append(f'<rect fill="#d9b980" stroke="#5a3d1a" x="{a1}" y="{b1}" width="{a2 - a1}" height="{b2 - b1}"/>')
+    (a1, b1), (a2, b2) = P(x1, z2), P(x2, z1)
+    c.append(f'<rect class="cache" x="{a1}" y="{b1}" width="{a2 - a1}" height="{b2 - b1}"/>')
+    c.append(f'<text x="{a1 + 4}" y="{(b1 + b2) / 2 + 3}">trappe</text>')
     # toit (dessous sur le plan z = H_SUD + x), épaisseur E vers le haut
     u = (math.cos(math.radians(PENTE)), math.sin(math.radians(PENTE)))
     n = (-u[1], u[0])
@@ -178,7 +212,7 @@ def vue_facade():
     c.append(cote(*P(EXT - E - 8, Z_FOND), *P(EXT - E - 8, Z_PLAFOND), f'{H_CHAMBRE}', -14))
     c.append(cote(*P(E + 8, Z_FOND), *P(E + 8, Z_TROU), f'axe {TROU_AXE}', 20))
     c.append(f'<line class="cote" x1="{P(E + 8, Z_TROU)[0]}" y1="{P(0, Z_TROU)[1]}" x2="{tx}" y2="{tz}"/>')
-    t = [f'Trou Ø{TROU} (28 pour la mésange bleue)', 'Bloc d’entrée 90 × 90 devant le trou',
+    t = [f'Trou Ø{TROU} (28 pour la mésange bleue)', 'Bloc d’entrée 90 × 90 devant le trou', f'Trappe technique {TRAPPE[1] - TRAPPE[0]} × {TRAPPE[3] - TRAPPE[2]} (pointillés) sous sa plaque',
          f'Chambre {INT} × {INT} × {H_CHAMBRE}', f'Cloison {Z_PLAFOND}–{Z_CLOISON}, compartiment technique au-dessus',
          f'Toit {TOIT_L} × {TOIT_P}, pente {PENTE}°, panneau P110 sur cales {CALE_PANNEAU}',
          'Sud à gauche (bas du toit), nord à droite']
@@ -191,21 +225,22 @@ def vue_debit():
     """Débit : flan façade + dos coupé à 45°, puis pièces de 140 de large."""
     c, y0 = [], 40
     flan = H_SUD + H_NORD
+    flan_reel = debit()['flan_facade_dos']
     s = 0.6  # échelle
     X = lambda v: 20 + v * s
-    c.append(f'<text x="20" y="{y0 - 6}">Planche 20 × 180 (mini) — façade + dos dans un flan de 180 × {flan:g}, une coupe à 45°</text>')
+    c.append(f'<text x="20" y="{y0 - 6}">Planche 20 × 180 (mini) — façade + dos dans un flan de 180 × {flan_reel}, une coupe à 45°</text>')
     c.append(poly([(X(0), y0), (X(H_SUD), y0), (X(H_NORD), y0 + EXT * s), (X(0), y0 + EXT * s)], 'bois'))
     c.append(poly([(X(H_SUD), y0), (X(flan), y0), (X(flan), y0 + EXT * s), (X(H_NORD), y0 + EXT * s)], 'bois'))
     c.append(f'<text x="{X(120)}" y="{y0 + 60}">Façade</text><text x="{X(600)}" y="{y0 + 60}">Dos</text>')
-    c.append(cote(X(0), y0 + EXT * s + 12, X(flan), y0 + EXT * s + 12, f'{flan:g} + trait de scie'))
+    c.append(cote(X(0), y0 + EXT * s + 12, X(flan), y0 + EXT * s + 12, f'{flan_reel} (trait de scie à 45° compris)'))
     y1 = y0 + EXT * s + 50
     x = 0
-    c.append(f'<text x="20" y="{y1 - 6}">Pièces de 140 de large (même planche, refendue)</text>')
+    c.append(f'<text x="20" y="{y1 - 6}">Pièces refendues : porte sud à 138, les autres à 140</text>')
     for p in pieces()[2:6]:
         w = p['h'] * s
         c.append(f'<rect class="bois" x="{X(x)}" y="{y1}" width="{w:.1f}" height="{INT * s}"/>')
         c.append(f'<text x="{X(x) + 3}" y="{y1 + 14}">{p["nom"].split(" (")[0]}</text>')
-        c.append(f'<text x="{X(x) + 3}" y="{y1 + 26}">{INT} × {p["h"]:g}</text>')
+        c.append(f'<text x="{X(x) + 3}" y="{y1 + 26}">{p["l"]:g} × {p["h"]:g}</text>')
         x += p['h'] + TRAIT_SCIE
     d = debit()
     c.append(f'<text x="20" y="{y1 + INT * s + 26}">Longueur totale de planche 180 : ≈ {d["longueur_planche_180"]} mm (bloc d’entrée compris), + toit {TOIT_L} × {TOIT_P} et barre 40 × 600.</text>')

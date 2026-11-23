@@ -33,11 +33,16 @@ class PlanNichoirTests(unittest.TestCase):
     def test_pivot_porte_entre_cloison_et_toit(self):
         self.assertTrue(p.Z_CLOISON < p.Z_PIVOT < p.z_toit(0) - p.JEU_PORTE)
 
+    def test_angle_ouverture(self):
+        a = p.angle_ouverture_porte()
+        self.assertGreaterEqual(a, 60)
+        self.assertLess(a, 90)  # butée réelle sur le débord sud
+
     def test_porte_ouverte_degage_le_toit(self):
-        # Rotation autour de (x=E/2, z=Z_PIVOT) : le haut de la porte s'écarte du toit.
+        # Rotation autour de (x=E/2, z=Z_PIVOT) : le haut de la porte s'écarte du plan du toit.
         xp, zp = p.E / 2, p.Z_PIVOT
         coins = [(0, p.H_SUD - p.JEU_PORTE), (p.E, p.z_toit(p.E) - p.JEU_PORTE)]
-        for deg in range(0, 91, 5):
+        for deg in range(0, p.angle_ouverture_porte() + 1, 5):
             a = math.radians(deg)
             for x, z in coins:
                 # la porte bascule vers l'extérieur par le bas : le haut part vers +x

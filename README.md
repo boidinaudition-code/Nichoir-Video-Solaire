@@ -33,7 +33,7 @@ Plans, débit et montage : **[docs/plans](docs/plans/README.md)**.
 - Chambre 140 × 140 × 230 mm, trou Ø32 (28 pour réserver aux mésanges bleues), selon le tableau LPO.
 - Planche de 20 mm, environ 2,05 m de long pour la caisse, plus le toit de 300 × 250.
 - Compartiment technique au-dessus de la chambre, sous le toit à 45° qui porte le panneau.
-- Côté sud pivotant pour le nettoyage d'automne ; trappe au dos pour l'électronique et la carte SD.
+- Côté sud pivotant pour le nettoyage d'automne ; trappe en façade, au-dessus du trou d'envol, pour l'électronique et la carte SD.
 
 ![Vue de face](docs/plans/vue-facade.svg)
 

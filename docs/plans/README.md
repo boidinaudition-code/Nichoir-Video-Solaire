@@ -29,18 +29,18 @@ Référence : les dimensions de la chambre et du trou suivent le [tableau de la 
 
 | Pièce | Qté | Cotes finies (mm) | Remarque |
 |---|---:|---|---|
-| Façade (est) | 1 | 180 de large, 310 côté sud → 490 côté nord | trapèze, trou Ø32 centré, axe à 190 du bas |
-| Dos (ouest) | 1 | même trapèze | trappe technique 100 × 60, passe-câble et aération |
+| Façade (est) | 1 | 180 de large, 310 côté sud → 490 côté nord | trapèze, trou Ø32 centré (axe à 190 du bas), trappe technique 80 × 60 |
+| Dos (ouest) | 1 | même trapèze | aération ; côté support |
 | Côté sud (porte) | 1 | 138 × 327, biseau 45° en tête (307 face extérieure) | 1 mm de jeu de chaque côté, raccourci de 3 mm pour pivoter sous le toit |
-| Côté nord | 1 | 140 × 490, biseau 45° en tête (470 face intérieure) | |
+| Côté nord | 1 | 140 × 490, biseau 45° en tête (470 face intérieure) | passe-câble vers la batterie |
 | Fond | 1 | 140 × 140 | 4 trous Ø5 près des angles |
 | Cloison | 1 | 140 × 140 | dessous à 250 du bas : caméra, LED IR, micro |
 | Toit | 1 | 300 dans la pente × 250 | planche large ou deux planches collées |
 | Bloc d'entrée | 1 | 90 × 90 | trou Ø32 aligné, logement de la barrière IR |
-| Plaque de trappe | 1 | 130 × 90 × 10 à 20 | vissée sur le dos, joint mousse |
-| Barre de fixation | 1 | 40 × 600 | verticale, vissée sur le dos le long du bord nord (de 140 à 180), donc à côté de la trappe |
+| Plaque de trappe | 1 | 100 × 80 × 10 | vissée sur la façade, joint mousse |
+| Barre de fixation | 1 | 40 × 600 × 20 | verticale, vissée au milieu du dos |
 
-Débit : une planche de 20 mm d'au moins 180 de large et environ **2,05 m** de long (traits de scie et équerrage compris), plus le toit et la barre. Façade et dos sortent d'un seul flan de 180 × 805 coupé en diagonale à 45°. Côtés, fond et cloison sont refendus à 140.
+Débit : une planche de 20 mm d'au moins 180 de large et environ **2,05 m** de long (traits de scie et équerrage compris), plus le toit et la barre. Façade et dos sortent d'un seul flan de 180 × 805 coupé en diagonale à 45°. Côté nord, fond et cloison sont refendus à 140, la porte sud à 138.
 
 ## Montage
 
@@ -48,14 +48,14 @@ Débit : une planche de 20 mm d'au moins 180 de large et environ **2,05 m** de l
 2. **Trou d'envol.** Scie cloche Ø32 dans la façade : centré, axe à 190 du bas. Percer le bloc d'entrée au même diamètre. Rainures horizontales à l'intérieur sous le trou si le bois est lisse.
 3. **Fond.** 4 trous Ø5. Laisser le bois brut à l'intérieur.
 4. **Caisse.** Visser le côté nord, le fond (de 0 à 20) et la cloison (dessous à 250, cale de 230 posée sur le fond) entre façade et dos. Vis inox 4 × 40, avant-trous Ø3. Le fond et la cloison ne sont **pas** vissés au côté sud.
-5. **Porte sud.** Deux vis pivots 4 × 40 à travers façade et dos, dans le chant de la porte, **à 290 du bas et à 10 du bord sud** (milieu de l'épaisseur) : au-dessus de la cloison, sous le toit. Une rondelle entre porte et façade, une entre porte et dos. En bas, un crochet ou une vis de blocage. Vérifier que la porte bascule sans toucher le toit. Un joint mousse ou une brosse ferme la fente de 3 mm sous le toit (insectes).
-6. **Trappe technique.** Découper dans le dos une trappe de 100 × 60 (de 40 à 140 depuis le bord sud, de 280 à 340 du bas), avant l'assemblage. Elle se referme par une plaque extérieure de 130 × 90 vissée sur le dos, avec un joint ; rien ne dépasse à l'intérieur, pour ne pas gêner la porte. C'est l'accès à l'électronique et à la carte SD, sans démonter le toit ni le panneau.
-7. **Électronique** (voir [README](../../README.md)). Percer la cloison après réception de la carte : passage d'objectif, 4 LED IR, trou micro au droit du micro de la carte. La carte repose sur la cloison, objectif vers le bas. **Laisser libres les 40 premiers millimètres côté sud du compartiment** : le haut de la porte y rentre quand elle s'ouvre.
-8. **Passages.** Dos, dans le compartiment technique (vers 300 du bas) : passe-câble Ø10 avec presse-étoupe vers le coffret de la batterie, boucle d'égouttement. Façade et dos : deux trous d'aération Ø8 grillagés, en haut du compartiment, sous le débord du toit. Câble de la barrière IR : dans une baguette sur la façade, jusqu'au compartiment technique. Aucun câble dans la chambre.
+5. **Porte sud.** Deux vis pivots 4 × 40 à travers façade et dos, dans le chant de la porte, **à 290 du bas et à 10 du bord sud** (milieu de l'épaisseur) : au-dessus de la cloison, sous le toit. Une rondelle entre porte et façade, une entre porte et dos. En bas, un crochet ou une vis de blocage. La porte s'ouvre d'environ 70° avant de buter sur le débord du toit, assez pour nettoyer. Un joint mousse ou une brosse ferme la fente de 3 mm sous le toit (insectes).
+6. **Trappe technique.** Avant l'assemblage, découper dans la **façade** une ouverture de 80 × 60 : de 70 à 150 depuis le bord sud, de 285 à 345 du bas. Il reste au moins 35 mm de bois au-dessus, sous le toit. Elle se ferme par une plaque extérieure de 100 × 80 × 10 (de 60 à 160, de 275 à 355), vissée avec un joint mousse ; la plaque reste sous le débord du toit et au-dessus du bloc d'entrée. C'est l'accès à l'électronique et à la carte SD, sans décrocher le nichoir ni démonter le toit.
+7. **Électronique** (voir [README](../../README.md)). Percer la cloison après réception de la carte : passage d'objectif, 4 LED IR, trou micro au droit du micro de la carte. La carte repose sur la cloison, objectif vers le bas. **Ne rien placer à moins de 50 mm du bord sud extérieur** dans le compartiment : le haut de la porte y rentre quand elle s'ouvre.
+8. **Passages.** Côté nord, dans le compartiment technique (vers 350 du bas, au milieu) : passe-câble Ø10 avec presse-étoupe vers le coffret de la batterie, boucle d'égouttement. Rien ne dépasse du dos, qui s'appuie sur le support. Aération : un trou Ø8 grillagé en façade (vers 170 depuis le bord sud, 400 du bas) et un au dos (vers 60 depuis le bord sud, 330 du bas), sous le débord du toit. Câble de la barrière IR : dans une baguette sur la façade, jusqu'au compartiment technique. Aucun câble dans la chambre.
 9. **Toit.** Vissé sur façade, dos et côté nord, jamais sur la porte, **avant** la pose du panneau : ses vis tombent sous l'emprise du panneau, le toit reste donc fixe. Couverture étanche (EPDM ou tôle). Panneau P110 sur une platine démontable, elle-même sur cales de 10, marges de 13 mm.
-10. **Pose.** Barre de fixation sur le dos. Nichoir légèrement penché vers l'avant (LPO), à 2 m au moins, solidement fixé, cales entre tronc et fil de fixation. Huile de lin facultative (LPO), à l'extérieur uniquement (choix du projet).
+10. **Pose.** Barre de fixation au milieu du dos, qui écarte le nichoir de 20 mm du support. Nichoir légèrement penché vers l'avant (LPO), à 2 m au moins, solidement fixé, cales entre tronc et fil de fixation. Huile de lin facultative (LPO), à l'extérieur uniquement (choix du projet).
 
-La porte sud ouvre la chambre ; la trappe du dos ouvre le compartiment technique. **Ni l'une ni l'autre pendant la nidification** : nettoyage et maintenance en automne, nichoir vide.
+La porte sud ouvre la chambre ; la trappe en façade ouvre le compartiment technique. **Ni l'une ni l'autre pendant la nidification** : nettoyage et maintenance en automne, nichoir vide.
 
 ## À vérifier au montage à blanc
 

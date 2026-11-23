@@ -6,7 +6,7 @@ Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seuleme
 
 | Dépôt | Ce que c'est | Licence |
 |---|---|---|
-| [NestNinja.open](https://github.com/CraigHutchinson/NestNinja.open/blob/a52b0e2bf9c955fbcb388ec3bcd1f0796fa754b5/README.md) | Nichoir connecté ESP32-P4 + ESP32-C6, caméra OV5647, vidéo H.264. **Code pas encore publié** : le dépôt ne contient que des README (sortie annoncée au 3ᵉ trimestre 2026) | GPL-3.0 annoncée |
+| [NestNinja.open](https://github.com/CraigHutchinson/NestNinja.open/blob/a52b0e2bf9c955fbcb388ec3bcd1f0796fa754b5/README.md) | Nichoir connecté ESP32-P4 + ESP32-C6, caméra OV5647, vidéo H.264. **Code pas encore publié** : le dépôt ne contient que de la documentation (sortie annoncée au 3ᵉ trimestre 2026) | GPL-3.0 annoncée |
 | [BirdNest](https://github.com/VorosEgyes/BirdNest/blob/0fd1f7e31f77f7be80f5b14e9bd0c7a7387bb24d/README.md) | ESP32-CAM sur batterie : photos programmées vers Telegram, MQTT, sommeil profond, mises à jour à distance, carte électronique KiCad | MIT |
 | [birdnest-ai](https://github.com/bali0019/birdnest-ai/blob/77303ef6dd78d19a14bc1949ecb09e2161854e49/README.md) | Surveillance d'un nid de cardinal avec une caméra Blink et l'IA Claude, alertes Discord | aucune licence : tous droits réservés |
 | [BirdBox](https://github.com/SEspe/BirdBox/blob/1643f8b72a8438b6ee4b93df1c81dd77e0106c3f/README.md) ([spécification](https://github.com/SEspe/BirdBox/blob/1643f8b72a8438b6ee4b93df1c81dd77e0106c3f/FSD_BirdBox.md)) | Caméra de nichoir ou de mangeoire ESP32-S3 (ESP-IDF), photos sur microSD, galerie et statistiques sur la carte, Home Assistant | MIT |
@@ -19,7 +19,7 @@ Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seuleme
 - **Les LED IR exigent un capteur sans filtre IR-cut.** La spécification de BirdBox le dit explicitement pour son option LED IR. Cela confirme le test de la télécommande prévu à la réception de la carte.
 - **Mode « nichoir »** (BirdBox) : mise au point rapprochée, éclairage IR, visites rares mais longues. Réglages distincts d'une mangeoire.
 - **Grand angle** : NestNinja annonce un objectif fisheye 160° avec LED IR pour l'intérieur du nichoir. À garder en tête si l'objectif de l'OV3660 ne couvre pas tout le fond.
-- **Jeter les premières images** après l'allumage de la caméra, le temps que l'exposition se règle (BirdNest : 4 images ; BirdBox : attendre que la mesure se stabilise plutôt qu'un délai fixe).
+- **Jeter les premières images** après l'allumage de la caméra, le temps que l'exposition se règle (BirdNest : 4 images ; BirdBox ignore aussi les détections pendant une courte période après le démarrage).
 - **Coupure de l'alimentation de la caméra** : BirdBox constate qu'un capteur OV2640 peut cesser de fournir des images après plusieurs heures ; le seul remède garanti est de couper son alimentation. Le transistor de coupure envisagé pour économiser l'énergie servira aussi à **redémarrer la carte et sa caméra** en cas de blocage.
 
 ### Fiabilité du firmware
