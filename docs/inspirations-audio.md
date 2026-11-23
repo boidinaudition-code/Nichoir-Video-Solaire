@@ -2,6 +2,8 @@
 
 [Accueil](../README.md) · [Recherches V3](recherches-v3.md) · [Comparatif des 14 projets](comparatif-pir-ov5640.md)
 
+> **Mise à jour du 24/11/2026 :** Romain abandonne l'éclairage et la barrière infrarouges, les sondes de température et la batterie V75 ; détection par capteur PIR, pack de 4 accus 18650 avec chargeur solaire. La [BOM](bom.md) fait foi ; les passages sur l'infrarouge, les sondes ou la V75 ci-dessous sont historiques.
+
 Sources lues le 23 novembre 2026. Documentation seulement : aucun code ni fichier 3D tiers copié dans ce dépôt, aucun essai matériel.
 
 ## 1. BirdWatch (Danielson187)
@@ -24,7 +26,7 @@ Idées retenues :
 | Détection d'oiseau par IA (YOLO) et classification d'espèce | La détection de présence peut servir à **trier les faux déclenchements**. La classification d'espèce est peu utile dans un nichoir à mésanges. Optionnel, côté Unraid uniquement. |
 | Panneaux collés sur le toit et larmier arrière pour limiter les entrées d'eau | Principe à reprendre pour le compartiment technique. |
 
-Non retenu : l'électronique de charge et le pack 18650 (remplacés par la V75 certifiée), l'ESP32-CAM AI-Thinker.
+Non retenu : l'électronique de charge de ce projet et l'ESP32-CAM AI-Thinker. (Le pack 18650 est finalement retenu le 24/11/2026, avec un autre chargeur : voir la [BOM](bom.md).)
 
 **Licence :** logiciel sous PolyForm Noncommercial 1.0.0 ; documentation et fichiers 3D sous CC BY-NC-SA 4.0. Un usage personnel non commercial avec attribution est possible ; toute adaptation des fichiers 3D doit garder la même licence.
 
@@ -52,7 +54,7 @@ Ce que décrit l'auteur : boîtier imprimé pour ESP32-CAM, PIR et deux 18650 en
 
 Idées retenues :
 
-- **Couper l'alimentation de la caméra et des LED IR** entre deux événements, plutôt que de compter sur la seule veille. À comparer par la mesure au sommeil profond : plus de latence, moins de veille. La V75 consomme de toute façon environ 26 mW en Always On.
+- **Couper l'alimentation de la caméra** entre deux événements, plutôt que de compter sur la seule veille. À comparer par la mesure au sommeil profond : plus de latence, moins de veille.
 - **Étanchéité** : silicone autour de la caméra et des passages, vernis de protection sur les cartes et connecteurs, **un orifice bas laissé ouvert** pour évacuer l'humidité.
 - **Impression** en PETG ou ABS : l'auteur indique que le PLA se dégrade dehors en un à deux ans. Utile pour le compartiment technique, imprimable par Romain.
 

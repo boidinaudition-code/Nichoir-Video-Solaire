@@ -25,6 +25,9 @@ class BomTests(unittest.TestCase):
                        'accus', 'p110', 'rallonge', 'coffret', 'pg7', 'cable'):
             self.assertIn(requis, ids)
 
+    def test_statut_conditionnel_refuse(self):
+        self.assertNotIn('conditionnel', bom.STATUTS)
+
     def test_references_gotronic_numeriques(self):
         for l in self.lignes:
             if l['marchand'] == 'Gotronic':

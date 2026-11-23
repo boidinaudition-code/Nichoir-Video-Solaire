@@ -2,6 +2,8 @@
 
 [Accueil](../README.md) · [Décision V2](decision-v2.md) · [Comparatif des projets](comparatif-pir-ov5640.md) · [Archive V1](archive/v1/README-v1.md)
 
+> **Mise à jour du 24/11/2026 :** Romain abandonne l'éclairage et la barrière infrarouges, les sondes de température et la batterie V75 ; détection par capteur PIR, pack de 4 accus 18650 avec chargeur solaire. La [BOM](bom.md) fait foi ; les passages sur l'infrarouge, les sondes ou la V75 ci-dessous sont historiques.
+
 Décisions confirmées par Romain le 23/11/2026. Documentation uniquement : aucun firmware, essai matériel ou déploiement. Les sources ci-dessous étayent les choix, pas une qualification du montage.
 
 ## 1. Autonomie et réseau
@@ -33,13 +35,13 @@ L'autofocus (module long séparé uniquement) est utile à 10–15 cm. Le [forum
 
 > **Mise à jour du 24/11/2026 :** Romain abandonne l'éclairage et la barrière infrarouges ; détection par capteur PIR. Voir la [BOM](bom.md).
 
-Version LED infrarouge validée. LED IR 940 nm diffusées, allumées seulement pendant la capture, alimentées depuis le 5 V et commandées par transistor/MOSFET, jamais directement par un GPIO. Référence retenue dans la [BOM](bom.md) : 4 × TSAL6200 à environ 35 mA ; intensité à valider en essai ; aucun échauffement de la chambre n'est acceptable. Les caméras de nichoir du commerce éclairent en IR ; cela ne qualifie pas notre intensité ni notre montage.
+Version LED infrarouge validée. LED IR 940 nm diffusées, allumées seulement pendant la capture, alimentées depuis le 5 V et commandées par transistor/MOSFET, jamais directement par un GPIO. Référence, nombre et courant restent à choisir et mesurer ; aucun échauffement de la chambre n'est acceptable. Les caméras de nichoir du commerce éclairent en IR ; cela ne qualifie pas notre intensité ni notre montage.
 
 Clips 720p MJPEG dans un conteneur AVI sur microSD, avec une photo 5 Mpx au début de chaque événement. La durée de travail héritée est 20 s, avec cadence réelle à mesurer. Pas de vidéo 5 Mpx. Le 1080p est écarté : un clip de 20 s pèserait probablement plusieurs dizaines de Mo, ordre de grandeur non mesuré incompatible avec le budget V2 de 10–30 s de Wi-Fi total par clip.
 
 ## 4. Détection
 
-Barrière infrarouge au trou d'envol pour déclencher sur les entrées/sorties, plus une photo toutes les 10 min en journée pour le timelapse. PIR intérieur optionnel : un oiseau qui couve bouge peu, et le PIR est peu fiable dans 14 cm. Barrière retenue dans la [BOM](bom.md) : Adafruit 2167 (Gotronic 39178).
+Barrière infrarouge au trou d'envol pour déclencher sur les entrées/sorties, plus une photo toutes les 10 min en journée pour le timelapse. PIR intérieur optionnel : un oiseau qui couve bouge peu, et le PIR est peu fiable dans 14 cm. Aucune référence de barrière n'est encore choisie.
 
 La caméra NoIR verra l'IR de la barrière : placer celle-ci hors champ et vérifier qu'elle n'éclaire pas la chambre. Mesurer aussi sa consommation continue et les faux déclenchements ; les besoins hérités ne les qualifient pas.
 

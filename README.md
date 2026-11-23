@@ -13,7 +13,7 @@ Références, prix et câblage : **[BOM](docs/bom.md)**. Environ 228 € TTC hor
 | Carte et caméra | [Gotronic 39234](https://www.gotronic.fr/art-carte-xiao-esp32s3-sen--soud--47620.htm) : XIAO ESP32-S3 Sense 102010635, connecteurs soudés, caméra **OV3660** (2048 × 1536), micro, lecteur microSD (32 Go maxi), antenne | Consommation annoncée : 138 mA en vidéo, 341 mA en prise de photo. Carte SanDisk Ultra 32 Go |
 | Détection | Capteur PIR BS612 sous la cloison + photo toutes les 10 min en journée | Pas d'infrarouge actif : ni LED ni barrière. Un oiseau qui couve bouge peu : la photo périodique sert de filet |
 | Panneau | Voltaic P110, 9,54 W, 223 × 274 mm | Sur le toit à 45° orienté sud ; rallonge de 3 m jusqu'au coffret |
-| Batterie | 4 accus XTAR 18650 4000 mAh protégés en parallèle (environ 55 Wh), chargeur solaire Adafruit bq24074, régulateur 5 V Pololu | Coffret IP65 séparé et ombragé ; charge coupée hors d'environ +5 à +45 °C par une thermistance ; tension du pack lue par la carte |
+| Batterie | 4 accus XTAR 18650 4000 mAh protégés en parallèle (environ 55 Wh), chargeur solaire Adafruit bq24074, régulateur 5 V Pololu | Coffret IP65 séparé et ombragé ; charge coupée sous environ +5 °C (reprise vers +8 °C) et au-dessus d'environ +45 °C par une thermistance ; tension du pack lue par la carte |
 | Liaison | Câble 4 conducteurs coffret → nichoir : 5 V, masse, tension batterie / 2, réserve | Presse-étoupe PG7 aux deux bouts |
 
 **Sans éclairage, la chambre est sombre** même de jour (lumière du seul trou d'envol) : qualité d'image à évaluer dans le carton d'essai, et pas d'images la nuit. Voir la [BOM](docs/bom.md).

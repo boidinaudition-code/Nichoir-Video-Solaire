@@ -22,7 +22,6 @@ STATUTS = OrderedDict([
     ('ferme', 'À commander'),
     ('option', 'Options'),
     ('outil', 'Outillage de mesure'),
-    ('conditionnel', 'Seulement si la caméra ne voit pas l’infrarouge'),
 ])
 COLONNES = ['id', 'statut', 'marchand', 'reference', 'designation', 'qte',
             'prix_unitaire_ttc', 'url', 'stock_releve', 'role']

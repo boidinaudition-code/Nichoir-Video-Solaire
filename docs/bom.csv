@@ -13,7 +13,7 @@ c470;ferme;Gotronic;04947;Condensateur radial 470 µF / 16 V;1;0.20;https://www.
 plaque;ferme;Gotronic;12630;Carte d'essais EE3070 30 × 70 mm;2;0.95;https://www.gotronic.fr/art-carte-d-essai-ee3070-21091.htm;57;nichoir + coffret
 bornier;ferme;Gotronic;49114;Bornier à vis SC03/5.08 (3 contacts);6;0.45;https://www.gotronic.fr/art-bornier-sc03-5-08-26024.htm;1000+;câble, PIR, pack et panneau
 cordon;ferme;Gotronic;49204;Cordon USB-A / USB-C 1 m, 3 A;1;4.30;https://www.gotronic.fr/art-cordon-1-m-usbc-1m-33654.htm;250+;moitié USB-C seulement : alimentation de la carte
-cable;ferme;Gotronic;48415;Câble blindé CB4CR 4 × 0,28 mm², Ø 4,2 mm (prix au mètre);2;0.50;https://www.gotronic.fr/art-cable-blinde-cb4cr-15162.htm;250+;liaison coffret → nichoir (5 V, masse, batterie / 2, réserve)
+cable;ferme;Gotronic;48415;Câble blindé CB4CR 4 × 0,28 mm² rigide, Ø 4,2 mm (prix au mètre);2;0.50;https://www.gotronic.fr/art-cable-blinde-cb4cr-15162.htm;250+;liaison coffret → nichoir (5 V, masse, batterie / 2, réserve)
 pg7;ferme;Gotronic;11345;Presse-étoupe PG7 (câble 3,5–7 mm, perçage 12,5 mm);3;1.05;https://www.gotronic.fr/art-presse-etoupe-pg7b-6376.htm;160;nichoir + coffret (câble et panneau)
 coffret;ferme;Gotronic;11871;Boîtier étanche ABS IP65, int. 193 × 114 × 51 mm;1;10.90;https://www.gotronic.fr/art-boitier-etanche-abs-ip207337-6695.htm;36;coffret des accus et du chargeur
 gaine;ferme;Gotronic;08913;Pochette de 100 gaines thermorétractables GT100M;1;4.90;https://www.gotronic.fr/art-pochette-de-gaine-thermo-rouge-gt40r-5176.htm;116;épissures
@@ -21,7 +21,7 @@ fil_n;ferme;Gotronic;08770;Fil souple 0,20 mm² noir (prix au mètre);2;0.30;htt
 fil_r;ferme;Gotronic;08776;Fil souple 0,20 mm² rouge (prix au mètre);2;0.30;https://www.gotronic.fr/art-fil-de-cablage-fc25r-5082.htm;1000+;câblage interne
 fil50_n;ferme;Gotronic;08940;Fil souple 0,50 mm² noir (prix au mètre);1;0.40;https://www.gotronic.fr/art-fil-de-cablage-fc50n-5199.htm;1000+;câblage du pack
 fil50_r;ferme;Gotronic;08946;Fil souple 0,50 mm² rouge (prix au mètre);1;0.40;https://www.gotronic.fr/art-fil-de-cablage-fc50r-5203.htm;1000+;câblage du pack
-accus;ferme;Bestpiles;6952918302384;Accu 18650 XTAR 4000 mAh protégé, + en relief (3 800 mAh mini, 69,2 mm);4;8.03;https://bestpiles.fr/piles-rechargeables-18650/1663-pile-rechargeable-18650-xtar-lithium-37v-4000mah-10a-6952918302384.html;disponible;pack 1S4P
+accus;ferme;Bestpiles;6952918302384;Accu 18650 XTAR 4000 mAh protégé, + en relief;4;8.03;https://bestpiles.fr/piles-rechargeables-18650/1663-pile-rechargeable-18650-xtar-lithium-37v-4000mah-10a-6952918302384.html;disponible;pack 1S4P
 chargeur_accus;ferme;Bestpiles;6952918340744;Chargeur XTAR MC2 Plus, 2 baies, coupure 4,20 V ± 0,05 V;1;6.95;https://bestpiles.fr/chargeur-de-piles-et-batteries/1084-chargeur-de-piles-xtar-mc2-plus-6952918340744.html;disponible;charger chaque accu avant la mise en parallèle
 p110;ferme;Kiwi Electronics;KW-3003;Voltaic P110 panneau 10 W 6 V ETFE, 223 × 274 mm, câble 30 cm;1;76.79;https://www.kiwi-electronics.com/en/10-watt-6-volt-solar-panel-etfe-10924;28;panneau du toit
 rallonge;ferme;Kiwi Electronics;KW-2069;Rallonge Voltaic W031 3 m, 3,5 × 1,1 mm étanche;1;12.59;https://www.kiwi-electronics.com/en/extension-cable-for-voltaic-solar-panel-300cm-3-5x1-1mm-plug-3367;20;toit → coffret, coupée et soudée sur le chargeur

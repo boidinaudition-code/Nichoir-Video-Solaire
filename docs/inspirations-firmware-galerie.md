@@ -2,6 +2,8 @@
 
 [Accueil](../README.md) · [Inspirations précédentes et audio](inspirations-audio.md) · [Comparatif des 14 projets](comparatif-pir-ov5640.md)
 
+> **Mise à jour du 24/11/2026 :** Romain abandonne l'éclairage et la barrière infrarouges, les sondes de température et la batterie V75 ; détection par capteur PIR, pack de 4 accus 18650 avec chargeur solaire. La [BOM](bom.md) fait foi ; les passages sur l'infrarouge, les sondes ou la V75 ci-dessous sont historiques.
+
 Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seulement : aucun code tiers copié.
 
 | Dépôt | Ce que c'est | Licence |
@@ -20,7 +22,7 @@ Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seuleme
 - **Mode « nichoir »** (BirdBox) : mise au point rapprochée, éclairage IR, visites rares mais longues. Réglages distincts d'une mangeoire.
 - **Grand angle** : NestNinja annonce un objectif fisheye 160° avec LED IR pour l'intérieur du nichoir. À garder en tête si l'objectif de l'OV3660 ne couvre pas tout le fond.
 - **Jeter les premières images** après l'allumage de la caméra, le temps que l'exposition se règle (BirdNest : 4 images ; BirdBox ignore aussi les détections pendant une courte période après le démarrage).
-- **Coupure de l'alimentation de la caméra** : BirdBox constate qu'un capteur OV2640 peut cesser de fournir des images après plusieurs heures ; le seul remède garanti est de couper son alimentation. Aucun circuit de coupure n'est retenu dans la [BOM](bom.md) : la minuterie TPL5110 couperait la carte entre deux réveils programmés, incompatible avec le réveil par la barrière. Point ouvert.
+- **Coupure de l'alimentation de la caméra** : BirdBox constate qu'un capteur OV2640 peut cesser de fournir des images après plusieurs heures ; le seul remède garanti est de couper son alimentation. Aucun circuit de coupure n'est retenu dans la [BOM](bom.md) : la minuterie TPL5110 couperait la carte entre deux réveils programmés, incompatible avec le réveil par le PIR. Point ouvert.
 
 ### Fiabilité du firmware
 
@@ -32,8 +34,8 @@ Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seuleme
 
 ### Énergie et nuit
 
-- **Nuit détectée par l'image, pas par l'heure** (BirdBox) : le contraste de l'image s'effondre dans le noir, alors que la luminosité moyenne reste trompeuse. Réveil par une courte mesure toutes les 10 minutes. Garde-fou : réveil forcé après 14 h de sommeil, au cas où un oiseau ou une feuille masquerait l'objectif. Pour nous, avec les LED IR, la nuit ne coupe pas la vidéo : elle sert à **passer en mode IR**.
-- **Tension batterie calibrée en deux points** (BirdNest). Notre carte est alimentée en 5 V régulé par la V75 : elle ne voit pas la tension de la batterie. Depuis le 24/11/2026, la V75 est remplacée par un pack de 4 accus 18650 dont la carte lit directement la tension, via un pont diviseur ([BOM](bom.md)) : l'étalonnage en deux points reste utile.
+- **Nuit détectée par l'image, pas par l'heure** (BirdBox) : le contraste de l'image s'effondre dans le noir, alors que la luminosité moyenne reste trompeuse. Réveil par une courte mesure toutes les 10 minutes. Garde-fou : réveil forcé après 14 h de sommeil, au cas où un oiseau ou une feuille masquerait l'objectif. Sans éclairage (choix du 24/11/2026), la nuit sert à **suspendre la capture**.
+- **Tension batterie calibrée en deux points** (BirdNest). Depuis le 24/11/2026, la V75 est remplacée par un pack de 4 accus 18650 dont la carte lit directement la tension, via un pont diviseur ([BOM](bom.md)) : l'étalonnage en deux points reste utile.
 - **Température** par sonde DS18B20 (BirdNest) : non retenu le 24/11/2026. La sécurité de charge repose sur la thermistance du chargeur ([BOM](bom.md)).
 
 ### Galerie, Home Assistant et suivi de la nichée
