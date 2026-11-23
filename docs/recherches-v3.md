@@ -31,13 +31,13 @@ L'autofocus (module long séparé uniquement) est utile à 10–15 cm. Le [forum
 
 ## 3. Éclairage et capture
 
-Version LED infrarouge validée. LED IR 940 nm diffusées, allumées seulement pendant la capture, alimentées depuis le 5 V et commandées par transistor/MOSFET, jamais directement par un GPIO. Référence, nombre et courant restent à choisir et mesurer ; aucun échauffement de la chambre n'est acceptable. Les caméras de nichoir du commerce éclairent en IR ; cela ne qualifie pas notre intensité ni notre montage.
+Version LED infrarouge validée. LED IR 940 nm diffusées, allumées seulement pendant la capture, alimentées depuis le 5 V et commandées par transistor/MOSFET, jamais directement par un GPIO. Référence retenue dans la [BOM](bom.md) : 4 × TSAL6200 à environ 35 mA ; intensité à valider en essai ; aucun échauffement de la chambre n'est acceptable. Les caméras de nichoir du commerce éclairent en IR ; cela ne qualifie pas notre intensité ni notre montage.
 
 Clips 720p MJPEG dans un conteneur AVI sur microSD, avec une photo 5 Mpx au début de chaque événement. La durée de travail héritée est 20 s, avec cadence réelle à mesurer. Pas de vidéo 5 Mpx. Le 1080p est écarté : un clip de 20 s pèserait probablement plusieurs dizaines de Mo, ordre de grandeur non mesuré incompatible avec le budget V2 de 10–30 s de Wi-Fi total par clip.
 
 ## 4. Détection
 
-Barrière infrarouge au trou d'envol pour déclencher sur les entrées/sorties, plus une photo toutes les 10 min en journée pour le timelapse. PIR intérieur optionnel : un oiseau qui couve bouge peu, et le PIR est peu fiable dans 14 cm. Aucune référence de barrière n'est encore choisie.
+Barrière infrarouge au trou d'envol pour déclencher sur les entrées/sorties, plus une photo toutes les 10 min en journée pour le timelapse. PIR intérieur optionnel : un oiseau qui couve bouge peu, et le PIR est peu fiable dans 14 cm. Barrière retenue dans la [BOM](bom.md) : Adafruit 2167 (Gotronic 39178).
 
 La caméra NoIR verra l'IR de la barrière : placer celle-ci hors champ et vérifier qu'elle n'éclaire pas la chambre. Mesurer aussi sa consommation continue et les faux déclenchements ; les besoins hérités ne les qualifient pas.
 
@@ -92,10 +92,10 @@ Sources : [fiche V75 fabricant](https://voltaicsystems.com/v75) et [notice V25/V
 | Reprise | Automatique après décharge et défauts de température |
 | Conformité indiquée | IEC 62133, UN 38.3, CE |
 | Encombrement et masse | 15,5 × 8,2 × 2,4 cm ; 502 g |
-| Prix fabricant | 89 USD ; ni prix France ni total livré |
+| Prix | 89 USD chez le fabricant ; prix France relevé dans la [BOM](bom.md) |
 | Charge au panneau 10 W | 9 h selon la notice, pas un résultat local |
 
-Ne pas utiliser le port USB-C PD du dessus en mode Always On. La notice indique 3,5 × 1,5 mm dans la ligne de spécifications, contre 3,5 × 1,1 ailleurs : vérifier connecteur, polarité et notice du lot à réception. Faire confirmer la compatibilité du P110 avec l'entrée V75, notamment Voc à froid et tolérances, avant connexion ; jamais de panneau brut sur la XIAO.
+Ne pas utiliser le port USB-C PD du dessus en mode Always On. La notice indique 3,5 × 1,5 mm dans la ligne de spécifications, contre 3,5 × 1,1 ailleurs : vérifier connecteur, polarité et notice du lot à réception. La [fiche du P110](https://voltaicsystems.com/10-watt-panel-etfe) le déclare compatible avec la V75 ; vérifier tout de même le connecteur reçu avant connexion ; jamais de panneau brut sur la XIAO.
 
 Coffret séparé de la chambre, ombragé, protégé de l'eau et de la condensation, jamais sous le panneau chaud. Tester au banc USB stable à faible charge, charge/alimentation simultanées et reprise après interruptions selon un protocole fabricant sûr. Aucun raccordement aux pastilles BAT XIAO ni batterie supplémentaire en parallèle de l'USB.
 

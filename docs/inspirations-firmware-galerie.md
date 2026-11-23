@@ -20,7 +20,7 @@ Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seuleme
 - **Mode « nichoir »** (BirdBox) : mise au point rapprochée, éclairage IR, visites rares mais longues. Réglages distincts d'une mangeoire.
 - **Grand angle** : NestNinja annonce un objectif fisheye 160° avec LED IR pour l'intérieur du nichoir. À garder en tête si l'objectif de l'OV3660 ne couvre pas tout le fond.
 - **Jeter les premières images** après l'allumage de la caméra, le temps que l'exposition se règle (BirdNest : 4 images ; BirdBox ignore aussi les détections pendant une courte période après le démarrage).
-- **Coupure de l'alimentation de la caméra** : BirdBox constate qu'un capteur OV2640 peut cesser de fournir des images après plusieurs heures ; le seul remède garanti est de couper son alimentation. Le transistor de coupure envisagé pour économiser l'énergie servira aussi à **redémarrer la carte et sa caméra** en cas de blocage.
+- **Coupure de l'alimentation de la caméra** : BirdBox constate qu'un capteur OV2640 peut cesser de fournir des images après plusieurs heures ; le seul remède garanti est de couper son alimentation. Aucun circuit de coupure n'est retenu dans la [BOM](bom.md) : la minuterie TPL5110 couperait la carte entre deux réveils programmés, incompatible avec le réveil par la barrière. Point ouvert.
 
 ### Fiabilité du firmware
 
@@ -33,7 +33,7 @@ Cinq dépôts lus le 23 novembre 2026, au commit indiqué. Documentation seuleme
 ### Énergie et nuit
 
 - **Nuit détectée par l'image, pas par l'heure** (BirdBox) : le contraste de l'image s'effondre dans le noir, alors que la luminosité moyenne reste trompeuse. Réveil par une courte mesure toutes les 10 minutes. Garde-fou : réveil forcé après 14 h de sommeil, au cas où un oiseau ou une feuille masquerait l'objectif. Pour nous, avec les LED IR, la nuit ne coupe pas la vidéo : elle sert à **passer en mode IR**.
-- **Tension batterie calibrée en deux points** (BirdNest). Notre carte est alimentée en 5 V régulé par la V75 : elle ne voit pas la tension de la batterie. Voltaic indique que la tension des cellules de la V75 est disponible sur les broches SBU de son port USB-C ; piste à vérifier avant d'en dépendre.
+- **Tension batterie calibrée en deux points** (BirdNest). Notre carte est alimentée en 5 V régulé par la V75 : elle ne voit pas la tension de la batterie. Voltaic indique que la tension des cellules de la V75 est disponible sur les broches SBU de son port USB-C, divisée par deux (1,6 à 2,1 V). Retenu dans la [BOM](bom.md) avec une carte de test USB-C ; à vérifier au multimètre à réception.
 - **Température** par sonde DS18B20 (BirdNest) : une sonde dans la chambre et une dans le coffret de batterie, pour le carnet et pour la sécurité de charge.
 
 ### Galerie, Home Assistant et suivi de la nichée
