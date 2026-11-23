@@ -37,7 +37,8 @@ Référence : les dimensions de la chambre et du trou suivent le [tableau de la 
 | Cloison | 1 | 140 × 140 | dessous à 250 du bas : caméra, LED IR, micro |
 | Toit | 1 | 300 dans la pente × 250 | planche large ou deux planches collées |
 | Bloc d'entrée | 1 | 90 × 90 | trou Ø32 aligné, logement de la barrière IR |
-| Barre de fixation | 1 | 40 × 600 | vissée sur le dos |
+| Plaque de trappe | 1 | 130 × 90 × 10 à 20 | vissée sur le dos, joint mousse |
+| Barre de fixation | 1 | 40 × 600 | verticale, vissée sur le dos le long du bord nord (de 140 à 180), donc à côté de la trappe |
 
 Débit : une planche de 20 mm d'au moins 180 de large et environ **2,05 m** de long (traits de scie et équerrage compris), plus le toit et la barre. Façade et dos sortent d'un seul flan de 180 × 805 coupé en diagonale à 45°. Côtés, fond et cloison sont refendus à 140.
 
@@ -48,7 +49,7 @@ Débit : une planche de 20 mm d'au moins 180 de large et environ **2,05 m** de l
 3. **Fond.** 4 trous Ø5. Laisser le bois brut à l'intérieur.
 4. **Caisse.** Visser le côté nord, le fond (de 0 à 20) et la cloison (dessous à 250, cale de 230 posée sur le fond) entre façade et dos. Vis inox 4 × 40, avant-trous Ø3. Le fond et la cloison ne sont **pas** vissés au côté sud.
 5. **Porte sud.** Deux vis pivots 4 × 40 à travers façade et dos, dans le chant de la porte, **à 290 du bas et à 10 du bord sud** (milieu de l'épaisseur) : au-dessus de la cloison, sous le toit. Une rondelle entre porte et façade, une entre porte et dos. En bas, un crochet ou une vis de blocage. Vérifier que la porte bascule sans toucher le toit. Un joint mousse ou une brosse ferme la fente de 3 mm sous le toit (insectes).
-6. **Trappe technique.** Découper dans le dos une trappe de 100 × 60 (de 40 à 140 depuis le bord sud, de 280 à 340 du bas), avant l'assemblage. Elle se referme par deux vis avec un joint, et une tasselette intérieure lui sert d'appui. C'est l'accès à l'électronique et à la carte SD, sans démonter le toit ni le panneau.
+6. **Trappe technique.** Découper dans le dos une trappe de 100 × 60 (de 40 à 140 depuis le bord sud, de 280 à 340 du bas), avant l'assemblage. Elle se referme par une plaque extérieure de 130 × 90 vissée sur le dos, avec un joint ; rien ne dépasse à l'intérieur, pour ne pas gêner la porte. C'est l'accès à l'électronique et à la carte SD, sans démonter le toit ni le panneau.
 7. **Électronique** (voir [README](../../README.md)). Percer la cloison après réception de la carte : passage d'objectif, 4 LED IR, trou micro au droit du micro de la carte. La carte repose sur la cloison, objectif vers le bas. **Laisser libres les 40 premiers millimètres côté sud du compartiment** : le haut de la porte y rentre quand elle s'ouvre.
 8. **Passages.** Dos, dans le compartiment technique (vers 300 du bas) : passe-câble Ø10 avec presse-étoupe vers le coffret de la batterie, boucle d'égouttement. Façade et dos : deux trous d'aération Ø8 grillagés, en haut du compartiment, sous le débord du toit. Câble de la barrière IR : dans une baguette sur la façade, jusqu'au compartiment technique. Aucun câble dans la chambre.
 9. **Toit.** Vissé sur façade, dos et côté nord, jamais sur la porte, **avant** la pose du panneau : ses vis tombent sous l'emprise du panneau, le toit reste donc fixe. Couverture étanche (EPDM ou tôle). Panneau P110 sur une platine démontable, elle-même sur cales de 10, marges de 13 mm.
