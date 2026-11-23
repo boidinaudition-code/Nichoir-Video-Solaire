@@ -14,6 +14,8 @@ Frigate n'est pas retenu : pas de flux continu possible. La galerie MP4 future s
 
 ## 2. Caméra : focale fixe ou autofocus, choisir NoIR
 
+> **Mise à jour :** Romain retient finalement la carte Gotronic 39234 (XIAO ESP32-S3 Sense avec caméra OV3660), voir le [README](../README.md). L'analyse OV5640 ci-dessous reste utile si un module NoIR est nécessaire.
+
 Seeed distingue deux modules : l'OV5640 **livré avec la carte Sense est à focale fixe** ; seul le **module OV5640 long vendu séparément, avec dissipateur, a un autofocus**. La mention V2 « Sense à focale fixe » était donc juste ; une version intermédiaire de ce dossier l'avait corrigée à tort.
 
 Sources primaires :
